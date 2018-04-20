@@ -43,12 +43,29 @@ public:
 			}
 		}
 	}
+	void placeRow(int row,enum Color color){
+		int loc;
+		Piece *p;
+		for(int j=0;j<8;j++){
+			loc=(row*8)+j;
+			p=new Pawn(color,loc);
+			square[row][j]->place(p);
+		}
+	}
+	void placePawns(){
+		placeRow(1,Black);
+		placeRow(6,White);
+	}
 	void reset(){
-		int loc=(0*8)+4;
-		King *k=new King(White,loc);
-		square[7][4]->place(k);
-		k=new King(Black,loc);
-		square[0][4]->place(k);
+		Piece *p;
+		int loc;
+		loc=(0*8)+4;
+		p=new King(White,loc);
+		square[7][4]->place(p);
+		loc=(7*8)+4;
+		p=new King(Black,loc);
+		square[0][4]->place(p);
+		placePawns();
 	}
 	void debug(){
 		printf("+--+--+--+--+--+--+--+--+\n");
