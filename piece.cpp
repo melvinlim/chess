@@ -1,13 +1,13 @@
+#include"board.h"
 using namespace std;
 enum Color{White,Black};
 class Piece{
 public:
 	enum Color color;
-	int location;
+	Square *square;
 	string self;
-	Piece(Color color,int location){
+	Piece(Color color){
 		this->color=color;
-		this->location=location;
 	}
 	void display(){
 		printf("%s",self.data());
@@ -15,7 +15,7 @@ public:
 };
 class King:public Piece{
 public:
-	King(Color color,int location):Piece(color,location){
+	King(Color color):Piece(color){
 		switch(color){
 			case White:
 				self=" K";
@@ -28,7 +28,7 @@ public:
 };
 class Pawn:public Piece{
 public:
-	Pawn(Color color,int location):Piece(color,location){
+	Pawn(Color color):Piece(color){
 		switch(color){
 			case White:
 				self=" P";
@@ -41,7 +41,7 @@ public:
 };
 class Queen:public Piece{
 public:
-	Queen(Color color,int location):Piece(color,location){
+	Queen(Color color):Piece(color){
 		switch(color){
 			case White:
 				self=" Q";

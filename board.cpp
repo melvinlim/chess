@@ -1,3 +1,4 @@
+#pragma once
 #include<stdio.h>
 #include<string>
 #include"piece.h"
@@ -21,6 +22,7 @@ public:
 	}
 	void place(Piece *p){
 		piece=p;
+		piece->square=this;
 	}
 	void display(){
 		if(piece){
@@ -29,8 +31,8 @@ public:
 			printf("  ");
 		}
 	}
-private:
 	int id;
+private:
 };
 class Board{
 public:
@@ -44,12 +46,11 @@ public:
 		}
 	}
 	void placeRow(int row,enum Color color){
-		int loc;
 		Piece *p;
 		for(int j=0;j<8;j++){
-			loc=(row*8)+j;
-			p=new Pawn(color,loc);
+			p=new Pawn(color);
 			square[row][j]->place(p);
+			//assert(square[row][j]->id==p->square->id);
 		}
 	}
 	void placePawns(){
@@ -58,12 +59,9 @@ public:
 	}
 	void reset(){
 		Piece *p;
-		int loc;
-		loc=(0*8)+4;
-		p=new King(White,loc);
+		p=new King(White);
 		square[7][4]->place(p);
-		loc=(7*8)+4;
-		p=new King(Black,loc);
+		p=new King(Black);
 		square[0][4]->place(p);
 		placePawns();
 	}
