@@ -16,7 +16,7 @@ public:
 		strId[0]=(column)+65;
 		strId[1]=(reversedRow)+48;
 		
-		printf("%s\n",strId.data());
+		//printf("%s\n",strId.data());
 		//printf("%d\n",this->id);
 	}
 	void place(Piece *p){
@@ -26,7 +26,7 @@ public:
 		if(piece){
 			piece->display();
 		}else{
-			printf(" ");
+			printf("  ");
 		}
 	}
 private:
@@ -50,15 +50,31 @@ public:
 		k=new King(Black,loc);
 		square[0][4]->place(k);
 	}
-	void display(){
-		printf("+-+-+-+-+-+-+-+-+\n");
+	void debug(){
+		printf("+--+--+--+--+--+--+--+--+\n");
 		for(int i=0;i<8;i++){
+			printf("|");
+			for(int j=0;j<8;j++){
+				printf("%s",square[i][j]->strId.data());
+				printf("|");
+			}
+			printf("\n+--+--+--+--+--+--+--+--+\n");
+		}
+	}
+	void display(bool labels=true){
+		if(labels)	printf("  ");
+		printf("+--+--+--+--+--+--+--+--+\n");
+		for(int i=0;i<8;i++){
+			if(labels)	printf("%c ",(7-i)+48+1);
 			printf("|");
 			for(int j=0;j<8;j++){
 				square[i][j]->display();
 				printf("|");
 			}
-			printf("\n+-+-+-+-+-+-+-+-+\n");
+			printf("\n");
+			if(labels)	printf("  ");
+			printf("+--+--+--+--+--+--+--+--+\n");
 		}
+		if(labels)	printf("    A  B  C  D  E  F  G  H\n");
 	}
 };

@@ -1,11 +1,14 @@
+using namespace std;
 enum Color{White,Black};
 class Piece{
 public:
-	virtual void display()=0;
+	string self;
+	void display(){
+		printf("%s",self.data());
+	}
 };
 class King:public Piece{
 public:
-	char self;
 	enum Color color;
 	int location;
 	King(Color color,int location){
@@ -13,14 +16,11 @@ public:
 		this->location=location;
 		switch(color){
 			case White:
-				self='K';
+				self=" K";
 			break;
 			case Black:
-				self='k';
+				self=" k";
 			break;
 		};
-	}
-	void display(){
-		printf("%c",self);
 	}
 };
