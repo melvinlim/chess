@@ -67,6 +67,49 @@ bool Rules::verify(const enum Color &color,Board *board,const Move &move){
 		case(BishopT):
 		break;
 		case(RookT):
+			bool lrMove,udMove;
+			if(dst.i!=src.i)
+				udMove=true;
+			else
+				udMove=false;
+			if(dst.j!=src.j)
+				lrMove=true;
+			else
+				lrMove=false;
+			if((lrMove&&udMove)||(!lrMove&&!udMove)){
+				printf("Rooks move horizontally or vertically.\n");
+				return false;
+			}
+			int start,end;
+			if(lrMove){
+				if(src.j>dst.j){
+					start=dst.j;
+					end=src.j;
+				}else{
+					start=src.j;
+					end=dst.j;
+				}
+				for(int j=start+1;j<end;j++){
+					if(board->square[src.i][j]->piece){
+						printf("Rooks cannot jump over other pieces.\n");
+						return false;
+					}
+				}
+			}else if(udMove){
+				if(src.i>dst.i){
+					start=dst.i;
+					end=src.i;
+				}else{
+					start=src.i;
+					end=dst.i;
+				}
+				for(int i=start+1;i<end;i++){
+					if(board->square[i][src.j]->piece){
+						printf("Rooks cannot jump over other pieces.\n");
+						return false;
+					}
+				}
+			}
 		break;
 		case(QueenT):
 		break;
