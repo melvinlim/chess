@@ -8,5 +8,8 @@ using namespace std;
 class Rules{
 public:
 	bool verify(const enum Color &,Board *,const Move &);
+	bool verifyColor(Piece *,const enum Color &);
+	bool verifySrc(const Board *,const Coord &);
+	bool verifyDst(const Board *,const Coord &);
 };
 #endif

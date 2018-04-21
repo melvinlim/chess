@@ -3,12 +3,14 @@
 #include"defs.h"
 #include"board.h"
 #include"utility.h"
+#include"rules.h"
 #include<string>
 #include<iostream>
 using namespace std;
 class Player{
 public:
 	Player *nextPlayer;
+	Rules rules;
 	string str;
 	char colorStr[5];
 	Utility utility;

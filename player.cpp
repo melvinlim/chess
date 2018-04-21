@@ -24,22 +24,13 @@ int Human::getCoord(string type,Move &move){
 	}
 	if(type[0]=='s'){
 		strncpy(move.src.str,str.data(),2);
-		utility.coordToSquare(str,move.src);
-		square=board->square[move.src.i][move.src.j];
-		if(square->piece==0){
-			printf("%s must be occupied.\n",type.data());
+		utility.stringToCoord(str,move.src);
+		if(!rules.verifySrc(board,move.src)){
 			return -1;
 		}
 	}else{
 		strncpy(move.dst.str,str.data(),2);
-		utility.coordToSquare(str,move.dst);
-		square=board->square[move.dst.i][move.dst.j];
-		if(square->piece!=0){
-			//printf("%x\n",square->piece);
-//			square->piece->display();
-			printf("%s must be vacant.\n",type.data());
-			return -1;
-		}
+		utility.stringToCoord(str,move.dst);
 	}
 	return 0;
 }

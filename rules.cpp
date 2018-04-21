@@ -1,14 +1,35 @@
 #include"rules.h"
+bool Rules::verifySrc(const Board *board,const Coord &coord){
+	if(board->square[coord.i][coord.j]->piece==0){
+		printf("starting square must be occupied\n");
+		return false;
+	}
+	return true;
+}
+bool Rules::verifyColor(Piece *p,const enum Color &color){
+	if(p->color!=color){
+		printf("Player must select piece of correct color.\n");
+		return false;
+	}
+	return true;
+}
 bool Rules::verify(const enum Color &color,Board *board,const Move &move){
 	Coord src=move.src;
 	Coord dst=move.dst;
 	int dx,dy,startingRank;
 	Piece *p=board->square[src.i][src.j]->piece;
-	if(p->color!=color){
-		printf("Player must select piece of correct color.\n");
-		return false;
+	Piece *pAtDst=board->square[dst.i][dst.j]->piece;
+	if(!verifyColor(p,color))	return false;
+	bool capturing;
+	if(pAtDst){
+		if(pAtDst->color==p->color){
+			printf("cannot capture own piece.\n");
+			return false;
+		}
+		capturing=true;
+	}else{
+		capturing=false;
 	}
-	bool capturing=false;
 	switch(p->type){
 		case(PawnT):
 			if(p->color==White){

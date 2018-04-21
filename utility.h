@@ -5,6 +5,6 @@
 using namespace std;
 class Utility{
 public:
-	void coordToSquare(string s,Coord &coord);
+	void stringToCoord(string s,Coord &coord);
 };
 #endif
