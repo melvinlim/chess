@@ -9,6 +9,7 @@ using namespace std;
 class Player{
 public:
 	string str;
+	char colorStr[5];
 	Utility utility;
 	enum Color color;
 	Board *board;

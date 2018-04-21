@@ -1,12 +1,16 @@
 #include"player.h"
 Player::Player(enum Color c,Board *board){
 	color=c;
+	if(color==White){
+		strcpy(colorStr,"White");
+	}else{
+		strcpy(colorStr,"Black");
+	}
 	this->board=board;
 }
 Human::Human(enum Color c,Board *board):Player(c,board){}
 int Human::getCoord(string type,Move &move){
 	Square *square;
-	printf(":");
 	cin>>str;
 	if((str.size()==1)&&((str[0]=='q')||(str[0]=='Q'))){
 		move.quit=true;
@@ -40,8 +44,10 @@ int Human::getCoord(string type,Move &move){
 	return 0;
 }
 void Human::decide(Move &move){
+	printf("%s:",colorStr);
 	while((getCoord("starting square",move))<0);
 	if(move.quit)	return;
+	printf("%s:",colorStr);
 	while((getCoord("ending square",move))<0);
 	if(move.quit)	return;
 }
