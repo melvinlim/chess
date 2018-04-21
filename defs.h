@@ -3,6 +3,7 @@
 #pragma once
 enum Color{White,Black};
 struct Coord{
+	char str[2];
 	int i;
 	int j;
 };
