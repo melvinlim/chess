@@ -3,18 +3,23 @@
 #include"defs.h"
 #include"board.h"
 #include"utility.h"
+#include<string>
+#include<iostream>
+using namespace std;
 class Player{
 public:
+	string str;
 	Utility utility;
 	enum Color color;
 	Board *board;
 	Move move;
 	Player(enum Color,Board *board);
-	virtual bool decide(Move &)=0;
+	virtual void decide(Move &)=0;
 };
 class Human:public Player{
+	int getCoord(string,Move &);
 public:
 	Human(enum Color,Board *board);
-	bool decide(Move &);
+	void decide(Move &);
 };
 #endif
