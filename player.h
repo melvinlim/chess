@@ -8,6 +8,7 @@
 using namespace std;
 class Player{
 public:
+	Player *nextPlayer;
 	string str;
 	char colorStr[5];
 	Utility utility;

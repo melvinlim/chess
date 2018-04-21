@@ -12,12 +12,13 @@ private:
 	Board *board;
 	Rules rules;
 	Utility utility;
-	Player *p1,*p2;
+	Player *p1,*p2,*activePlayer;
 	Move move;
 	bool running;
 public:
 	Game();
 	void step();
+	void step(Player *);
 	void prompt(Move &);
 	int getCoord(string,Move &);
 	Square *coordToSquare(string,Coord &);
