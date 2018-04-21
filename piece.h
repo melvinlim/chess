@@ -8,6 +8,7 @@ using namespace std;
 class Piece{
 public:
 	enum Color color;
+	PieceType type;
 //	Square *square;
 	string self;
 	Piece(Color color);

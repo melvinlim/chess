@@ -18,10 +18,14 @@ void Game::step(){
 //	board->debug();
 //	board->display(false);
 	board->display();
-	p1->decide(move);
-	if(move.quit){
-		running=false;
-		return;
+	valid=false;
+	while(!valid){
+		p1->decide(move);
+		if(move.quit){
+			running=false;
+			return;
+		}
+		valid=rules.verify(p1->color,board,move);
 	}
 	board->move(move);
 }

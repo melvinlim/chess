@@ -14,19 +14,25 @@ void Piece::setSelf(string s){
 }
 King::King(Color color):Piece(color){
 	setSelf(" K");
+	type=KingT;
 }
 Pawn::Pawn(Color color):Piece(color){
 	setSelf(" P");
+	type=PawnT;
 }
 Queen::Queen(Color color):Piece(color){
 	setSelf(" Q");
+	type=QueenT;
 }
 Knight::Knight(Color color):Piece(color){
 	setSelf(" N");
+	type=KnightT;
 }
 Bishop::Bishop(Color color):Piece(color){
 	setSelf(" B");
+	type=BishopT;
 }
 Rook::Rook(Color color):Piece(color){
 	setSelf(" R");
+	type=RookT;
 }

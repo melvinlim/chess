@@ -1,7 +1,18 @@
 #ifndef _VARS_H
 #define _VARS_H
 #pragma once
-enum Color{White,Black};
+enum Color{
+	White,
+	Black
+};
+enum PieceType{
+	PawnT,
+	KnightT,
+	BishopT,
+	RookT,
+	QueenT,
+	KingT
+};
 struct Coord{
 	char str[2];
 	int i;

@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -Wall -g -c
 LFLAGS = -Wall -g -o chess
-chess:	main.o board.o square.o piece.o game.o player.o utility.o
-	$(CC) $(LFLAGS) main.o board.o square.o piece.o game.o player.o utility.o
+chess:	main.o board.o square.o piece.o game.o player.o utility.o rules.o
+	$(CC) $(LFLAGS) main.o board.o square.o piece.o game.o player.o utility.o rules.o
 main:		main.cpp
 	$(CC) $(CFLAGS) main.cpp
 board:	board.cpp defs.h square.h
@@ -17,5 +17,7 @@ player:	player.cpp defs.h board.h
 	$(CC) $(CFLAGS) player.cpp
 utility:	utility.cpp defs.h
 	$(CC) $(CFLAGS) utility.cpp
+rules:	rules.cpp defs.h
+	$(CC) $(CFLAGS) rules.cpp
 clean:
 	rm -f chess *.o a.out

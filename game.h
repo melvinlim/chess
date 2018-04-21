@@ -3,11 +3,14 @@
 #include"square.h"
 #include"player.h"
 #include"utility.h"
+#include"rules.h"
 #include"defs.h"
 class Game{
 private:
+	bool valid;
 	string str;
 	Board *board;
+	Rules rules;
 	Utility utility;
 	Player *p1,*p2;
 	Move move;
