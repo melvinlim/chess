@@ -1,10 +1,6 @@
-//#include<stdio.h>
-#include"board.h"
+#include"game.h"
 int main(){
-	Board *board=new Board();
-	board->reset();
-	board->debug();
-	board->display(false);
-	board->display();
+	Game *game=new Game();
+	game->step();
 	return 0;
 }
