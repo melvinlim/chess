@@ -4,6 +4,8 @@ using namespace std;
 Game::Game(){
 	board=new Board();
 	board->reset();
+	p1=new Human(White);
+	p2=new Human(Black);
 	move.quit=false;
 	running=true;
 }
@@ -17,6 +19,7 @@ void Game::step(){
 //	board->display(false);
 	board->display();
 	prompt(move);
+	p1->decide(move);
 	if(move.quit){
 		running=false;
 		return;
