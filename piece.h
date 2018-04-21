@@ -5,7 +5,6 @@
 #include"defs.h"
 //#include"square.h"
 using namespace std;
-//enum Color{White,Black};
 class Piece{
 public:
 	enum Color color;
@@ -13,6 +12,7 @@ public:
 	string self;
 	Piece(Color color);
 	void display();
+	void setSelf(string s);
 };
 class King:public Piece{
 public:
@@ -25,5 +25,17 @@ public:
 class Queen:public Piece{
 public:
 	Queen(Color color);
+};
+class Knight:public Piece{
+public:
+	Knight(Color color);
+};
+class Bishop:public Piece{
+public:
+	Bishop(Color color);
+};
+class Rook:public Piece{
+public:
+	Rook(Color color);
 };
 #endif

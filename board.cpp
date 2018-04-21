@@ -9,7 +9,29 @@ Board::Board(){
 	}
 }
 Board::~Board(){}
-void Board::placeRow(int row,enum Color color){
+void Board::placeSidePieces(int row,enum Color color){
+	Piece *p;
+	p=new Rook(color);
+	square[row][0]->place(p);
+	p=new Knight(color);
+	square[row][1]->place(p);
+	p=new Bishop(color);
+	square[row][2]->place(p);
+	p=new Rook(color);
+	square[row][7]->place(p);
+	p=new Knight(color);
+	square[row][6]->place(p);
+	p=new Bishop(color);
+	square[row][5]->place(p);
+}
+void Board::placeRowPieces(int row,enum Color color){
+	Piece *p;
+	p=new King(color);
+	square[row][4]->place(p);
+	p=new Queen(color);
+	square[row][3]->place(p);
+}
+void Board::placeRowPawns(int row,enum Color color){
 	Piece *p;
 	for(int j=0;j<8;j++){
 		p=new Pawn(color);
@@ -17,17 +39,19 @@ void Board::placeRow(int row,enum Color color){
 		//assert(square[row][j]->id==p->square->id);
 	}
 }
+void Board::placePieces(){
+	placeRowPieces(0,Black);
+	placeRowPieces(7,White);
+	placeSidePieces(0,Black);
+	placeSidePieces(7,White);
+}
 void Board::placePawns(){
-	placeRow(1,Black);
-	placeRow(6,White);
+	placeRowPawns(1,Black);
+	placeRowPawns(6,White);
 }
 void Board::reset(){
-	Piece *p;
-	p=new King(White);
-	square[7][4]->place(p);
-	p=new King(Black);
-	square[0][4]->place(p);
 	placePawns();
+	placePieces();
 }
 void Board::debug(){
 	printf("+--+--+--+--+--+--+--+--+\n");

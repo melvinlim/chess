@@ -6,33 +6,27 @@ Piece::Piece(Color color){
 void Piece::display(){
 	printf("%s",self.data());
 }
+void Piece::setSelf(string s){
+	self=s;
+	if(color==Black){
+		self[1]+=32;
+	}
+}
 King::King(Color color):Piece(color){
-	switch(color){
-		case White:
-			self=" K";
-		break;
-		case Black:
-			self=" k";
-		break;
-	};
+	setSelf(" K");
 }
 Pawn::Pawn(Color color):Piece(color){
-	switch(color){
-		case White:
-			self=" P";
-		break;
-		case Black:
-			self=" p";
-		break;
-	};
+	setSelf(" P");
 }
 Queen::Queen(Color color):Piece(color){
-	switch(color){
-		case White:
-			self=" Q";
-		break;
-		case Black:
-			self=" q";
-		break;
-	};
+	setSelf(" Q");
+}
+Knight::Knight(Color color):Piece(color){
+	setSelf(" N");
+}
+Bishop::Bishop(Color color):Piece(color){
+	setSelf(" B");
+}
+Rook::Rook(Color color):Piece(color){
+	setSelf(" R");
 }

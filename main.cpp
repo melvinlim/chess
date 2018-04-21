@@ -5,6 +5,6 @@ int main(){
 	board->reset();
 	board->debug();
 	board->display(false);
-//	board->display();
+	board->display();
 	return 0;
 }

@@ -3,13 +3,15 @@
 #pragma once
 #include"square.h"
 #include"defs.h"
-//class Square;
 class Board{
 public:
 	Square *square[8][8];
 	Board();
 	~Board();
-	void placeRow(int row,enum Color color);
+	void placeSidePieces(int row,enum Color color);
+	void placeRowPieces(int row,enum Color color);
+	void placeRowPawns(int row,enum Color color);
+	void placePieces();
 	void placePawns();
 	void reset();
 	void debug();
