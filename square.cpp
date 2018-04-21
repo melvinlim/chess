@@ -13,7 +13,7 @@ Square::Square(int id){
 	//printf("%d\n",this->id);
 }
 void Square::place(Piece *p){
-	piece=p;
+	this->piece=p;
 //	piece->square=this;
 }
 void Square::display(){

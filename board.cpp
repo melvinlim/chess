@@ -24,6 +24,15 @@ void Board::placeSidePieces(int row,enum Color color){
 	p=new Bishop(color);
 	square[row][5]->place(p);
 }
+void Board::move(Move &move){
+	int i=move.src.i;
+	int j=move.src.j;
+	int di=move.dst.i;
+	int dj=move.dst.j;
+//	printf("moving %s at %d %d to %d %d\n",(square[i][j]->piece->self).data(),move.src.i,move.src.j,move.dst.i,move.dst.j);
+	square[di][dj]->piece=square[i][j]->piece;
+	square[i][j]->piece=0;
+}
 void Board::placeRowPieces(int row,enum Color color){
 	Piece *p;
 	p=new King(color);

@@ -16,5 +16,6 @@ public:
 	void reset();
 	void debug();
 	void display(bool labels=true);
+	void move(Move &);
 };
 #endif

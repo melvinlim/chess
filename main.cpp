@@ -1,6 +1,6 @@
 #include"game.h"
 int main(){
 	Game *game=new Game();
-	game->step();
+	game->start();
 	return 0;
 }
