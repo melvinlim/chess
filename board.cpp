@@ -8,10 +8,22 @@ Board::Board(){
 	}
 }
 Board::~Board(){}
+void Board::placePiece(int i,int j,enum Color color,Piece *p){
+	switch(color){
+		case White:
+			whitePieces.add(p);
+		break;
+		case Black:
+			blackPieces.add(p);
+		break;
+	}
+	square[i][j]->place(p);
+}
 void Board::placeSidePieces(int row,enum Color color){
 	Piece *p;
 	p=new Rook(color);
-	square[row][0]->place(p);
+	placePiece(row,0,color,p);
+//	square[row][0]->place(p);
 	p=new Knight(color);
 	square[row][1]->place(p);
 	p=new Bishop(color);

@@ -24,6 +24,7 @@ void Game::step(Player *player){
 //	board->debug();
 //	board->display(false);
 	board->display();
+	player->pieces.print();
 	valid=false;
 	while(!valid){
 		player->decide(move);
