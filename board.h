@@ -24,6 +24,6 @@ public:
 	void reset();
 	void debug();
 	void display(bool labels=true);
-	Piece *move(Move &);
+	Piece *move(Move &,Collection<Square *> *);
 };
 #endif

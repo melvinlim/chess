@@ -41,7 +41,7 @@ void Game::step(Player *player){
 		}
 		valid=Rules::verify(player->color,board,move);
 	}
-	Piece *p=board->move(move);
+	Piece *p=board->move(move,player->threats);
 	if(p){
 		player->captured->add(p);
 		player->nextPlayer->pieces->remove(p);

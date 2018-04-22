@@ -36,16 +36,18 @@ void Board::placeSidePieces(int row,enum Color color){
 	p=new Bishop(color);
 	placePiece(row,5,color,p);
 }
-Piece *Board::move(Move &move){
+Piece *Board::move(Move &move,Collection<Square *> *threats){
 	int i=move.src.i;
 	int j=move.src.j;
 	int di=move.dst.i;
 	int dj=move.dst.j;
 //	printf("moving %s at %d %d to %d %d\n",(square[i][j]->piece->self).data(),move.src.i,move.src.j,move.dst.i,move.dst.j);
-	Piece *piece=square[di][dj]->piece;
+	Piece *srcPiece=square[i][j]->piece;
+	Piece *dstPiece=square[di][dj]->piece;
+	threats->remove(srcPiece->threats);
 	square[di][dj]->piece=square[i][j]->piece;
 	square[i][j]->piece=0;
-	return piece;
+	return dstPiece;
 }
 void Board::placeRowPieces(int row,enum Color color){
 	Piece *p;

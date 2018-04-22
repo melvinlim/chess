@@ -233,8 +233,8 @@ void Rules::addPawnThreats(Collection<Square *> *allThreats,Collection<Square *>
 		allThreats->add(board->square[start->i+forwardDirection][start->j-1]);
 		localThreats->add(board->square[start->i+forwardDirection][start->j-1]);
 	}
-	if(start->j<0){
+	if(start->j<7){
 		allThreats->add(board->square[start->i+forwardDirection][start->j+1]);
-		localThreats->add(board->square[start->i+forwardDirection][start->j-1]);
+		localThreats->add(board->square[start->i+forwardDirection][start->j+1]);
 	}
 }

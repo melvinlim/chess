@@ -10,6 +10,7 @@ public:
 	forward_list<T> list;
 	void add(T);
 	void remove(T);
+	void remove(Collection<T> *);
 	void print();
 };
 template<typename T>
@@ -19,6 +20,16 @@ Collection<T>::~Collection(){
 template<typename T>
 void Collection<T>::add(T item){
 	list.push_front(item);
+}
+template<typename T>
+void Collection<T>::remove(Collection<T> *items){
+	printf("removing multiple items\n");
+	for(auto p=items->list.begin();p!=items->list.end();p++){
+		printf("removing ");
+		(*p)->print();
+		printf("\n");
+		list.remove(*p);
+	}
 }
 template<typename T>
 void Collection<T>::remove(T item){
