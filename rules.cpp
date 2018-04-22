@@ -13,6 +13,90 @@ bool Rules::verifyColor(Piece *p,const enum Color &color){
 	}
 	return true;
 }
+bool Rules::verifyBishop(const Board *board,const Move &move){
+	int dx,dy;
+	Coord src=move.src;
+	Coord dst=move.dst;
+	dx=dst.j-src.j;
+	dy=dst.i-src.i;
+	if(abs(dx)!=abs(dy)){
+		printf("bishops move diagonally.\n");
+		return false;
+	}
+	int xStart,xEnd;
+	int yStart,yEnd;
+	if(src.j>dst.j){
+		xStart=dst.j;
+		xEnd=src.j;
+	}else{
+		xStart=src.j;
+		xEnd=dst.j;
+	}
+	if(src.i>dst.i){
+		yStart=dst.i;
+		yEnd=src.i;
+	}else{
+		yStart=src.i;
+		yEnd=dst.i;
+	}
+	for(int i=yStart+1;i<yEnd;i++){
+		for(int j=xStart+1;j<xEnd;j++){
+			if(board->square[i][j]->piece){
+				printf("Bishops cannot jump over other pieces.\n");
+				return false;
+			}
+		}
+	}
+	return true;
+}
+bool Rules::verifyRook(const Board *board,const Move &move){
+	bool lrMove,udMove;
+	Coord src=move.src;
+	Coord dst=move.dst;
+	if(dst.i!=src.i)
+		udMove=true;
+	else
+		udMove=false;
+	if(dst.j!=src.j)
+		lrMove=true;
+	else
+		lrMove=false;
+	if((lrMove&&udMove)||(!lrMove&&!udMove)){
+		printf("Rooks move horizontally or vertically.\n");
+		return false;
+	}
+	int start,end;
+	if(lrMove){
+		if(src.j>dst.j){
+			start=dst.j;
+			end=src.j;
+		}else{
+			start=src.j;
+			end=dst.j;
+		}
+		for(int j=start+1;j<end;j++){
+			if(board->square[src.i][j]->piece){
+				printf("Rooks cannot jump over other pieces.\n");
+				return false;
+			}
+		}
+	}else if(udMove){
+		if(src.i>dst.i){
+			start=dst.i;
+			end=src.i;
+		}else{
+			start=src.i;
+			end=dst.i;
+		}
+		for(int i=start+1;i<end;i++){
+			if(board->square[i][src.j]->piece){
+				printf("Rooks cannot jump over other pieces.\n");
+				return false;
+			}
+		}
+	}
+	return true;
+}
 bool Rules::verify(const enum Color &color,Board *board,const Move &move){
 	Coord src=move.src;
 	Coord dst=move.dst;
@@ -65,51 +149,10 @@ bool Rules::verify(const enum Color &color,Board *board,const Move &move){
 		case(KnightT):
 		break;
 		case(BishopT):
+			return verifyBishop(board,move);
 		break;
 		case(RookT):
-			bool lrMove,udMove;
-			if(dst.i!=src.i)
-				udMove=true;
-			else
-				udMove=false;
-			if(dst.j!=src.j)
-				lrMove=true;
-			else
-				lrMove=false;
-			if((lrMove&&udMove)||(!lrMove&&!udMove)){
-				printf("Rooks move horizontally or vertically.\n");
-				return false;
-			}
-			int start,end;
-			if(lrMove){
-				if(src.j>dst.j){
-					start=dst.j;
-					end=src.j;
-				}else{
-					start=src.j;
-					end=dst.j;
-				}
-				for(int j=start+1;j<end;j++){
-					if(board->square[src.i][j]->piece){
-						printf("Rooks cannot jump over other pieces.\n");
-						return false;
-					}
-				}
-			}else if(udMove){
-				if(src.i>dst.i){
-					start=dst.i;
-					end=src.i;
-				}else{
-					start=src.i;
-					end=dst.i;
-				}
-				for(int i=start+1;i<end;i++){
-					if(board->square[i][src.j]->piece){
-						printf("Rooks cannot jump over other pieces.\n");
-						return false;
-					}
-				}
-			}
+			return verifyRook(board,move);
 		break;
 		case(QueenT):
 		break;
