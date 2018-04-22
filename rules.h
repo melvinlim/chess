@@ -18,11 +18,11 @@ namespace Rules{
 	bool verifyColor(const Piece *,const enum Color &);
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);
-	void addKingThreats(Collection<Square *> *,const Square *);
-	void addQueenThreats(Collection<Square *> *,const Square *);
-	void addBishopThreats(Collection<Square *> *,const Square *);
-	void addKnightThreats(Collection<Square *> *,const Square *);
-	void addRookThreats(Collection<Square *> *,const Square *);
-	void addPawnThreats(Collection<Square *> *,const Square *,int);
+	void addKingThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
+	void addQueenThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
+	void addBishopThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
+	void addKnightThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
+	void addRookThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
+	void addPawnThreats(Collection<Square *> *,Collection<Square *> *,const Square *,int);
 }
 #endif

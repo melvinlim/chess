@@ -11,6 +11,7 @@ class Square;
 class Piece{
 public:
 	enum Color color;
+	Collection<Square *> *threats;
 	int forwardDirection;
 	PieceType type;
 	Square *square;

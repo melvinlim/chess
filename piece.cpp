@@ -7,6 +7,7 @@ Piece::Piece(Color color){
 	}else{
 		forwardDirection=1;
 	}
+	threats=new Collection<Square *>();
 }
 void Piece::display(){
 	printf("%s",self.data());
@@ -41,29 +42,29 @@ Rook::Rook(Color color):Piece(color){
 	setSelf(" R");
 	type=RookT;
 }
-void Pawn::addThreats(Collection<Square *> *threats){
+void Pawn::addThreats(Collection<Square *> *allThreats){
 	printf("%d\n",type);
-	Rules::addPawnThreats(threats,square,forwardDirection);
+	Rules::addPawnThreats(allThreats,threats,square,forwardDirection);
 }
-void King::addThreats(Collection<Square *> *threats){
+void King::addThreats(Collection<Square *> *allThreats){
 	printf("%d\n",type);
-	Rules::addKingThreats(threats,square);
+	Rules::addKingThreats(allThreats,threats,square);
 }
-void Queen::addThreats(Collection<Square *> *threats){
+void Queen::addThreats(Collection<Square *> *allThreats){
 	printf("%d\n",type);
-	Rules::addQueenThreats(threats,square);
+	Rules::addQueenThreats(allThreats,threats,square);
 }
-void Knight::addThreats(Collection<Square *> *threats){
+void Knight::addThreats(Collection<Square *> *allThreats){
 	printf("%d\n",type);
-	Rules::addKnightThreats(threats,square);
+	Rules::addKnightThreats(allThreats,threats,square);
 }
-void Bishop::addThreats(Collection<Square *> *threats){
+void Bishop::addThreats(Collection<Square *> *allThreats){
 	printf("%d\n",type);
-	Rules::addBishopThreats(threats,square);
+	Rules::addBishopThreats(allThreats,threats,square);
 }
-void Rook::addThreats(Collection<Square *> *threats){
+void Rook::addThreats(Collection<Square *> *allThreats){
 	printf("%d\n",type);
-	Rules::addRookThreats(threats,square);
+	Rules::addRookThreats(allThreats,threats,square);
 }
 void Piece::print(){
 	display();
