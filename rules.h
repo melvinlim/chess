@@ -10,6 +10,7 @@ public:
 	bool verify(const enum Color &,const Board *,const Move &);
 	bool verifyRook(const Board *,const Move &);
 	bool verifyBishop(const Board *,const Move &);
+	bool verifyQueen(const Board *,const Move &);
 	bool verifyColor(const Piece *,const enum Color &);
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);

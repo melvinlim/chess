@@ -13,6 +13,11 @@ bool Rules::verifyColor(const Piece *p,const enum Color &color){
 	}
 	return true;
 }
+bool Rules::verifyQueen(const Board *board,const Move &move){
+	if(verifyRook(board,move))	return true;
+	if(verifyBishop(board,move))	return true;
+	return false;
+}
 bool Rules::verifyBishop(const Board *board,const Move &move){
 	int dx,dy;
 	Coord src=move.src;
@@ -181,6 +186,7 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 			return verifyRook(board,move);
 		break;
 		case(QueenT):
+			return verifyQueen(board,move);
 		break;
 		case(KingT):
 		break;
