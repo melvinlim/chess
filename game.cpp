@@ -24,8 +24,12 @@ void Game::step(Player *player){
 //	board->debug();
 //	board->display(false);
 	board->display();
+	printf("pieces:");
 	player->pieces->print();
+	printf("captured:");
 	player->captured->print();
+	printf("threats:");
+	player->threats->print();
 //	board->whitePieces->print();
 //	board->blackPieces->print();
 	valid=false;

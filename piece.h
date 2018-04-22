@@ -3,17 +3,20 @@
 #pragma once
 #include<string>
 #include"defs.h"
-//#include"square.h"
+#include"collection.h"
+#include"square.h"
 using namespace std;
+class Square;
 class Piece{
 public:
 	enum Color color;
 	PieceType type;
-//	Square *square;
+	Square *square;
 	string self;
 	Piece(Color color);
 	void display();
 	void setSelf(string s);
+	void addThreats(Collection<Square *> *);
 };
 class King:public Piece{
 public:

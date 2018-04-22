@@ -6,6 +6,9 @@ Piece::Piece(Color color){
 void Piece::display(){
 	printf("%s",self.data());
 }
+void Piece::addThreats(Collection<Square *> *threats){
+	threats->add(square);
+}
 void Piece::setSelf(string s){
 	self=s;
 	if(color==Black){

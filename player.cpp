@@ -9,11 +9,14 @@ Player::Player(enum Color c,Board *board){
 		this->pieces=board->blackPieces;
 	}
 	this->captured=new Collection<Piece *>();
+	this->threats=new Collection<Square *>();
 	this->board=board;
+	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){
+		(*it)->addThreats(threats);
+	}
 }
 Human::Human(enum Color c,Board *board):Player(c,board){}
 int Human::getCoord(string type,Move &move){
-//	Square *square;
 	cin>>str;
 	if((str.size()==1)&&((str[0]=='q')||(str[0]=='Q'))){
 		move.quit=true;

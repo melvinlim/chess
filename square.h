@@ -4,6 +4,7 @@
 #include<string>
 #include"piece.h"
 using namespace std;
+class Piece;
 class Square{
 public:
 	Piece *piece;

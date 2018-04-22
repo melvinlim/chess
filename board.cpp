@@ -20,6 +20,7 @@ void Board::placePiece(int i,int j,enum Color color,Piece *p){
 		break;
 	}
 	square[i][j]->place(p);
+	p->square=square[i][j];
 }
 void Board::placeSidePieces(int row,enum Color color){
 	Piece *p;
