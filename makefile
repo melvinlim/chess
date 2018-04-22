@@ -11,13 +11,13 @@ square:	square.cpp piece.h
 	$(CC) $(CFLAGS) square.cpp
 piece:	piece.cpp defs.h
 	$(CC) $(CFLAGS) piece.cpp
-game:		game.cpp board.h
+game:		game.cpp board.h square.h player.h utility.h rules.h defs.h
 	$(CC) $(CFLAGS) game.cpp
 player:	player.cpp defs.h board.h
 	$(CC) $(CFLAGS) player.cpp
 utility:	utility.cpp defs.h
 	$(CC) $(CFLAGS) utility.cpp
-rules:	rules.cpp defs.h
+rules:	rules.cpp defs.h board.h piece.h
 	$(CC) $(CFLAGS) rules.cpp
 clean:
 	rm -f chess *.o a.out

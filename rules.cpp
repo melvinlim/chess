@@ -6,7 +6,7 @@ bool Rules::verifySrc(const Board *board,const Coord &coord){
 	}
 	return true;
 }
-bool Rules::verifyColor(Piece *p,const enum Color &color){
+bool Rules::verifyColor(const Piece *p,const enum Color &color){
 	if(p->color!=color){
 		printf("Player must select piece of correct color.\n");
 		return false;
@@ -39,12 +39,38 @@ bool Rules::verifyBishop(const Board *board,const Move &move){
 		yStart=src.i;
 		yEnd=dst.i;
 	}
-	for(int i=yStart+1;i<yEnd;i++){
-		for(int j=xStart+1;j<xEnd;j++){
+	if(((dx>0)&&(dy>0))||((dx<0)&&(dy<0))){
+		int i=yStart+1;
+		int j=xStart+1;
+		while(i<yEnd){
 			if(board->square[i][j]->piece){
-				printf("Bishops cannot jump over other pieces.\n");
+				printf("Bishops cannot jump over other pieces.  (1)\n");
 				return false;
 			}
+			i++;
+			j++;
+		}
+	}else if((dx>0)&&(dy<0)){
+		int i=src.i-1;
+		int j=src.j+1;
+		while(j<dst.j){
+			if(board->square[i][j]->piece){
+				printf("Bishops cannot jump over other pieces.  (%d,%d) (2)\n",i,j);
+				return false;
+			}
+			i--;
+			j++;
+		}
+	}else{
+		int i=src.i+1;
+		int j=src.j-1;
+		while(i<dst.i){
+			if(board->square[i][j]->piece){
+				printf("Bishops cannot jump over other pieces.  (%d,%d) (3)\n",i,j);
+				return false;
+			}
+			i++;
+			j--;
 		}
 	}
 	return true;
@@ -97,7 +123,7 @@ bool Rules::verifyRook(const Board *board,const Move &move){
 	}
 	return true;
 }
-bool Rules::verify(const enum Color &color,Board *board,const Move &move){
+bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	Coord src=move.src;
 	Coord dst=move.dst;
 	int dx,dy,startingRank;
