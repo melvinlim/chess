@@ -1,17 +1,16 @@
 #include"piece.h"
 using namespace std;
 Piece::Piece(Color color){
-		this->color=color;
+	this->color=color;
+	if(color==White){
+		forwardDirection=-1;
+	}else{
+		forwardDirection=1;
+	}
 }
 void Piece::display(){
 	printf("%s",self.data());
 }
-/*
-void Piece::addThreats(Collection<Square *> *threats){
-	threats->add(square);
-//	threats->add(rules.addThreats(threats,type));
-}
-*/
 void Piece::setSelf(string s){
 	self=s;
 	if(color==Black){
@@ -44,31 +43,28 @@ Rook::Rook(Color color):Piece(color){
 }
 void Pawn::addThreats(Collection<Square *> *threats){
 	printf("%d\n",type);
-	threats->add(square);
-//	threats->add(rules.addThreats(threats,type));
+	Rules::addPawnThreats(threats,square,forwardDirection);
 }
 void King::addThreats(Collection<Square *> *threats){
 	printf("%d\n",type);
-	threats->add(square);
-//	threats->add(rules.addThreats(threats,type));
+	Rules::addKingThreats(threats,square);
 }
 void Queen::addThreats(Collection<Square *> *threats){
 	printf("%d\n",type);
-	threats->add(square);
-//	threats->add(rules.addThreats(threats,type));
+	Rules::addQueenThreats(threats,square);
 }
 void Knight::addThreats(Collection<Square *> *threats){
 	printf("%d\n",type);
-	threats->add(square);
-//	threats->add(rules.addThreats(threats,type));
+	Rules::addKnightThreats(threats,square);
 }
 void Bishop::addThreats(Collection<Square *> *threats){
 	printf("%d\n",type);
-	threats->add(square);
-//	threats->add(rules.addThreats(threats,type));
+	Rules::addBishopThreats(threats,square);
 }
 void Rook::addThreats(Collection<Square *> *threats){
 	printf("%d\n",type);
-	threats->add(square);
-//	threats->add(rules.addThreats(threats,type));
+	Rules::addRookThreats(threats,square);
+}
+void Piece::print(){
+	display();
 }

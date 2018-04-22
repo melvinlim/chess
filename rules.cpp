@@ -217,3 +217,23 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	}
 	return true;
 }
+void Rules::addKingThreats(Collection<Square *> *squares,const Square *start){
+}
+void Rules::addQueenThreats(Collection<Square *> *squares,const Square *start){
+}
+void Rules::addBishopThreats(Collection<Square *> *squares,const Square *start){
+}
+void Rules::addKnightThreats(Collection<Square *> *squares,const Square *start){
+}
+void Rules::addRookThreats(Collection<Square *> *squares,const Square *start){
+}
+void Rules::addPawnThreats(Collection<Square *> *squares,const Square *start,int forwardDirection){
+	Board *board=start->board;
+	if(start->j>0){
+		squares->add(board->square[start->i+forwardDirection][start->j-1]);
+	}
+	if(start->j<0){
+		printf("?");
+		squares->add(board->square[start->i+forwardDirection][start->j+1]);
+	}
+}

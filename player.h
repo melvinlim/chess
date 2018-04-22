@@ -14,7 +14,6 @@ public:
 	Collection<Square *> *threats;
 	Collection<Piece *> *pieces;
 	Collection<Piece *> *captured;
-	int forwardDirection;
 	Player *nextPlayer;
 	string str;
 	char colorStr[5];

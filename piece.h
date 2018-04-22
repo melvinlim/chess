@@ -11,11 +11,13 @@ class Square;
 class Piece{
 public:
 	enum Color color;
+	int forwardDirection;
 	PieceType type;
 	Square *square;
 	string self;
 	Piece(Color color);
 	void display();
+	void print();
 	void setSelf(string s);
 	virtual void addThreats(Collection<Square *> *)=0;
 };

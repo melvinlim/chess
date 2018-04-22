@@ -26,7 +26,7 @@ void Collection<T>::remove(T item){
 }
 template<typename T>
 void Collection<T>::print(){
-	for(T p:list)	p->display();
+	for(T p:list)	p->print();
 /*
 	for(auto p=list.begin();p!=list.end();p++){
 		(*p)->display();
