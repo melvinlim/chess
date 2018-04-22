@@ -1,14 +1,20 @@
 #include"collection.h"
-Collection::~Collection(){
+/*
+template<typename T>
+Collection<T>::~Collection(){
 	list.clear();
 }
-void Collection::add(Piece *piece){
-	list.push_front(piece);
+template<typename T>
+void Collection<T>::add(T item){
+	list.push_front(item);
 }
-void Collection::remove(Piece *piece){
-	list.remove(piece);
+template<typename T>
+void Collection<T>::remove(T item){
+	list.remove(item);
 }
-void Collection::print(){
-	for(Piece *p:list)	p->display();
+template<typename T>
+void Collection<T>::print(){
+	for(T *p:list)	p->display();
 	printf("\n");
 }
+*/

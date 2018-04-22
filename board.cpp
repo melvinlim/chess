@@ -6,8 +6,8 @@ Board::Board(){
 			square[i][j]=new Square(id++);
 		}
 	}
-	whitePieces=new Collection();
-	blackPieces=new Collection();
+	whitePieces=new Collection<Piece *>();
+	blackPieces=new Collection<Piece *>();
 }
 Board::~Board(){}
 void Board::placePiece(int i,int j,enum Color color,Piece *p){
@@ -73,8 +73,8 @@ void Board::placePawns(){
 void Board::reset(){
 	delete whitePieces;
 	delete blackPieces;
-	whitePieces=new Collection();
-	blackPieces=new Collection();
+	whitePieces=new Collection<Piece *>();
+	blackPieces=new Collection<Piece *>();
 	placePawns();
 	placePieces();
 }

@@ -4,11 +4,12 @@
 #include<stdio.h>
 #include"square.h"
 #include"collection.h"
+#include"piece.h"
 #include"defs.h"
 class Board{
 public:
-	Collection *whitePieces;
-	Collection *blackPieces;
+	Collection<Piece *> *whitePieces;
+	Collection<Piece *> *blackPieces;
 	Square *square[8][8];
 	Board();
 	~Board();

@@ -12,7 +12,7 @@ Player::Player(enum Color c,Board *board){
 }
 Human::Human(enum Color c,Board *board):Player(c,board){}
 int Human::getCoord(string type,Move &move){
-	Square *square;
+//	Square *square;
 	cin>>str;
 	if((str.size()==1)&&((str[0]=='q')||(str[0]=='Q'))){
 		move.quit=true;

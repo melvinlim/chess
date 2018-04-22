@@ -5,13 +5,14 @@
 #include"utility.h"
 #include"rules.h"
 #include"collection.h"
+#include"piece.h"
 #include<string>
 #include<iostream>
 using namespace std;
 class Player{
 public:
-	Collection *pieces;
-	Collection *captured;
+	Collection<Piece *> *pieces;
+	Collection<Piece *> *captured;
 	Player *nextPlayer;
 	Rules rules;
 	string str;
