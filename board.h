@@ -1,6 +1,7 @@
 #ifndef _BOARD_H
 #define _BOARD_H
 #pragma once
+#include<stdio.h>
 #include"square.h"
 #include"defs.h"
 class Board{

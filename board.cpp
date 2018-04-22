@@ -1,4 +1,3 @@
-#include<stdio.h>
 #include"board.h"
 Board::Board(){
 	int id=0;

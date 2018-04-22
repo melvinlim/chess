@@ -13,6 +13,28 @@ bool Rules::verifyColor(const Piece *p,const enum Color &color){
 	}
 	return true;
 }
+bool Rules::verifyKnight(const Board *board,const Move &move){
+	int adx,ady;
+	Coord src=move.src;
+	Coord dst=move.dst;
+	adx=abs(dst.j-src.j);
+	ady=abs(dst.i-src.i);
+	if(((adx==2)&&(ady==1))||((adx==1)&&(ady==2)))	return true;
+	printf("knights move one square straight and one square diagonally\n");
+	return false;
+}
+bool Rules::verifyKing(const Board *board,const Move &move){
+	int dx,dy;
+	Coord src=move.src;
+	Coord dst=move.dst;
+	dx=dst.j-src.j;
+	dy=dst.i-src.i;
+	if((abs(dx)>1)||(abs(dy)>1)){
+		printf("King can only move 1 square in any direction.\n");
+		return false;
+	}
+	return true;
+}
 bool Rules::verifyQueen(const Board *board,const Move &move){
 	if(verifyRook(board,move))	return true;
 	if(verifyBishop(board,move))	return true;
@@ -178,6 +200,7 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 			}
 		break;
 		case(KnightT):
+			return verifyKnight(board,move);
 		break;
 		case(BishopT):
 			return verifyBishop(board,move);
@@ -189,6 +212,7 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 			return verifyQueen(board,move);
 		break;
 		case(KingT):
+			return verifyKing(board,move);
 		break;
 	}
 	return true;
