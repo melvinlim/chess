@@ -4,9 +4,11 @@ Player::Player(enum Color c,Board *board){
 	if(color==White){
 		strcpy(colorStr,"White");
 		this->pieces=board->whitePieces;
+		forwardDirection=-1;
 	}else{
 		strcpy(colorStr,"Black");
 		this->pieces=board->blackPieces;
+		forwardDirection=1;
 	}
 	this->captured=new Collection<Piece *>();
 	this->threats=new Collection<Square *>();
