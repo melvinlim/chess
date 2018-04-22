@@ -25,8 +25,9 @@ void Game::step(Player *player){
 //	board->display(false);
 	board->display();
 	player->pieces->print();
-	board->whitePieces->print();
-	board->blackPieces->print();
+	player->captured->print();
+//	board->whitePieces->print();
+//	board->blackPieces->print();
 	valid=false;
 	while(!valid){
 		player->decide(move);
@@ -36,5 +37,9 @@ void Game::step(Player *player){
 		}
 		valid=rules.verify(player->color,board,move);
 	}
-	board->move(move);
+	Piece *p=board->move(move);
+	if(p){
+		player->captured->add(p);
+		player->nextPlayer->pieces->remove(p);
+	}
 }

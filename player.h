@@ -11,6 +11,7 @@
 using namespace std;
 class Player{
 public:
+	Collection<Square *> *threats;
 	Collection<Piece *> *pieces;
 	Collection<Piece *> *captured;
 	Player *nextPlayer;

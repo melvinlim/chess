@@ -8,6 +8,7 @@ Player::Player(enum Color c,Board *board){
 		strcpy(colorStr,"Black");
 		this->pieces=board->blackPieces;
 	}
+	this->captured=new Collection<Piece *>();
 	this->board=board;
 }
 Human::Human(enum Color c,Board *board):Player(c,board){}
