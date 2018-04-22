@@ -10,8 +10,8 @@
 using namespace std;
 class Player{
 public:
-	Collection pieces;
-	Collection captured;
+	Collection *pieces;
+	Collection *captured;
 	Player *nextPlayer;
 	Rules rules;
 	string str;
@@ -20,13 +20,13 @@ public:
 	enum Color color;
 	Board *board;
 	Move move;
-	Player(enum Color,Board *board);
+	Player(enum Color,Board *);
 	virtual void decide(Move &)=0;
 };
 class Human:public Player{
 	int getCoord(string,Move &);
 public:
-	Human(enum Color,Board *board);
+	Human(enum Color,Board *);
 	void decide(Move &);
 };
 #endif

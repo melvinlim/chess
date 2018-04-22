@@ -3,8 +3,10 @@ Player::Player(enum Color c,Board *board){
 	color=c;
 	if(color==White){
 		strcpy(colorStr,"White");
+		this->pieces=board->whitePieces;
 	}else{
 		strcpy(colorStr,"Black");
+		this->pieces=board->blackPieces;
 	}
 	this->board=board;
 }

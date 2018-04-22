@@ -7,8 +7,8 @@
 #include"defs.h"
 class Board{
 public:
-	Collection whitePieces;
-	Collection blackPieces;
+	Collection *whitePieces;
+	Collection *blackPieces;
 	Square *square[8][8];
 	Board();
 	~Board();

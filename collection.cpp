@@ -1,4 +1,7 @@
 #include"collection.h"
+Collection::~Collection(){
+	list.clear();
+}
 void Collection::add(Piece *piece){
 	list.push_front(piece);
 }

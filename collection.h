@@ -6,6 +6,7 @@
 using namespace std;
 class Collection{
 public:
+	~Collection();
 	forward_list<Piece *> list;
 	void add(Piece *);
 	void remove(Piece *);
