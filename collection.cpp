@@ -7,4 +7,5 @@ void Collection::remove(Piece *piece){
 }
 void Collection::print(){
 	for(Piece *p:list)	p->display();
+	printf("\n");
 }

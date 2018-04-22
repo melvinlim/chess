@@ -25,6 +25,8 @@ void Game::step(Player *player){
 //	board->display(false);
 	board->display();
 	player->pieces.print();
+	board->whitePieces.print();
+	board->blackPieces.print();
 	valid=false;
 	while(!valid){
 		player->decide(move);

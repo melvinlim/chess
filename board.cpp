@@ -23,17 +23,16 @@ void Board::placeSidePieces(int row,enum Color color){
 	Piece *p;
 	p=new Rook(color);
 	placePiece(row,0,color,p);
-//	square[row][0]->place(p);
 	p=new Knight(color);
-	square[row][1]->place(p);
+	placePiece(row,1,color,p);
 	p=new Bishop(color);
-	square[row][2]->place(p);
+	placePiece(row,2,color,p);
 	p=new Rook(color);
-	square[row][7]->place(p);
+	placePiece(row,7,color,p);
 	p=new Knight(color);
-	square[row][6]->place(p);
+	placePiece(row,6,color,p);
 	p=new Bishop(color);
-	square[row][5]->place(p);
+	placePiece(row,5,color,p);
 }
 void Board::move(Move &move){
 	int i=move.src.i;
@@ -47,15 +46,15 @@ void Board::move(Move &move){
 void Board::placeRowPieces(int row,enum Color color){
 	Piece *p;
 	p=new King(color);
-	square[row][4]->place(p);
+	placePiece(row,4,color,p);
 	p=new Queen(color);
-	square[row][3]->place(p);
+	placePiece(row,3,color,p);
 }
 void Board::placeRowPawns(int row,enum Color color){
 	Piece *p;
 	for(int j=0;j<8;j++){
 		p=new Pawn(color);
-		square[row][j]->place(p);
+		placePiece(row,j,color,p);
 		//assert(square[row][j]->id==p->square->id);
 	}
 }
