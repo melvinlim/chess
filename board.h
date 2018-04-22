@@ -6,6 +6,8 @@
 #include"collection.h"
 #include"piece.h"
 #include"defs.h"
+class Square;
+class Piece;
 class Board{
 public:
 	Collection<Piece *> *whitePieces;

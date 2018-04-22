@@ -16,7 +16,6 @@ public:
 	Collection<Piece *> *captured;
 	int forwardDirection;
 	Player *nextPlayer;
-	Rules rules;
 	string str;
 	char colorStr[5];
 	Utility utility;

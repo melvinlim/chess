@@ -33,7 +33,7 @@ int Human::getCoord(string type,Move &move){
 	if(type[0]=='s'){
 		strncpy(move.src.str,str.data(),2);
 		utility.stringToCoord(str,move.src);
-		if(!rules.verifySrc(board,move.src)){
+		if(!Rules::verifySrc(board,move.src)){
 			return -1;
 		}
 	}else{

@@ -4,6 +4,7 @@
 #include<string>
 #include"defs.h"
 #include"collection.h"
+#include"rules.h"
 #include"square.h"
 using namespace std;
 class Square;

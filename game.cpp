@@ -39,7 +39,7 @@ void Game::step(Player *player){
 			running=false;
 			return;
 		}
-		valid=rules.verify(player->color,board,move);
+		valid=Rules::verify(player->color,board,move);
 	}
 	Piece *p=board->move(move);
 	if(p){

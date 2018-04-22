@@ -10,7 +10,6 @@ private:
 	bool valid;
 	string str;
 	Board *board;
-	Rules rules;
 	Utility utility;
 	Player *p1,*p2,*activePlayer;
 	Move move;
