@@ -1,9 +1,8 @@
 #include"board.h"
 Board::Board(){
-	int id=0;
 	for(int i=0;i<8;i++){
 		for(int j=0;j<8;j++){
-			square[i][j]=new Square(id++);
+			square[i][j]=new Square(i,j);
 		}
 	}
 	whitePieces=new Collection<Piece *>();

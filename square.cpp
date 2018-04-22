@@ -1,16 +1,17 @@
 #include"square.h"
-Square::Square(int id){
+Square::Square(int i,int j){
 	piece=0;
-	this->id=id;
+	this->i=i;
+	this->j=j;
 	strId="  ";
-	int column=id%8;
-	int row=id/8;
+	int column=j;
+	int row=i;
 	int reversedRow=8-row;
 	strId[0]=(column)+65;
 	strId[1]=(reversedRow)+48;
 	
 	//printf("%s\n",strId.data());
-	//printf("%d\n",this->id);
+	//printf("%d %d\n",i,j);
 }
 void Square::place(Piece *p){
 	this->piece=p;

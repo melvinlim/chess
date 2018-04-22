@@ -7,11 +7,11 @@ using namespace std;
 class Piece;
 class Square{
 public:
+	int i,j;
 	Piece *piece;
 	string strId;
-	Square(int id);
+	Square(int,int);
 	void place(Piece *p);
 	void display();
-	int id;
 };
 #endif
