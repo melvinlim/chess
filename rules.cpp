@@ -244,6 +244,12 @@ void Rules::addKingThreats(Collection<Square *> *allThreats,Collection<Square *>
 			addBothThreats(allThreats,localThreats,square[si+1][sj+1]);
 		}
 	}
+	if(si>0){
+		addBothThreats(allThreats,localThreats,square[si-1][sj]);
+	}
+	if(si<7){
+		addBothThreats(allThreats,localThreats,square[si+1][sj]);
+	}
 }
 void Rules::addQueenThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 }
