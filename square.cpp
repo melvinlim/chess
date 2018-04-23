@@ -26,5 +26,10 @@ void Square::display(){
 	}
 }
 void Square::print(){
-	printf(" %s",strId.data());
+	printf("[");
+	if(threats){
+		threats->print();
+	}
+	printf("]");
+	printf(":%s ",strId.data());
 }

@@ -73,6 +73,6 @@ void Collection<T>::print(){
 		(*p)->display();
 	}
 */
-	printf("\n");
+//	printf("\n");
 }
 #endif

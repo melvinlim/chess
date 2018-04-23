@@ -31,11 +31,11 @@ void Game::step(Player *player){
 	board->display();
 	printf("pieces:");
 	player->pieces->print();
-	printf("captured:");
+	printf("\ncaptured:");
 	player->captured->print();
-	printf("threats:");
+	printf("\nthreats:");
 	player->threats->print();
-	printf("kingSquare:");
+	printf("\nkingSquare:");
 	player->kingSquare->print();
 	printf("\n");
 //	board->whitePieces->print();
