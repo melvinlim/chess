@@ -18,6 +18,7 @@ namespace Rules{
 	bool verifyColor(const Piece *,const enum Color &);
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);
+	void addBothThreats(Collection<Square *> *,Collection<Square *> *,Square *);
 	void addKingThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
 	void addQueenThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
 	void addBishopThreats(Collection<Square *> *,Collection<Square *> *,const Square *);

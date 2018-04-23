@@ -217,6 +217,10 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	}
 	return true;
 }
+void Rules::addBothThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,Square *target){
+	allThreats->add(target);
+	localThreats->add(target);
+}
 void Rules::addKingThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 }
 void Rules::addQueenThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
@@ -230,11 +234,17 @@ void Rules::addRookThreats(Collection<Square *> *allThreats,Collection<Square *>
 void Rules::addPawnThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start,int forwardDirection){
 	Board *board=start->board;
 	if(start->j>0){
+		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j-1]);
+/*
 		allThreats->add(board->square[start->i+forwardDirection][start->j-1]);
 		localThreats->add(board->square[start->i+forwardDirection][start->j-1]);
+*/
 	}
 	if(start->j<7){
+		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j+1]);
+/*
 		allThreats->add(board->square[start->i+forwardDirection][start->j+1]);
 		localThreats->add(board->square[start->i+forwardDirection][start->j+1]);
+*/
 	}
 }
