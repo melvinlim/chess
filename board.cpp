@@ -22,6 +22,7 @@ void Board::placePiece(int i,int j,enum Color color,Piece *p){
 	}
 	square[i][j]->place(p);
 	p->square=square[i][j];
+	p->place();
 }
 void Board::placeSidePieces(int row,enum Color color){
 	Piece *p;
@@ -57,6 +58,7 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 	srcPiece->square=square[di][dj];
 	srcPiece->addThreats(threats);
 	square[i][j]->threats->list.apply(updatePieceHelper);
+	srcPiece->place();
 	return dstPiece;
 }
 void Board::placeRowPieces(int row,enum Color color){

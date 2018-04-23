@@ -35,6 +35,9 @@ void Game::step(Player *player){
 	player->captured->print();
 	printf("threats:");
 	player->threats->print();
+	printf("kingSquare:");
+	player->kingSquare->print();
+	printf("\n");
 //	board->whitePieces->print();
 //	board->blackPieces->print();
 	valid=false;

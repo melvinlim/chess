@@ -1,5 +1,4 @@
 #include"player.h"
-//Collection<Square *> *threats;
 void helperFunc(Piece *p){
 	p->addThreats(p->player->threats);
 }

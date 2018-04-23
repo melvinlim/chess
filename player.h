@@ -17,6 +17,7 @@ public:
 	Collection<Square *> *threats;
 	Collection<Piece *> *pieces;
 	Collection<Piece *> *captured;
+	Square *kingSquare;
 	Player *nextPlayer;
 	string str;
 	char colorStr[5];

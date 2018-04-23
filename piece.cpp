@@ -1,5 +1,8 @@
 #include"piece.h"
 using namespace std;
+void Piece::place(){
+	printf("pp\n");
+}
 Piece::Piece(Color color){
 	this->color=color;
 	if(color==White){
@@ -17,6 +20,10 @@ void Piece::setSelf(string s){
 	if(color==Black){
 		self[1]+=32;
 	}
+}
+void King::place(){
+	printf("kp\n");
+	player->kingSquare=square;
 }
 King::King(Color color):Piece(color){
 	setSelf(" K");

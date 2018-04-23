@@ -23,12 +23,14 @@ public:
 	void display();
 	void print();
 	void setSelf(string s);
+	virtual void place();
 	virtual void addThreats(Collection<Square *> *)=0;
 };
 class King:public Piece{
 public:
 	King(Color color);
 	void addThreats(Collection<Square *> *);
+	void place();
 };
 class Pawn:public Piece{
 public:
