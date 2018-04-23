@@ -47,6 +47,7 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 	Piece *srcPiece=square[i][j]->piece;
 	Piece *dstPiece=square[di][dj]->piece;
 	threats->remove(srcPiece->threats);
+	srcPiece->threats->clear();
 	square[di][dj]->piece=square[i][j]->piece;
 	square[i][j]->piece=0;
 	srcPiece->square=square[di][dj];

@@ -142,5 +142,10 @@ public:
 			sPtr=sPtr->next;
 		}
 	}
+	//shallow clear
+	void clear(){
+		root->next=0;
+		size=0;
+	}
 };
 #endif

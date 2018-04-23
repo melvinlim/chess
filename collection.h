@@ -13,6 +13,7 @@ public:
 	void remove(Collection<T> *);
 	void removeHelper(T *);
 	void print();
+	void clear();
 };
 template<typename T>
 Collection<T>::~Collection(){
@@ -47,6 +48,10 @@ template<typename T>
 void printHelper(T *data){
 	//printf("%x\n",data);
 	data->print();
+}
+template<typename T>
+void Collection<T>::clear(){
+	list.clear();
 }
 template<typename T>
 void Collection<T>::print(){

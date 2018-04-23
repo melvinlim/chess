@@ -263,16 +263,8 @@ void Rules::addPawnThreats(Collection<Square *> *allThreats,Collection<Square *>
 	Board *board=start->board;
 	if(start->j>0){
 		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j-1]);
-/*
-		allThreats->add(board->square[start->i+forwardDirection][start->j-1]);
-		localThreats->add(board->square[start->i+forwardDirection][start->j-1]);
-*/
 	}
 	if(start->j<7){
 		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j+1]);
-/*
-		allThreats->add(board->square[start->i+forwardDirection][start->j+1]);
-		localThreats->add(board->square[start->i+forwardDirection][start->j+1]);
-*/
 	}
 }
