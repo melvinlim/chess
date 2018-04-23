@@ -256,6 +256,42 @@ void Rules::addQueenThreats(Collection<Square *> *allThreats,Collection<Square *
 void Rules::addBishopThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 }
 void Rules::addKnightThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+	Square *(*square)[8]=start->board->square;
+	int si,sj;
+	si=start->i;
+	sj=start->j;
+	if(sj>1){
+		if(si>0){
+			addBothThreats(allThreats,localThreats,square[si-1][sj-2]);
+		}
+		if(si<7){
+			addBothThreats(allThreats,localThreats,square[si+1][sj-2]);
+		}
+	}
+	if(sj<7){
+		if(si>0){
+			addBothThreats(allThreats,localThreats,square[si-1][sj+2]);
+		}
+		if(si<7){
+			addBothThreats(allThreats,localThreats,square[si+1][sj+2]);
+		}
+	}
+	if(si>1){
+		if(sj>0){
+			addBothThreats(allThreats,localThreats,square[si-2][sj-1]);
+		}
+		if(sj<7){
+			addBothThreats(allThreats,localThreats,square[si-2][sj+1]);
+		}
+	}
+	if(si<7){
+		if(sj>0){
+			addBothThreats(allThreats,localThreats,square[si+2][sj-1]);
+		}
+		if(sj<7){
+			addBothThreats(allThreats,localThreats,square[si+2][sj+1]);
+		}
+	}
 }
 void Rules::addRookThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 }
