@@ -2,6 +2,7 @@
 using namespace std;
 void Piece::place(){
 	printf("pp\n");
+	addThreats(player->threats);
 }
 Piece::Piece(Color color){
 	this->color=color;

@@ -23,7 +23,7 @@ public:
 	void placeRowPawns(int row,enum Color color);
 	void placePieces();
 	void placePawns();
-	void reset();
+	void placeAllPieces();
 	void debug();
 	void display(bool labels=true);
 	Piece *move(Move &,Collection<Square *> *);

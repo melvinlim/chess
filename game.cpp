@@ -11,9 +11,9 @@ Game::Game(){
 	players[1]=p2;
 	activePlayer=p1;
 	move.quit=false;
-	board->reset();
-	p1->initThreatsList();
-	p2->initThreatsList();
+	board->placeAllPieces();
+//	p1->initThreatsList();
+//	p2->initThreatsList();
 	running=true;
 }
 void Game::start(){

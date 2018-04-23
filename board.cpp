@@ -56,7 +56,7 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 	square[di][dj]->piece=square[i][j]->piece;
 	square[i][j]->piece=0;
 	srcPiece->square=square[di][dj];
-	srcPiece->addThreats(threats);
+//	srcPiece->addThreats(threats);
 	square[i][j]->threats->list.apply(updatePieceHelper);
 	srcPiece->place();
 	return dstPiece;
@@ -86,11 +86,7 @@ void Board::placePawns(){
 	placeRowPawns(1,Black);
 	placeRowPawns(6,White);
 }
-void Board::reset(){
-	delete whitePieces;
-	delete blackPieces;
-	whitePieces=new Collection<Piece *>();
-	blackPieces=new Collection<Piece *>();
+void Board::placeAllPieces(){
 	placePawns();
 	placePieces();
 }
