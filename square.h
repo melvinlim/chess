@@ -1,6 +1,5 @@
 #ifndef _SQUARE_H
 #define _SQUARE_H
-#pragma once
 #include<string>
 #include"piece.h"
 #include"board.h"

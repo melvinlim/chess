@@ -253,6 +253,8 @@ void Rules::addKingThreats(Collection<Square *> *allThreats,Collection<Square *>
 	}
 }
 void Rules::addQueenThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+	addRookThreats(allThreats,localThreats,start);
+	addBishopThreats(allThreats,localThreats,start);
 }
 void Rules::addBishopThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 	Square *(*square)[8]=start->board->square;

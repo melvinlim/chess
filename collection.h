@@ -1,6 +1,5 @@
 #ifndef _COLLECTION_H
 #define _COLLECTION_H
-#include<iostream>
 #include"linkedlist.h"
 #include"piece.h"
 using namespace std;

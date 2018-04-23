@@ -16,7 +16,7 @@ Square::Square(int i,int j,Board *board){
 }
 void Square::place(Piece *p){
 	this->piece=p;
-//	piece->square=this;
+	piece->square=this;
 }
 void Square::display(){
 	if(piece){
