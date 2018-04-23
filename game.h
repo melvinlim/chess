@@ -9,6 +9,7 @@ class Game{
 private:
 	bool valid;
 	string str;
+	Player *players[2];
 	Board *board;
 	Utility utility;
 	Player *p1,*p2,*activePlayer;

@@ -6,13 +6,16 @@
 #include"collection.h"
 #include"rules.h"
 #include"square.h"
+#include"player.h"
 using namespace std;
 class Square;
+class Player;
 class Piece{
 public:
 	enum Color color;
 	Collection<Square *> *threats;
 	int forwardDirection;
+	Player *player;
 	PieceType type;
 	Square *square;
 	string self;

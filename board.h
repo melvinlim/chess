@@ -5,11 +5,13 @@
 #include"square.h"
 #include"collection.h"
 #include"piece.h"
+#include"player.h"
 #include"defs.h"
 class Square;
 class Piece;
 class Board{
 public:
+	Player **players;
 	Collection<Piece *> *whitePieces;
 	Collection<Piece *> *blackPieces;
 	Square *square[8][8];

@@ -2,13 +2,18 @@
 using namespace std;
 Game::Game(){
 	board=new Board();
-	board->reset();
+	board->players=this->players;
 	p1=new Human(White,board);
 	p2=new Human(Black,board);
 	p1->nextPlayer=p2;
 	p2->nextPlayer=p1;
+	players[0]=p1;
+	players[1]=p2;
 	activePlayer=p1;
 	move.quit=false;
+	board->reset();
+	p1->initThreatsList();
+	p2->initThreatsList();
 	running=true;
 }
 void Game::start(){

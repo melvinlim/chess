@@ -1,4 +1,8 @@
 #include"player.h"
+//Collection<Square *> *threats;
+void helperFunc(Piece *p){
+	p->addThreats(p->player->threats);
+}
 Player::Player(enum Color c,Board *board){
 	color=c;
 	if(color==White){
@@ -11,9 +15,14 @@ Player::Player(enum Color c,Board *board){
 	this->captured=new Collection<Piece *>();
 	this->threats=new Collection<Square *>();
 	this->board=board;
+/*
 	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){
 		(*it)->addThreats(threats);
 	}
+*/
+}
+void Player::initThreatsList(){
+	pieces->list.apply(helperFunc);
 }
 Human::Human(enum Color c,Board *board):Player(c,board){}
 int Human::getCoord(string type,Move &move){

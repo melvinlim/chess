@@ -9,6 +9,9 @@
 #include<string>
 #include<iostream>
 using namespace std;
+class Square;
+class Piece;
+class Board;
 class Player{
 public:
 	Collection<Square *> *threats;
@@ -23,6 +26,7 @@ public:
 	Move move;
 	Player(enum Color,Board *);
 	virtual void decide(Move &)=0;
+	void initThreatsList();
 };
 class Human:public Player{
 	int getCoord(string,Move &);

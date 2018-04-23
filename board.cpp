@@ -13,9 +13,11 @@ void Board::placePiece(int i,int j,enum Color color,Piece *p){
 	switch(color){
 		case White:
 			whitePieces->add(p);
+			p->player=players[0];
 		break;
 		case Black:
 			blackPieces->add(p);
+			p->player=players[1];
 		break;
 	}
 	square[i][j]->place(p);
