@@ -222,6 +222,28 @@ void Rules::addBothThreats(Collection<Square *> *allThreats,Collection<Square *>
 	localThreats->add(target);
 }
 void Rules::addKingThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+	Square *(*square)[8]=start->board->square;
+	int si,sj;
+	si=start->i;
+	sj=start->j;
+	if(sj>0){
+		addBothThreats(allThreats,localThreats,square[si][sj-1]);
+		if(si>0){
+			addBothThreats(allThreats,localThreats,square[si-1][sj-1]);
+		}
+		if(si<7){
+			addBothThreats(allThreats,localThreats,square[si+1][sj-1]);
+		}
+	}
+	if(sj<7){
+		addBothThreats(allThreats,localThreats,square[si][sj+1]);
+		if(si>0){
+			addBothThreats(allThreats,localThreats,square[si-1][sj+1]);
+		}
+		if(si<7){
+			addBothThreats(allThreats,localThreats,square[si+1][sj+1]);
+		}
+	}
 }
 void Rules::addQueenThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 }
