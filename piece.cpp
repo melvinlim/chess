@@ -7,7 +7,7 @@ Piece::Piece(Color color){
 	}else{
 		forwardDirection=1;
 	}
-	threats=new Collection<Square *>();
+	threats=new Collection<Square *>(this);
 }
 void Piece::display(){
 	printf("%s",self.data());

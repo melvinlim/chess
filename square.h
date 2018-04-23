@@ -11,6 +11,7 @@ class Square{
 public:
 	int i,j;
 	Board *board;
+	Collection<Piece *> *threats;
 	Piece *piece;
 	string strId;
 	Square(int,int,Board *);

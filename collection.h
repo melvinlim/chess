@@ -2,7 +2,9 @@
 #define _COLLECTION_H
 #include<iostream>
 #include"linkedlist.h"
+#include"piece.h"
 using namespace std;
+class Piece;
 template<typename T>
 class Collection{
 public:
@@ -14,10 +16,20 @@ public:
 	void removeHelper(T *);
 	void print();
 	void clear();
+	Collection();
+	Collection(Piece *);
+	Piece *piece;
 };
 template<typename T>
 Collection<T>::~Collection(){
 	//list.clear();
+}
+template<typename T>
+Collection<T>::Collection(){
+}
+template<typename T>
+Collection<T>::Collection(Piece *p){
+	piece=p;
 }
 template<typename T>
 void Collection<T>::add(T item){
