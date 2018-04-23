@@ -20,7 +20,6 @@ public:
 	Player *nextPlayer;
 	string str;
 	char colorStr[5];
-	Utility utility;
 	enum Color color;
 	Board *board;
 	Move move;

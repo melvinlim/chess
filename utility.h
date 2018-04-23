@@ -2,9 +2,7 @@
 #define _UTILITY_H
 #include"defs.h"
 #include<string>
-using namespace std;
-class Utility{
-public:
-	void stringToCoord(string s,Coord &coord);
+namespace Utility{
+	void stringToCoord(std::string s,Coord &coord);
 };
 #endif

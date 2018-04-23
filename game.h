@@ -10,7 +10,6 @@ private:
 	string str;
 	Player *players[2];
 	Board *board;
-	Utility utility;
 	Player *p1,*p2,*activePlayer;
 	Move move;
 	bool running;

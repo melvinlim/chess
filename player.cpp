@@ -39,13 +39,13 @@ int Human::getCoord(string type,Move &move){
 	}
 	if(type[0]=='s'){
 		strncpy(move.src.str,str.data(),2);
-		utility.stringToCoord(str,move.src);
+		Utility::stringToCoord(str,move.src);
 		if(!Rules::verifySrc(board,move.src)){
 			return -1;
 		}
 	}else{
 		strncpy(move.dst.str,str.data(),2);
-		utility.stringToCoord(str,move.dst);
+		Utility::stringToCoord(str,move.dst);
 	}
 	return 0;
 }
