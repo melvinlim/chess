@@ -38,6 +38,10 @@ void Board::placeSidePieces(int row,enum Color color){
 	p=new Bishop(color);
 	placePiece(row,5,color,p);
 }
+void updatePieceHelper(Piece *piece){
+	piece->threats->clear();
+	piece->addThreats(piece->player->threats);
+}
 Piece *Board::move(Move &move,Collection<Square *> *threats){
 	int i=move.src.i;
 	int j=move.src.j;
@@ -52,6 +56,7 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 	square[i][j]->piece=0;
 	srcPiece->square=square[di][dj];
 	srcPiece->addThreats(threats);
+	square[i][j]->threats->list.apply(updatePieceHelper);
 	return dstPiece;
 }
 void Board::placeRowPieces(int row,enum Color color){
