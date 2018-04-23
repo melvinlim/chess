@@ -255,6 +255,42 @@ void Rules::addKingThreats(Collection<Square *> *allThreats,Collection<Square *>
 void Rules::addQueenThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 }
 void Rules::addBishopThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+	Square *(*square)[8]=start->board->square;
+	int si,sj,i,j;
+	si=start->i;
+	sj=start->j;
+	i=si+1;
+	j=sj+1;
+	while(i<=7&&j<=7){
+		addBothThreats(allThreats,localThreats,square[i][j]);
+		if(square[i++][j++]->piece){
+			break;
+		}
+	}
+	i=si-1;
+	j=sj-1;
+	while(i>=0&&j>=0){
+		addBothThreats(allThreats,localThreats,square[i][j]);
+		if(square[i--][j--]->piece){
+			break;
+		}
+	}
+	i=si+1;
+	j=sj-1;
+	while(i<=7&&j>=0){
+		addBothThreats(allThreats,localThreats,square[i][j]);
+		if(square[i++][j--]->piece){
+			break;
+		}
+	}
+	i=si-1;
+	j=sj+1;
+	while(i>=0&&j<=7){
+		addBothThreats(allThreats,localThreats,square[i][j]);
+		if(square[i--][j++]->piece){
+			break;
+		}
+	}
 }
 void Rules::addKnightThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 	Square *(*square)[8]=start->board->square;
