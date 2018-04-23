@@ -294,6 +294,34 @@ void Rules::addKnightThreats(Collection<Square *> *allThreats,Collection<Square 
 	}
 }
 void Rules::addRookThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+	Square *(*square)[8]=start->board->square;
+	int si,sj;
+	si=start->i;
+	sj=start->j;
+	for(int j=sj+1;j<=7;j++){
+		addBothThreats(allThreats,localThreats,square[si][j]);
+		if(square[si][j]->piece){
+			break;
+		}
+	}
+	for(int j=sj-1;j>=0;j--){
+		addBothThreats(allThreats,localThreats,square[si][j]);
+		if(square[si][j]->piece){
+			break;
+		}
+	}
+	for(int i=si+1;i<=7;i++){
+		addBothThreats(allThreats,localThreats,square[i][sj]);
+		if(square[i][sj]->piece){
+			break;
+		}
+	}
+	for(int i=si-1;i>=0;i--){
+		addBothThreats(allThreats,localThreats,square[i][sj]);
+		if(square[i][sj]->piece){
+			break;
+		}
+	}
 }
 void Rules::addPawnThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start,int forwardDirection){
 	Board *board=start->board;

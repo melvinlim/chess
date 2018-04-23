@@ -2,7 +2,6 @@
 #include"board.h"
 #include"square.h"
 #include"player.h"
-#include"utility.h"
 #include"rules.h"
 #include"defs.h"
 class Game{
