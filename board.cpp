@@ -49,6 +49,8 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 	threats->remove(srcPiece->threats);
 	square[di][dj]->piece=square[i][j]->piece;
 	square[i][j]->piece=0;
+	srcPiece->square=square[di][dj];
+	srcPiece->addThreats(threats);
 	return dstPiece;
 }
 void Board::placeRowPieces(int row,enum Color color){
