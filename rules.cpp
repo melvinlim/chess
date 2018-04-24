@@ -271,6 +271,11 @@ void Rules::addBishopThreats(Collection<Square *> *allThreats,Collection<Square 
 			break;
 		}
 	}
+	i++;
+	j++;
+	while(i<=7&&j<=7){
+		square[i++][j++]->attackers->remove(localThreats->piece);
+	}
 	i=si-1;
 	j=sj-1;
 	while(i>=0&&j>=0){
@@ -278,6 +283,11 @@ void Rules::addBishopThreats(Collection<Square *> *allThreats,Collection<Square 
 		if(square[i--][j--]->piece){
 			break;
 		}
+	}
+	i--;
+	j--;
+	while(i>=0&&j>=0){
+		square[i--][j--]->attackers->remove(localThreats->piece);
 	}
 	i=si+1;
 	j=sj-1;
@@ -287,6 +297,11 @@ void Rules::addBishopThreats(Collection<Square *> *allThreats,Collection<Square 
 			break;
 		}
 	}
+	i++;
+	j--;
+	while(i<=7&&j>=0){
+		square[i++][j--]->attackers->remove(localThreats->piece);
+	}
 	i=si-1;
 	j=sj+1;
 	while(i>=0&&j<=7){
@@ -294,6 +309,11 @@ void Rules::addBishopThreats(Collection<Square *> *allThreats,Collection<Square 
 		if(square[i--][j++]->piece){
 			break;
 		}
+	}
+	i--;
+	j++;
+	while(i>=0&&j<=7){
+		square[i--][j++]->attackers->remove(localThreats->piece);
 	}
 }
 void Rules::addKnightThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
