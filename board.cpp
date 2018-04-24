@@ -60,6 +60,7 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 //	srcPiece->addThreats(threats);
 	square[i][j]->attackers->list.apply(updatePieceHelper);
 	srcPiece->place();
+	srcPiece->square->attackers->list.apply(updatePieceHelper);
 	return dstPiece;
 }
 void Board::placeRowPieces(int row,enum Color color){
