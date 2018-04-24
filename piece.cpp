@@ -6,8 +6,8 @@ void updatePieceHelper(Piece *piece){
 	piece->addThreats(piece->player->threats);
 }
 void removePieceHelper(Square *square){
-	square->attackers->list.apply(updatePieceHelper);
 	square->attackers->clear();
+	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::removePiece(){
 	player->threats->remove(threats);
