@@ -329,7 +329,7 @@ void Rules::addKnightThreats(Collection<Square *> *allThreats,Collection<Square 
 			addBothThreats(allThreats,localThreats,square[si+1][sj-2]);
 		}
 	}
-	if(sj<7){
+	if(sj<6){
 		if(si>0){
 			addBothThreats(allThreats,localThreats,square[si-1][sj+2]);
 		}
@@ -345,7 +345,7 @@ void Rules::addKnightThreats(Collection<Square *> *allThreats,Collection<Square 
 			addBothThreats(allThreats,localThreats,square[si-2][sj+1]);
 		}
 	}
-	if(si<7){
+	if(si<6){
 		if(sj>0){
 			addBothThreats(allThreats,localThreats,square[si+2][sj-1]);
 		}
