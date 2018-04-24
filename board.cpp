@@ -26,18 +26,18 @@ void Board::placePiece(int i,int j,enum Color color,Piece *p){
 }
 void Board::placeSidePieces(int row,enum Color color){
 	Piece *p;
-	p=new Rook(color);
-	placePiece(row,0,color,p);
 	p=new Knight(color);
 	placePiece(row,1,color,p);
-	p=new Bishop(color);
-	placePiece(row,2,color,p);
-	p=new Rook(color);
-	placePiece(row,7,color,p);
 	p=new Knight(color);
 	placePiece(row,6,color,p);
 	p=new Bishop(color);
+	placePiece(row,2,color,p);
+	p=new Bishop(color);
 	placePiece(row,5,color,p);
+	p=new Rook(color);
+	placePiece(row,0,color,p);
+	p=new Rook(color);
+	placePiece(row,7,color,p);
 }
 void updatePieceHelper(Piece *piece){
 	piece->threats->clear();
@@ -77,10 +77,10 @@ void Board::placeRowPawns(int row,enum Color color){
 	}
 }
 void Board::placePieces(){
-	placeRowPieces(0,Black);
-	placeRowPieces(7,White);
 	placeSidePieces(0,Black);
 	placeSidePieces(7,White);
+	placeRowPieces(0,Black);
+	placeRowPieces(7,White);
 }
 void Board::placePawns(){
 	placeRowPawns(1,Black);
