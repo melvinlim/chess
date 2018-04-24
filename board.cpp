@@ -39,11 +39,6 @@ void Board::placeSidePieces(int row,enum Color color){
 	p=new Rook(color);
 	placePiece(row,7,color,p);
 }
-void updatePieceHelper(Piece *piece){
-	piece->player->threats->remove(piece->threats);
-	piece->threats->clear();
-	piece->addThreats(piece->player->threats);
-}
 Piece *Board::move(Move &move,Collection<Square *> *threats){
 	int i=move.src.i;
 	int j=move.src.j;
@@ -52,16 +47,11 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 //	printf("moving %s at %d %d to %d %d\n",(square[i][j]->piece->self).data(),move.src.i,move.src.j,move.dst.i,move.dst.j);
 	Piece *srcPiece=square[i][j]->piece;
 	Piece *dstPiece=square[di][dj]->piece;
-	srcPiece->player->threats->remove(srcPiece->threats);
-	srcPiece->square->attackers->remove(srcPiece);
-	srcPiece->threats->clear();
+	srcPiece->removePiece();
 	square[di][dj]->piece=square[i][j]->piece;
-	square[i][j]->piece=0;
 	srcPiece->square=square[di][dj];
 //	srcPiece->addThreats(threats);
-	square[i][j]->attackers->list.apply(updatePieceHelper);
 	srcPiece->place();
-	srcPiece->square->attackers->list.apply(updatePieceHelper);
 	return dstPiece;
 }
 void Board::placeRowPieces(int row,enum Color color){

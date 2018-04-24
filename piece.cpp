@@ -1,8 +1,21 @@
 #include"piece.h"
 using namespace std;
+void updatePieceHelper(Piece *piece){
+	piece->player->threats->remove(piece->threats);
+	piece->threats->clear();
+	piece->addThreats(piece->player->threats);
+}
+void Piece::removePiece(){
+	player->threats->remove(threats);
+	square->attackers->remove(this);
+	threats->clear();
+	square->piece=0;
+	square->attackers->list.apply(updatePieceHelper);
+}
 void Piece::place(){
 	printf("pp\n");
 	addThreats(player->threats);
+	square->attackers->list.apply(updatePieceHelper);
 }
 Piece::Piece(Color color){
 	this->color=color;

@@ -23,6 +23,7 @@ public:
 	void display();
 	void print();
 	void setSelf(string s);
+	void removePiece();
 	virtual void place();
 	virtual void addThreats(Collection<Square *> *)=0;
 };
