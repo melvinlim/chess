@@ -6,13 +6,14 @@ void updatePieceHelper(Piece *piece){
 	piece->addThreats(piece->player->threats);
 }
 void removePieceHelper(Square *square){
-	square->attackers->clear();
+//	square->attackers->clear();
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::removePiece(){
 	player->threats->remove(threats);
 	square->attackers->remove(this);
 	square->piece=0;
+	threats->removePiece(this);
 	threats->list.apply(removePieceHelper);
 	threats->clear();
 	square->attackers->list.apply(updatePieceHelper);

@@ -12,6 +12,7 @@ public:
 	void add(T);
 	void remove(T);
 	void remove(Collection<T> *);
+	void removePiece(Piece *);
 	void removeHelper(T *);
 	void print();
 	void clear();
@@ -19,6 +20,15 @@ public:
 	Collection(Piece *);
 	Piece *piece;
 };
+template<typename T>
+void Collection<T>::removePiece(Piece *piece){
+	Node<T> *p=list.root;
+	while (p->next){
+		p=p->next;
+		T sptr=p->item;
+		sptr->attackers->remove(piece);
+	}
+}
 template<typename T>
 Collection<T>::~Collection(){
 	//list.clear();
