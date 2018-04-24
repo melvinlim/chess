@@ -1,7 +1,6 @@
 #ifndef _LINKEDLIST_H
 #define _LINKEDLIST_H
 #include<stdio.h>
-#include"collection.h"
 template<typename T>
 class Node{
 public:
