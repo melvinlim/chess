@@ -24,6 +24,7 @@ void Piece::setSelf(string s){
 }
 void King::place(){
 	printf("kp\n");
+	Piece::place();
 	player->kingSquare=square;
 }
 King::King(Color color):Piece(color){
