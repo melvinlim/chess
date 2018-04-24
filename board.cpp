@@ -47,8 +47,8 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 //	printf("moving %s at %d %d to %d %d\n",(square[i][j]->piece->self).data(),move.src.i,move.src.j,move.dst.i,move.dst.j);
 	Piece *srcPiece=square[i][j]->piece;
 	Piece *dstPiece=square[di][dj]->piece;
-	srcPiece->removePiece();
 	square[di][dj]->piece=square[i][j]->piece;
+	srcPiece->removePiece();
 	srcPiece->square=square[di][dj];
 //	srcPiece->addThreats(threats);
 	srcPiece->place();
