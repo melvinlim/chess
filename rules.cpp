@@ -218,7 +218,7 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	return true;
 }
 void Rules::addBothThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,Square *target){
-	target->threats->add(localThreats->piece);
+	target->attackers->add(localThreats->piece);
 	allThreats->add(target);
 	localThreats->add(target);
 }

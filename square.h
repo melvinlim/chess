@@ -10,7 +10,7 @@ class Square{
 public:
 	int i,j;
 	Board *board;
-	Collection<Piece *> *threats;
+	Collection<Piece *> *attackers;
 	Piece *piece;
 	string strId;
 	Square(int,int,Board *);

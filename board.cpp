@@ -40,6 +40,7 @@ void Board::placeSidePieces(int row,enum Color color){
 	placePiece(row,7,color,p);
 }
 void updatePieceHelper(Piece *piece){
+	piece->player->threats->remove(piece->threats);
 	piece->threats->clear();
 	piece->addThreats(piece->player->threats);
 }
@@ -57,7 +58,7 @@ Piece *Board::move(Move &move,Collection<Square *> *threats){
 	square[i][j]->piece=0;
 	srcPiece->square=square[di][dj];
 //	srcPiece->addThreats(threats);
-	square[i][j]->threats->list.apply(updatePieceHelper);
+	square[i][j]->attackers->list.apply(updatePieceHelper);
 	srcPiece->place();
 	return dstPiece;
 }
