@@ -26,6 +26,8 @@ void Board::placePiece(int i,int j,enum Color color,Piece *p){
 }
 void Board::placeSidePieces(int row,enum Color color){
 	Piece *p;
+	p=new Rook(color);
+	placePiece(row,0,color,p);
 	p=new Knight(color);
 	placePiece(row,1,color,p);
 	p=new Knight(color);
@@ -34,8 +36,6 @@ void Board::placeSidePieces(int row,enum Color color){
 	placePiece(row,2,color,p);
 	p=new Bishop(color);
 	placePiece(row,5,color,p);
-	p=new Rook(color);
-	placePiece(row,0,color,p);
 	p=new Rook(color);
 	placePiece(row,7,color,p);
 }

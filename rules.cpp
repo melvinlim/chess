@@ -336,32 +336,48 @@ void Rules::addKnightThreats(Collection<Square *> *allThreats,Collection<Square 
 }
 void Rules::addRookThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
 	Square *(*square)[8]=start->board->square;
-	int si,sj;
+	int si,sj,i,j;
 	si=start->i;
 	sj=start->j;
-	for(int j=sj+1;j<=7;j++){
+	for(j=sj+1;j<=7;j++){
 		addBothThreats(allThreats,localThreats,square[si][j]);
 		if(square[si][j]->piece){
 			break;
 		}
 	}
-	for(int j=sj-1;j>=0;j--){
+	j++;
+	while(j<=7){
+		square[si][j++]->attackers->remove(localThreats->piece);
+	}
+	for(j=sj-1;j>=0;j--){
 		addBothThreats(allThreats,localThreats,square[si][j]);
 		if(square[si][j]->piece){
 			break;
 		}
 	}
-	for(int i=si+1;i<=7;i++){
+	j--;
+	while(j>=0){
+		square[si][j--]->attackers->remove(localThreats->piece);
+	}
+	for(i=si+1;i<=7;i++){
 		addBothThreats(allThreats,localThreats,square[i][sj]);
 		if(square[i][sj]->piece){
 			break;
 		}
 	}
-	for(int i=si-1;i>=0;i--){
+	i++;
+	while(i<=7){
+		square[i++][sj]->attackers->remove(localThreats->piece);
+	}
+	for(i=si-1;i>=0;i--){
 		addBothThreats(allThreats,localThreats,square[i][sj]);
 		if(square[i][sj]->piece){
 			break;
 		}
+	}
+	i--;
+	while(i>=0){
+		square[i--][sj]->attackers->remove(localThreats->piece);
 	}
 }
 void Rules::addPawnThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start,int forwardDirection){
