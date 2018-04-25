@@ -26,6 +26,6 @@ public:
 	void placeAllPieces();
 	void debug();
 	void display(bool labels=true);
-	Piece *move(Move &,Collection<Square *> *);
+	Piece *move(const Move &);
 };
 #endif

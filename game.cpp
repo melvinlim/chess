@@ -12,8 +12,6 @@ Game::Game(){
 	activePlayer=p1;
 	move.quit=false;
 	board->placeAllPieces();
-//	p1->initThreatsList();
-//	p2->initThreatsList();
 	running=true;
 }
 void Game::start(){
@@ -49,7 +47,7 @@ void Game::step(Player *player){
 		}
 		valid=Rules::verify(player->color,board,move);
 	}
-	Piece *p=board->move(move,player->threats);
+	Piece *p=board->move(move);
 	if(p){
 		player->captured->add(p);
 		player->nextPlayer->pieces->remove(p);
