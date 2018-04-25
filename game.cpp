@@ -4,7 +4,8 @@ Game::Game(){
 	board=new Board();
 	board->players=this->players;
 	p1=new Human(White,board);
-	p2=new Random(Black,board);
+	p2=new Human(Black,board);
+//	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
 	p2->nextPlayer=p1;
 	players[0]=p1;
@@ -26,14 +27,49 @@ void Game::step(){
 }
 bool Game::gameOver(Player *player){
 	if(player->legalMoves->isEmpty()){
-		player->result=Draw;
-		player->nextPlayer->result=Draw;
+		if(!Rules::checked(player)){
+			player->result=Draw;
+			player->nextPlayer->result=Draw;
+			return true;
+		}
+	}
+	if(Rules::checked(player)){
+		Piece *p;
+		Move testMove,tmpMove;
+		Node<Square *> *sptr;
+		Node<Piece *> *pptr=player->pieces->list.root;
+		while(pptr->next){
+			pptr=pptr->next;
+			sptr=pptr->item->legalMoves->list.root;
+			testMove.src.i=pptr->item->square->i;
+			testMove.src.j=pptr->item->square->j;
+			while(sptr->next){
+				sptr=sptr->next;
+				testMove.dst.i=sptr->item->i;
+				testMove.dst.j=sptr->item->j;
+				p=board->move(testMove);
+				if(!Rules::checked(player)){
+					return false;
+				}
+				tmpMove.src.i=testMove.dst.i;
+				tmpMove.src.j=testMove.dst.j;
+				tmpMove.dst.i=testMove.src.i;
+				tmpMove.dst.j=testMove.src.j;
+				board->move(tmpMove);
+				if(p){
+					board->square[testMove.dst.i][testMove.dst.j]->piece=p;
+					p->square=board->square[testMove.dst.i][testMove.dst.j];
+					p->place();
+				}
+			}
+		}
 		return true;
 	}
 	return false;
 }
 void Game::step(Player *player){
 	if(gameOver(player)){
+		printf("game over\n");
 		running=false;
 		return;
 	}
