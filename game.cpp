@@ -4,7 +4,7 @@ Game::Game(){
 	board=new Board();
 	board->players=this->players;
 	p1=new Human(White,board);
-	p2=new Human(Black,board);
+	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
 	p2->nextPlayer=p1;
 	players[0]=p1;

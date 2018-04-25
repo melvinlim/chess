@@ -25,11 +25,12 @@ void Player::initThreatsList(){
 }
 Random::Random(enum Color c,Board *board):Player(c,board){}
 void Random::decide(Move &move){
-	Piece *chosenPiece=pieces->randomElement();
-	move.src.i=chosenPiece->square->i;
-	move.src.j=chosenPiece->square->j;
+	Piece *chosenPiece;
 	Square *dstSquare;
 	do{	//this is potentially very inefficient.
+		chosenPiece=pieces->randomElement();
+		move.src.i=chosenPiece->square->i;
+		move.src.j=chosenPiece->square->j;
 		dstSquare=chosenPiece->threats->randomElement();
 	}while(dstSquare->piece);
 	move.dst.i=dstSquare->i;
