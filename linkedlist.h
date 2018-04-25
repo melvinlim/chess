@@ -21,8 +21,8 @@ public:
 template<typename T>
 class List{
 private:
-	int size;
 public:
+	int size;
 	Node<T> *root;
 	List(List<T> *l){
 		root=new Node<T>();

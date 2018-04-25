@@ -23,6 +23,18 @@ Player::Player(enum Color c,Board *board){
 void Player::initThreatsList(){
 	pieces->list.apply(helperFunc);
 }
+Random::Random(enum Color c,Board *board):Player(c,board){}
+void Random::decide(Move &move){
+	Piece *chosenPiece=pieces->randomElement();
+	move.src.i=chosenPiece->square->i;
+	move.src.j=chosenPiece->square->j;
+	Square *dstSquare;
+	do{	//this is potentially very inefficient.
+		dstSquare=chosenPiece->threats->randomElement();
+	}while(dstSquare->piece);
+	move.dst.i=dstSquare->i;
+	move.dst.i=dstSquare->j;
+}
 Human::Human(enum Color c,Board *board):Player(c,board){}
 int Human::getCoord(string type,Move &move){
 	cin>>str;

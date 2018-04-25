@@ -16,10 +16,17 @@ public:
 	void removeHelper(T *);
 	void print();
 	void clear();
+	T randomElement();
 	Collection();
 	Collection(Piece *);
 	Piece *piece;
 };
+template<typename T>
+T Collection<T>::randomElement(){
+	int randval=rand()%list.size;
+	T ret=list.atIndex(randval);
+	return ret;
+}
 template<typename T>
 void Collection<T>::removePiece(Piece *piece){
 	Node<T> *p=list.root;

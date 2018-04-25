@@ -28,6 +28,11 @@ public:
 	virtual void decide(Move &)=0;
 	void initThreatsList();
 };
+class Random:public Player{
+public:
+	Random(enum Color,Board *);
+	void decide(Move &);
+};
 class Human:public Player{
 	int getCoord(string,Move &);
 public:
