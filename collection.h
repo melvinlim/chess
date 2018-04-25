@@ -23,6 +23,7 @@ public:
 };
 template<typename T>
 T Collection<T>::randomElement(){
+	srand(time(0));
 	int randval=rand()%list.size;
 	T ret=list.atIndex(randval);
 	return ret;

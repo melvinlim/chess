@@ -34,7 +34,7 @@ void Random::decide(Move &move){
 		dstSquare=chosenPiece->threats->randomElement();
 	}while(dstSquare->piece);
 	move.dst.i=dstSquare->i;
-	move.dst.i=dstSquare->j;
+	move.dst.j=dstSquare->j;
 }
 Human::Human(enum Color c,Board *board):Player(c,board){}
 int Human::getCoord(string type,Move &move){
