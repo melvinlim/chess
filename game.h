@@ -17,6 +17,7 @@ public:
 	Game();
 	void step();
 	void step(Player *);
+	bool gameOver(Player *);
 	void prompt(Move &);
 	int getCoord(string,Move &);
 	Square *coordToSquare(string,Coord &);

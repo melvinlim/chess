@@ -23,6 +23,7 @@ public:
 	string str;
 	char colorStr[5];
 	enum Color color;
+	enum Result result;
 	Board *board;
 	Move move;
 	Player(enum Color,Board *);

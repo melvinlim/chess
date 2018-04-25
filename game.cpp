@@ -23,7 +23,24 @@ void Game::step(){
 	step(activePlayer);
 	activePlayer=activePlayer->nextPlayer;
 }
+bool Game::gameOver(Player *player){
+	if(player->legalMoves->isEmpty()){
+		if(Rules::checked(player)){
+			player->result=Lose;
+			player->nextPlayer->result=Win;
+		}else{
+			player->result=Draw;
+			player->nextPlayer->result=Draw;
+		}
+		return true;
+	}
+	return false;
+}
 void Game::step(Player *player){
+	if(gameOver(player)){
+		running=false;
+		return;
+	}
 //	board->debug();
 //	board->display(false);
 	board->display();

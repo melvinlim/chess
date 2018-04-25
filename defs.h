@@ -1,6 +1,12 @@
 #ifndef _VARS_H
 #define _VARS_H
 #pragma once
+enum Result{
+	Playing,
+	Win,
+	Lose,
+	Draw
+};
 enum Color{
 	White,
 	Black

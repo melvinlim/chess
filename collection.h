@@ -17,11 +17,16 @@ public:
 	void print();
 	void printAll();
 	void clear();
+	bool isEmpty();
 	T randomElement();
 	Collection();
 	Collection(Piece *);
 	Piece *piece;
 };
+template<typename T>
+bool Collection<T>::isEmpty(){
+	return(list.size==0);
+}
 template<typename T>
 T Collection<T>::randomElement(){
 	srand(time(0));

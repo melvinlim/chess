@@ -15,6 +15,7 @@ Player::Player(enum Color c,Board *board){
 	this->threats=new Collection<Square *>();
 	this->legalMoves=new Collection<Square *>();
 	this->board=board;
+	result=Playing;
 /*
 	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){
 		(*it)->addThreats(threats);
