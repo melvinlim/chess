@@ -32,7 +32,7 @@ void Game::step(Player *player){
 	printf("\ncaptured:");
 	player->captured->print();
 	printf("\nthreats:");
-	player->threats->print();
+	player->threats->printAll();
 	printf("\nlegalmoves:");
 	player->legalMoves->print();
 	printf("\nkingSquare:");

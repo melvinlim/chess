@@ -15,6 +15,7 @@ public:
 	void removePiece(Piece *);
 	void removeHelper(T *);
 	void print();
+	void printAll();
 	void clear();
 	T randomElement();
 	Collection();
@@ -80,6 +81,14 @@ void printHelper(T *data){
 template<typename T>
 void Collection<T>::clear(){
 	list.clear();
+}
+template<typename T>
+void printAllHelper(T *data){
+	data->printAll();
+}
+template<typename T>
+void Collection<T>::printAll(){
+	list.apply(printAllHelper);
 }
 template<typename T>
 void Collection<T>::print(){

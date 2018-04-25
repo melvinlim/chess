@@ -25,11 +25,14 @@ void Square::display(){
 		printf("  ");
 	}
 }
-void Square::print(){
+void Square::printAll(){
 	printf("[");
 	if(attackers){
 		attackers->print();
 	}
-	printf("]");
-	printf(":%s ",strId.data());
+	printf("]:");
+	print();
+}
+void Square::print(){
+	printf("%s ",strId.data());
 }

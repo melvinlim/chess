@@ -17,5 +17,6 @@ public:
 	void place(Piece *p);
 	void display();
 	void print();
+	void printAll();
 };
 #endif
