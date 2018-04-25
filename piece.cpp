@@ -75,19 +75,19 @@ void Pawn::addThreats(Collection<Square *> *allThreats){
 	Rules::addPawnThreats(player->legalMoves,legalMoves,allThreats,threats,square,forwardDirection);
 }
 void King::addThreats(Collection<Square *> *allThreats){
-	Rules::addKingThreats(allThreats,threats,square);
+	Rules::addKingThreats(player->legalMoves,legalMoves,allThreats,threats,square);
 }
 void Queen::addThreats(Collection<Square *> *allThreats){
-	Rules::addQueenThreats(allThreats,threats,square);
+	Rules::addQueenThreats(player->legalMoves,legalMoves,allThreats,threats,square);
 }
 void Knight::addThreats(Collection<Square *> *allThreats){
-	Rules::addKnightThreats(allThreats,threats,square);
+	Rules::addKnightThreats(player->legalMoves,legalMoves,allThreats,threats,square);
 }
 void Bishop::addThreats(Collection<Square *> *allThreats){
-	Rules::addBishopThreats(allThreats,threats,square);
+	Rules::addBishopThreats(player->legalMoves,legalMoves,allThreats,threats,square);
 }
 void Rook::addThreats(Collection<Square *> *allThreats){
-	Rules::addRookThreats(allThreats,threats,square);
+	Rules::addRookThreats(player->legalMoves,legalMoves,allThreats,threats,square);
 }
 void Piece::print(){
 	display();
