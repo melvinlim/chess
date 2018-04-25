@@ -30,12 +30,8 @@ void Random::decide(Move &move){
 	Square *dstSquare;
 	do{	//this is potentially very inefficient.
 		chosenPiece=pieces->randomElement();
-		if(chosenPiece->type==PawnT){
-			dstSquare=board->square[chosenPiece->square->i+chosenPiece->forwardDirection][chosenPiece->square->j];
-		}else{
-			dstSquare=chosenPiece->threats->randomElement();
-		}
-	}while(dstSquare->piece);
+	}while(chosenPiece->legalMoves->list.size==0);
+	dstSquare=chosenPiece->legalMoves->randomElement();
 	move.src.i=chosenPiece->square->i;
 	move.src.j=chosenPiece->square->j;
 	move.dst.i=dstSquare->i;
