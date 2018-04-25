@@ -227,6 +227,12 @@ void Rules::addBothLegalMoves(Collection<Square *> *allLegalMoves,Collection<Squ
 	allLegalMoves->add(target);
 	localLegalMoves->add(target);
 }
+void Rules::updateAllLists(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,Square *target){
+	if((!target->piece)||(target->piece->player!=localLegalMoves->piece->player)){
+		addBothLegalMoves(allLegalMoves,localLegalMoves,target);
+	}
+	addBothThreats(allThreats,localThreats,target);
+}
 void Rules::addBothThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,Square *target){
 	if(target->attackers->list.find(localThreats->piece)==0){
 		target->attackers->add(localThreats->piece);
