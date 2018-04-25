@@ -1,15 +1,17 @@
 #include"piece.h"
 using namespace std;
 void updatePieceHelper(Piece *piece){
+	piece->player->legalMoves->remove(piece->legalMoves);
+	piece->legalMoves->clear();
 	piece->player->threats->remove(piece->threats);
 	piece->threats->clear();
 	piece->addThreats(piece->player->threats);
 }
 void removePieceHelper(Square *square){
-//	square->attackers->clear();
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::removePiece(){
+	player->legalMoves->remove(legalMoves);
 	player->threats->remove(threats);
 	square->attackers->remove(this);
 	square->piece=0;
