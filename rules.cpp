@@ -431,6 +431,8 @@ void Rules::addPawnThreats(Collection<Square *> *allLegalMoves,Collection<Square
 	if(!square->piece){
 		addBothLegalMoves(allLegalMoves,localLegalMoves,square);
 		//pawns cannot capture forwards but this ensures pawn legal moves are updated when necessary.  will have to check if this causes any problems.
-		addBothThreats(allThreats,localThreats,square);
+		if(square->attackers->list.find(localLegalMoves->piece)==0){
+			square->attackers->add(localLegalMoves->piece);
+		}
 	}
 }
