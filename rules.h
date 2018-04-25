@@ -4,11 +4,13 @@
 #include"board.h"
 #include"piece.h"
 #include"square.h"
+#include"player.h"
 #include<string>
 class Square;
 class Board;
 class Piece;
 namespace Rules{
+	bool checked(const Player *);
 	bool verify(const enum Color &,const Board *,const Move &);
 	bool verifyRook(const Board *,const Move &);
 	bool verifyBishop(const Board *,const Move &);

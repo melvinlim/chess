@@ -1,4 +1,12 @@
 #include"rules.h"
+bool Rules::checked(const Player *player){
+	if(player->nextPlayer->threats->list.find(player->kingSquare)){
+		printf("true");
+		return true;
+	}
+	printf("false");
+	return false;
+}
 bool Rules::verifySrc(const Board *board,const Coord &coord){
 	if(board->square[coord.i][coord.j]->piece==0){
 		printf("starting square must be occupied\n");
