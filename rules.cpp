@@ -412,13 +412,22 @@ void Rules::addRookThreats(Collection<Square *> *allThreats,Collection<Square *>
 }
 void Rules::addPawnThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start,int forwardDirection){
 	Board *board=start->board;
+	Square *square;
 	if(start->j>0){
-		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j-1]);
+		square=board->square[start->i+forwardDirection][start->j-1];
+		if(square->piece){
+			addBothLegalMoves(allLegalMoves,localLegalMoves,square);
+		}
+		addBothThreats(allThreats,localThreats,square);
 	}
 	if(start->j<7){
-		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j+1]);
+		square=board->square[start->i+forwardDirection][start->j+1];
+		if(square->piece){
+			addBothLegalMoves(allLegalMoves,localLegalMoves,square);
+		}
+		addBothThreats(allThreats,localThreats,square);
 	}
-	Square *square=board->square[start->i+forwardDirection][start->j];
+	square=board->square[start->i+forwardDirection][start->j];
 	if(!square->piece){
 		addBothLegalMoves(allLegalMoves,localLegalMoves,square);
 		//pawns cannot capture forwards but this ensures pawn legal moves are updated when necessary.  will have to check if this causes any problems.
