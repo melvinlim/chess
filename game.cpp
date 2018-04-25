@@ -40,16 +40,35 @@ void Game::step(Player *player){
 	printf("\n");
 //	board->whitePieces->print();
 //	board->blackPieces->print();
-	valid=false;
-	while(!valid){
-		player->decide(move);
-		if(move.quit){
-			running=false;
-			return;
+	Move tmpMove;
+	Piece *p;
+	for(;;){
+		valid=false;
+		while(!valid){
+			player->decide(move);
+			if(move.quit){
+				running=false;
+				return;
+			}
+			valid=Rules::verify(player->color,board,move);
 		}
-		valid=Rules::verify(player->color,board,move);
+		p=board->move(move);
+		if(!Rules::checked(player)){
+			break;
+		}
+		printf("move cannot result in king being under attack.\n");
+		tmpMove.src.i=move.dst.i;
+		tmpMove.src.j=move.dst.j;
+		tmpMove.dst.i=move.src.i;
+		tmpMove.dst.j=move.src.j;
+		board->move(tmpMove);
+		if(p){
+			board->square[move.dst.i][move.dst.j]->piece=p;
+			p->square=board->square[move.dst.i][move.dst.j];
+			p->place();
+		}
 	}
-	Piece *p=board->move(move);
+	
 	if(p){
 		player->captured->add(p);
 		player->nextPlayer->pieces->remove(p);
