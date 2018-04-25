@@ -70,7 +70,7 @@ Rook::Rook(Color color):Piece(color){
 	type=RookT;
 }
 void Pawn::addThreats(Collection<Square *> *allThreats){
-	Rules::addPawnThreats(allThreats,threats,square,forwardDirection);
+	Rules::addPawnThreats(player->legalMoves,legalMoves,allThreats,threats,square,forwardDirection);
 }
 void King::addThreats(Collection<Square *> *allThreats){
 	Rules::addKingThreats(allThreats,threats,square);

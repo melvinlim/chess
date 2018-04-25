@@ -223,6 +223,10 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	}
 	return true;
 }
+void Rules::addBothLegalMoves(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Square *target){
+	allLegalMoves->add(target);
+	localLegalMoves->add(target);
+}
 void Rules::addBothThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,Square *target){
 	if(target->attackers->list.find(localThreats->piece)==0){
 		target->attackers->add(localThreats->piece);
@@ -406,7 +410,7 @@ void Rules::addRookThreats(Collection<Square *> *allThreats,Collection<Square *>
 		square[i--][sj]->attackers->remove(localThreats->piece);
 	}
 }
-void Rules::addPawnThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start,int forwardDirection){
+void Rules::addPawnThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start,int forwardDirection){
 	Board *board=start->board;
 	if(start->j>0){
 		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j-1]);
@@ -414,4 +418,5 @@ void Rules::addPawnThreats(Collection<Square *> *allThreats,Collection<Square *>
 	if(start->j<7){
 		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j+1]);
 	}
+	addBothLegalMoves(allLegalMoves,localLegalMoves,board->square[start->i+forwardDirection][start->j]);
 }

@@ -21,12 +21,13 @@ namespace Rules{
 	bool verifyColor(const Piece *,const enum Color &);
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);
+	void addBothLegalMoves(Collection<Square *> *,Collection<Square *> *,Square *);
 	void addBothThreats(Collection<Square *> *,Collection<Square *> *,Square *);
 	void addKingThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
 	void addQueenThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
 	void addBishopThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
 	void addKnightThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
 	void addRookThreats(Collection<Square *> *,Collection<Square *> *,const Square *);
-	void addPawnThreats(Collection<Square *> *,Collection<Square *> *,const Square *,int);
+	void addPawnThreats(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,const Square *,int);
 }
 #endif
