@@ -418,5 +418,10 @@ void Rules::addPawnThreats(Collection<Square *> *allLegalMoves,Collection<Square
 	if(start->j<7){
 		addBothThreats(allThreats,localThreats,board->square[start->i+forwardDirection][start->j+1]);
 	}
-	addBothLegalMoves(allLegalMoves,localLegalMoves,board->square[start->i+forwardDirection][start->j]);
+	Square *square=board->square[start->i+forwardDirection][start->j];
+	if(!square->piece){
+		addBothLegalMoves(allLegalMoves,localLegalMoves,square);
+		//pawns cannot capture forwards but this ensures pawn legal moves are updated when necessary.  will have to check if this causes any problems.
+		addBothThreats(allThreats,localThreats,square);
+	}
 }
