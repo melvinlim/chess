@@ -21,17 +21,13 @@ void Game::start(){
 }
 void Game::step(){
 	step(activePlayer);
+	if(!running)	return;
 	activePlayer=activePlayer->nextPlayer;
 }
 bool Game::gameOver(Player *player){
 	if(player->legalMoves->isEmpty()){
-		if(Rules::checked(player)){
-			player->result=Lose;
-			player->nextPlayer->result=Win;
-		}else{
-			player->result=Draw;
-			player->nextPlayer->result=Draw;
-		}
+		player->result=Draw;
+		player->nextPlayer->result=Draw;
 		return true;
 	}
 	return false;
