@@ -415,14 +415,14 @@ void Rules::addPawnThreats(Collection<Square *> *allLegalMoves,Collection<Square
 	Square *square;
 	if(start->j>0){
 		square=board->square[start->i+forwardDirection][start->j-1];
-		if(square->piece){
+		if(square->piece&&(square->piece->player!=localLegalMoves->piece->player)){
 			addBothLegalMoves(allLegalMoves,localLegalMoves,square);
 		}
 		addBothThreats(allThreats,localThreats,square);
 	}
 	if(start->j<7){
 		square=board->square[start->i+forwardDirection][start->j+1];
-		if(square->piece){
+		if(square->piece&&(square->piece->player!=localLegalMoves->piece->player)){
 			addBothLegalMoves(allLegalMoves,localLegalMoves,square);
 		}
 		addBothThreats(allThreats,localThreats,square);
