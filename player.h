@@ -15,6 +15,7 @@ class Board;
 class Player{
 public:
 	Collection<Square *> *threats;
+	Collection<Square *> *legalMoves;
 	Collection<Piece *> *pieces;
 	Collection<Piece *> *captured;
 	Square *kingSquare;

@@ -30,6 +30,7 @@ Piece::Piece(Color color){
 		forwardDirection=1;
 	}
 	threats=new Collection<Square *>(this);
+	legalMoves=new Collection<Square *>(this);
 }
 void Piece::display(){
 	printf("%s",self.data());

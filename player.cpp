@@ -13,6 +13,7 @@ Player::Player(enum Color c,Board *board){
 	}
 	this->captured=new Collection<Piece *>();
 	this->threats=new Collection<Square *>();
+	this->legalMoves=new Collection<Square *>();
 	this->board=board;
 /*
 	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){

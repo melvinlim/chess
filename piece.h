@@ -14,6 +14,7 @@ class Piece{
 public:
 	enum Color color;
 	Collection<Square *> *threats;
+	Collection<Square *> *legalMoves;
 	int forwardDirection;
 	Player *player;
 	PieceType type;
