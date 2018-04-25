@@ -36,7 +36,7 @@ void Game::step(Player *player){
 	printf("\nkingSquare:");
 	player->kingSquare->print();
 	printf("\ncheck:");
-	Rules::checked(player->nextPlayer);
+	Rules::checked(player->nextPlayer) ? printf("true") : printf("false");
 	printf("\n");
 //	board->whitePieces->print();
 //	board->blackPieces->print();
