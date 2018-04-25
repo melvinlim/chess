@@ -58,7 +58,6 @@ void Collection<T>::removeHelper(T *obj){
 }
 template<typename T>
 void Collection<T>::remove(Collection<T> *items){
-	printf("removing multiple items\n");
 	list.remove(&items->list);
 /*
 	for(auto p=items->list.begin();p!=items->list.end();p++){
