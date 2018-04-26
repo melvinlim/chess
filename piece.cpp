@@ -16,7 +16,7 @@ void Piece::removePiece(){
 	square->attackers->remove(this);
 	square->piece=0;
 	threats->removePiece(this);
-	threats->list.apply(removePieceHelper);
+//	threats->list.apply(removePieceHelper);
 	threats->clear();
 	legalMoves->clear();
 	square->attackers->list.apply(updatePieceHelper);

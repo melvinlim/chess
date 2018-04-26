@@ -78,11 +78,10 @@ bool Game::gameOver(Player *player){
 			tmpMove.dst.j=testMove.src.j;
 			if(board->square[tmpMove.src.i][tmpMove.src.j]->piece==0){
 				assert(false);
-				printf("?");
 			}
 			board->move(tmpMove);
-			if(board->square[tmpMove.dst.i][tmpMove.dst.j]->piece->legalMoves->find(board->square[tmpMove.dst.i][tmpMove.dst.j])==0){
-				printf("?");
+			if(board->square[tmpMove.dst.i][tmpMove.dst.j]->piece->legalMoves->find(board->square[tmpMove.dst.i][tmpMove.dst.j])!=0){
+				assert(false);
 			}
 			if(p){
 				board->square[testMove.dst.i][testMove.dst.j]->piece=p;
