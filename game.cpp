@@ -49,11 +49,13 @@ void Game::step(){
 }
 bool Game::gameOver(Player *player){
 	Piece *p;
+	bool invalidMove;
 	Move testMove,tmpMove;
 	Node<Square *> *sptr;
 	Node<Piece *> *pptr=player->pieces->list.root;
 	bool escapePossible=false;
 	while(pptr->next){
+		invalidMove=false;
 		pptr=pptr->next;
 		sptr=pptr->item->legalMoves->list.root;
 		testMove.src.i=pptr->item->square->i;
@@ -63,12 +65,11 @@ bool Game::gameOver(Player *player){
 			testMove.dst.i=sptr->item->i;
 			testMove.dst.j=sptr->item->j;
 			if((testMove.dst.i==testMove.src.i)&&(testMove.dst.j==testMove.src.j)){
-				continue;
+				assert(false);
 			}
 			p=board->move(testMove);
 			if(Rules::checked(player)){
-				pptr->item->legalMoves->remove(sptr->item);
-				player->legalMoves->remove(sptr->item);
+				invalidMove=true;
 			}else{
 				escapePossible=true;
 			}
@@ -87,6 +88,15 @@ bool Game::gameOver(Player *player){
 				board->square[testMove.dst.i][testMove.dst.j]->piece=p;
 				p->square=board->square[testMove.dst.i][testMove.dst.j];
 				p->place();
+			}
+			if(invalidMove){
+				printf("removing:%s\n",board->square[testMove.dst.i][testMove.dst.j]->strId.data());
+				printf("sz0:%d,%d\n",pptr->item->legalMoves->size(),player->legalMoves->size());
+				//pptr->item->legalMoves->remove(sptr->item);
+				pptr->item->legalMoves->remove(board->square[testMove.dst.i][testMove.dst.j]);
+				//player->legalMoves->remove(sptr->item);
+				player->legalMoves->remove(board->square[testMove.dst.i][testMove.dst.j]);
+				printf("sz1:%d,%d\n",pptr->item->legalMoves->size(),player->legalMoves->size());
 			}
 		}
 	}

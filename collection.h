@@ -23,7 +23,12 @@ public:
 	Collection();
 	Collection(Piece *);
 	Piece *piece;
+	int size();
 };
+template<typename T>
+int Collection<T>::size(){
+	return list.size;
+}
 template<typename T>
 Node<T> *Collection<T>::find(T item){
 	return list.find(item);
@@ -103,6 +108,7 @@ void Collection<T>::printAll(){
 template<typename T>
 void Collection<T>::print(){
 	list.apply(printHelper);
+	printf(" (%d)",list.size);
 //	for(T p:list)	p->print();
 /*
 	for(auto p=list.begin();p!=list.end();p++){
