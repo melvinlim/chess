@@ -26,31 +26,21 @@ void Game::step(){
 	activePlayer=activePlayer->nextPlayer;
 }
 bool Game::gameOver(Player *player){
-	if(player->legalMoves->isEmpty()){
-		if(!Rules::checked(player)){
-			player->result=Draw;
-			player->nextPlayer->result=Draw;
-			return true;
-		}
-	}
-	if(Rules::checked(player)){
-		Piece *p;
-		Move testMove,tmpMove;
-		Node<Square *> *sptr;
-		Node<Piece *> *pptr=player->pieces->list.root;
-		while(pptr->next){
-			pptr=pptr->next;
-			sptr=pptr->item->legalMoves->list.root;
-			testMove.src.i=pptr->item->square->i;
-			testMove.src.j=pptr->item->square->j;
-			while(sptr->next){
-				sptr=sptr->next;
-				testMove.dst.i=sptr->item->i;
-				testMove.dst.j=sptr->item->j;
-				p=board->move(testMove);
-				if(!Rules::checked(player)){
-					return false;
-				}
+	Piece *p;
+	Move testMove,tmpMove;
+	Node<Square *> *sptr;
+	Node<Piece *> *pptr=player->pieces->list.root;
+	while(pptr->next){
+		pptr=pptr->next;
+		sptr=pptr->item->legalMoves->list.root;
+		testMove.src.i=pptr->item->square->i;
+		testMove.src.j=pptr->item->square->j;
+		while(sptr->next){
+			sptr=sptr->next;
+			testMove.dst.i=sptr->item->i;
+			testMove.dst.j=sptr->item->j;
+			p=board->move(testMove);
+			if(!Rules::checked(player)){
 				tmpMove.src.i=testMove.dst.i;
 				tmpMove.src.j=testMove.dst.j;
 				tmpMove.dst.i=testMove.src.i;
@@ -61,11 +51,28 @@ bool Game::gameOver(Player *player){
 					p->square=board->square[testMove.dst.i][testMove.dst.j];
 					p->place();
 				}
+				return false;
+			}
+			tmpMove.src.i=testMove.dst.i;
+			tmpMove.src.j=testMove.dst.j;
+			tmpMove.dst.i=testMove.src.i;
+			tmpMove.dst.j=testMove.src.j;
+			board->move(tmpMove);
+			if(p){
+				board->square[testMove.dst.i][testMove.dst.j]->piece=p;
+				p->square=board->square[testMove.dst.i][testMove.dst.j];
+				p->place();
 			}
 		}
-		return true;
 	}
-	return false;
+	if(Rules::checked(player)){
+		player->result=Lose;
+		player->nextPlayer->result=Win;
+	}else{
+		player->result=Draw;
+		player->nextPlayer->result=Draw;
+	}
+	return true;
 }
 void Game::step(Player *player){
 	if(gameOver(player)){
