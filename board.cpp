@@ -44,9 +44,11 @@ Piece *Board::move(const Move &move){
 	int j=move.src.j;
 	int di=move.dst.i;
 	int dj=move.dst.j;
+	Square *srcSquare=square[i][j];
+	Square *dstSquare=square[di][dj];
 //	printf("moving %s at %d %d to %d %d\n",(square[i][j]->piece->self).data(),move.src.i,move.src.j,move.dst.i,move.dst.j);
-	Piece *srcPiece=square[i][j]->piece;
-	Piece *dstPiece=square[di][dj]->piece;
+	Piece *srcPiece=srcSquare->piece;
+	Piece *dstPiece=dstSquare->piece;
 	if(dstPiece)	dstPiece->removePiece();
 	square[di][dj]->piece=square[i][j]->piece;
 	srcPiece->removePiece();

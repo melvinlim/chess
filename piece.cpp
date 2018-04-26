@@ -22,6 +22,7 @@ void Piece::removePiece(){
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::place(){
+	square->piece=this;
 	addThreats(player->threats);
 	square->attackers->list.apply(updatePieceHelper);
 }
