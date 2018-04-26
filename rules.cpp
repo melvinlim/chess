@@ -419,6 +419,8 @@ void Rules::addRookThreats(Collection<Square *> *allLegalMoves,Collection<Square
 void Rules::addPawnThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start,int forwardDirection){
 	Board *board=start->board;
 	Square *square;
+	int forwardSquare=start->i+forwardDirection;
+	if((forwardSquare>7)||(forwardSquare<0))	return;
 	if(start->j>0){
 		square=board->square[start->i+forwardDirection][start->j-1];
 		if(square->piece&&(square->piece->player!=localLegalMoves->piece->player)){

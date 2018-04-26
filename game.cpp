@@ -90,8 +90,8 @@ bool Game::gameOver(Player *player){
 				p->place();
 			}
 			if(invalidMove){
-				printf("removing:%s\n",board->square[testMove.dst.i][testMove.dst.j]->strId.data());
-				printf("sz0:%d,%d\n",pptr->item->legalMoves->size(),player->legalMoves->size());
+				printf("removing:%s\t",board->square[testMove.dst.i][testMove.dst.j]->strId.data());
+				printf("sz0:%d,%d\t",pptr->item->legalMoves->size(),player->legalMoves->size());
 				//pptr->item->legalMoves->remove(sptr->item);
 				pptr->item->legalMoves->remove(board->square[testMove.dst.i][testMove.dst.j]);
 				//player->legalMoves->remove(sptr->item);
