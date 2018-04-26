@@ -22,4 +22,6 @@ public:
 	int getCoord(string,Move &);
 	Square *coordToSquare(string,Coord &);
 	void start();
+	void test();
+	void testMove(const char *,const char *);
 };

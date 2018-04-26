@@ -15,7 +15,29 @@ Game::Game(){
 	board->placeAllPieces();
 	running=true;
 }
+void Game::testMove(const char *src,const char *dst){
+	Move move;
+	Piece *p;
+//	gameOver(activePlayer);
+	Utility::stringToCoord(src,move.src);
+	Utility::stringToCoord(dst,move.dst);
+	p=board->move(move);
+	if(p){
+		activePlayer->captured->add(p);
+		activePlayer->nextPlayer->pieces->remove(p);
+	}
+	activePlayer=activePlayer->nextPlayer;
+}
+void Game::test(){
+	testMove("e2","e4");
+	testMove("e7","e5");
+	testMove("f1","c4");
+	testMove("a7","a6");
+	testMove("d1","f3");
+	testMove("a6","a5");
+}
 void Game::start(){
+	test();
 	while(running){
 		step();
 	}
@@ -30,6 +52,7 @@ bool Game::gameOver(Player *player){
 	Move testMove,tmpMove;
 	Node<Square *> *sptr;
 	Node<Piece *> *pptr=player->pieces->list.root;
+	bool escapePossible=false;
 	while(pptr->next){
 		pptr=pptr->next;
 		sptr=pptr->item->legalMoves->list.root;
@@ -39,24 +62,23 @@ bool Game::gameOver(Player *player){
 			sptr=sptr->next;
 			testMove.dst.i=sptr->item->i;
 			testMove.dst.j=sptr->item->j;
+			if((testMove.dst.i==testMove.src.i)&&(testMove.dst.j==testMove.src.j)){
+				continue;
+			}
 			p=board->move(testMove);
-			if(!Rules::checked(player)){
-				tmpMove.src.i=testMove.dst.i;
-				tmpMove.src.j=testMove.dst.j;
-				tmpMove.dst.i=testMove.src.i;
-				tmpMove.dst.j=testMove.src.j;
-				board->move(tmpMove);
-				if(p){
-					board->square[testMove.dst.i][testMove.dst.j]->piece=p;
-					p->square=board->square[testMove.dst.i][testMove.dst.j];
-					p->place();
-				}
-				return false;
+			if(Rules::checked(player)){
+				pptr->item->legalMoves->remove(sptr->item);
+				player->legalMoves->remove(sptr->item);
+			}else{
+				escapePossible=true;
 			}
 			tmpMove.src.i=testMove.dst.i;
 			tmpMove.src.j=testMove.dst.j;
 			tmpMove.dst.i=testMove.src.i;
 			tmpMove.dst.j=testMove.src.j;
+			if(board->square[tmpMove.src.i][tmpMove.src.j]->piece==0){
+				printf("?");
+			}
 			board->move(tmpMove);
 			if(p){
 				board->square[testMove.dst.i][testMove.dst.j]->piece=p;
@@ -65,6 +87,8 @@ bool Game::gameOver(Player *player){
 			}
 		}
 	}
+	//if(!player->legalMoves->isEmpty())	return false;
+	if(escapePossible)	return false;
 	if(Rules::checked(player)){
 		player->result=Lose;
 		player->nextPlayer->result=Win;
