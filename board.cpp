@@ -50,9 +50,8 @@ Piece *Board::move(const Move &move){
 	Piece *srcPiece=srcSquare->piece;
 	Piece *dstPiece=dstSquare->piece;
 	if(dstPiece)	dstPiece->removePiece();
-	square[di][dj]->piece=square[i][j]->piece;
 	srcPiece->removePiece();
-	srcPiece->square=square[di][dj];
+	srcPiece->square=dstSquare;
 	srcPiece->place();
 	return dstPiece;
 }
