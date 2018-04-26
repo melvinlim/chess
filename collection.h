@@ -17,12 +17,17 @@ public:
 	void print();
 	void printAll();
 	void clear();
+	Node<T> *find(T);
 	bool isEmpty();
 	T randomElement();
 	Collection();
 	Collection(Piece *);
 	Piece *piece;
 };
+template<typename T>
+Node<T> *Collection<T>::find(T item){
+	return list.find(item);
+}
 template<typename T>
 bool Collection<T>::isEmpty(){
 	return(list.size==0);

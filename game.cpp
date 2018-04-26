@@ -4,8 +4,8 @@ Game::Game(){
 	board=new Board();
 	board->players=this->players;
 	p1=new Human(White,board);
-	p2=new Human(Black,board);
-//	p2=new Random(Black,board);
+//	p2=new Human(Black,board);
+	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
 	p2->nextPlayer=p1;
 	players[0]=p1;
@@ -37,7 +37,7 @@ void Game::test(){
 	testMove("a6","a5");
 }
 void Game::start(){
-	test();
+//	test();
 	while(running){
 		step();
 	}
@@ -77,9 +77,13 @@ bool Game::gameOver(Player *player){
 			tmpMove.dst.i=testMove.src.i;
 			tmpMove.dst.j=testMove.src.j;
 			if(board->square[tmpMove.src.i][tmpMove.src.j]->piece==0){
+				assert(false);
 				printf("?");
 			}
 			board->move(tmpMove);
+			if(board->square[tmpMove.dst.i][tmpMove.dst.j]->piece->legalMoves->find(board->square[tmpMove.dst.i][tmpMove.dst.j])==0){
+				printf("?");
+			}
 			if(p){
 				board->square[testMove.dst.i][testMove.dst.j]->piece=p;
 				p->square=board->square[testMove.dst.i][testMove.dst.j];
