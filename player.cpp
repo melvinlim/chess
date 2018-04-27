@@ -28,17 +28,14 @@ void Player::initThreatsList(){
 }
 Random::Random(enum Color c,Board *board):Player(c,board){}
 void Random::decide(Move &move){
-	Piece *chosenPiece;
 	Move *chosenMove;
-again:
 	srand(time(0));
-	do{	//this is potentially very inefficient.
-		chosenPiece=pieces->randomElement();
-	}while(chosenPiece->localMoves->list.size==0);
-	chosenMove=chosenPiece->localMoves->randomElement();
-	if(!chosenMove->valid)	goto again;
-	move.src.i=chosenPiece->square->i;
-	move.src.j=chosenPiece->square->j;
+	chosenMove=globalMoves->randomElement();
+	while(!chosenMove->valid){
+		chosenMove=globalMoves->nextElement();
+	}
+	move.src.i=chosenMove->src.i;
+	move.src.j=chosenMove->src.j;
 	move.dst.i=chosenMove->dst.i;
 	move.dst.j=chosenMove->dst.j;
 }
