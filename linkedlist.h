@@ -98,10 +98,31 @@ public:
 		size--;
 		return ret;
 	}
+	void deepRemove(List<T> *items){
+		Node<T> *ptr=items->root;
+		while(ptr->next){
+			deepRemove(ptr->next->item);
+			ptr=ptr->next;
+		}
+	}
 	void remove(List<T> *items){
 		Node<T> *ptr=items->root;
 		while(ptr->next){
 			remove(ptr->next->item);
+			ptr=ptr->next;
+		}
+	}
+	void deepRemove(T item){
+		Node<T> *ptr=root;
+		Node<T> *ret;
+		while(ptr->next){
+			if((ptr->next->item)==item){
+				ret=ptr->next;
+				ptr->next=ptr->next->next;
+				size--;
+				delete ret;
+				return;
+			}
 			ptr=ptr->next;
 		}
 	}

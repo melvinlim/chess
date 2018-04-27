@@ -1,9 +1,9 @@
 #include"piece.h"
 using namespace std;
 void updatePieceHelper(Piece *piece){
-	piece->player->globalMoves->remove(piece->localMoves);
+	piece->player->globalMoves->deepRemove(piece->localMoves);
 	piece->localMoves->clear();
-	piece->player->globalAttacks->remove(piece->localAttacks);
+	piece->player->globalAttacks->deepRemove(piece->localAttacks);
 	piece->localAttacks->clear();
 	piece->addThreats(piece->player->globalMoves);
 }

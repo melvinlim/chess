@@ -10,6 +10,8 @@ public:
 	~Collection();
 	List<T> list;
 	void add(T);
+	void deepRemove(T);
+	void deepRemove(Collection<T> *);
 	void remove(T);
 	void remove(Collection<T> *);
 	void removePiece(Piece *);
@@ -73,16 +75,12 @@ void Collection<T>::removeHelper(T *obj){
 	list.remove(obj);
 }
 template<typename T>
+void Collection<T>::deepRemove(Collection<T> *items){
+	list.deepRemove(&items->list);
+}
+template<typename T>
 void Collection<T>::remove(Collection<T> *items){
 	list.remove(&items->list);
-/*
-	for(auto p=items->list.begin();p!=items->list.end();p++){
-		printf("removing ");
-		(*p)->print();
-		printf("\n");
-		list.remove(*p);
-	}
-*/
 }
 template<typename T>
 void Collection<T>::remove(T item){

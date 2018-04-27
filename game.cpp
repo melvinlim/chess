@@ -53,7 +53,7 @@ void Game::test(){
 	testMove("a6","a5");
 }
 void Game::start(){
-	test();
+//	test();
 	while(running){
 		step();
 	}
