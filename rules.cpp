@@ -223,24 +223,24 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	}
 	return true;
 }
-void Rules::addBothLegalMoves(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Square *target){
+void Rules::addBothLegalMoves(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Square *target){
 	allLegalMoves->add(target);
 	localLegalMoves->add(target);
 }
-void Rules::updateAllLists(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,Square *target){
+void Rules::updateAllLists(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *target){
 	if((!target->piece)||(target->piece->player!=localLegalMoves->piece->player)){
 		addBothLegalMoves(allLegalMoves,localLegalMoves,target);
 	}
 	addBothThreats(allThreats,localThreats,target);
 }
-void Rules::addBothThreats(Collection<Square *> *allThreats,Collection<Square *> *localThreats,Square *target){
+void Rules::addBothThreats(Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *target){
 	if(target->attackers->list.find(localThreats->piece)==0){
 		target->attackers->add(localThreats->piece);
 	}
 	allThreats->add(target);
 	localThreats->add(target);
 }
-void Rules::addKingThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *start){
 	Square *(*square)[8]=start->board->square;
 	int si,sj;
 	si=start->i;
@@ -270,11 +270,11 @@ void Rules::addKingThreats(Collection<Square *> *allLegalMoves,Collection<Square
 		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,square[si+1][sj]);
 	}
 }
-void Rules::addQueenThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+void Rules::addQueenThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *start){
 	addRookThreats(allLegalMoves,localLegalMoves,allThreats,localThreats,start);
 	addBishopThreats(allLegalMoves,localLegalMoves,allThreats,localThreats,start);
 }
-void Rules::addBishopThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *start){
 	Square *(*square)[8]=start->board->square;
 	int si,sj,i,j;
 	si=start->i;
@@ -332,7 +332,7 @@ void Rules::addBishopThreats(Collection<Square *> *allLegalMoves,Collection<Squa
 		square[i--][j++]->attackers->remove(localThreats->piece);
 	}
 }
-void Rules::addKnightThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+void Rules::addKnightThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *start){
 	Square *(*square)[8]=start->board->square;
 	int si,sj;
 	si=start->i;
@@ -370,7 +370,7 @@ void Rules::addKnightThreats(Collection<Square *> *allLegalMoves,Collection<Squa
 		}
 	}
 }
-void Rules::addRookThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start){
+void Rules::addRookThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *start){
 	Square *(*square)[8]=start->board->square;
 	int si,sj,i,j;
 	si=start->i;
@@ -416,7 +416,7 @@ void Rules::addRookThreats(Collection<Square *> *allLegalMoves,Collection<Square
 		square[i--][sj]->attackers->remove(localThreats->piece);
 	}
 }
-void Rules::addPawnThreats(Collection<Square *> *allLegalMoves,Collection<Square *> *localLegalMoves,Collection<Square *> *allThreats,Collection<Square *> *localThreats,const Square *start,int forwardDirection){
+void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *start,int forwardDirection){
 	Board *board=start->board;
 	Square *square;
 	int forwardSquare=start->i+forwardDirection;

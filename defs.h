@@ -28,6 +28,7 @@ struct Move{
 	struct Coord src;
 	struct Coord dst;
 	bool valid;
+	bool isCapture;
 	bool quit;
 };
 #endif

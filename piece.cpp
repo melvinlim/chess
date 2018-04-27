@@ -1,29 +1,21 @@
 #include"piece.h"
 using namespace std;
 void updatePieceHelper(Piece *piece){
-	piece->player->legalMoves->remove(piece->legalMoves);
-	piece->legalMoves->clear();
-	piece->player->threats->remove(piece->threats);
-	piece->threats->clear();
-	piece->addThreats(piece->player->threats);
-}
-void removePieceHelper(Square *square){
-	square->attackers->list.apply(updatePieceHelper);
+	piece->player->globalMoves->remove(piece->localMoves);
+	piece->localMoves->clear();
+	piece->addThreats(piece->player->globalMoves);
 }
 void Piece::removePiece(){
-	player->legalMoves->remove(legalMoves);
-	player->threats->remove(threats);
+	player->globalMoves->remove(localMoves);
 	square->attackers->remove(this);
 	square->piece=0;
-	threats->removePiece(this);
-//	threats->list.apply(removePieceHelper);
-	threats->clear();
-	legalMoves->clear();
+	//threats->removePiece(this);
+	localMoves->clear();
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::place(){
 	square->piece=this;
-	addThreats(player->threats);
+	addThreats(this->player->globalMoves);
 	square->attackers->list.apply(updatePieceHelper);
 }
 Piece::Piece(Color color){
@@ -33,8 +25,7 @@ Piece::Piece(Color color){
 	}else{
 		forwardDirection=1;
 	}
-	threats=new Collection<Square *>(this);
-	legalMoves=new Collection<Square *>(this);
+	localMoves=new Collection<Move *>(this);
 }
 void Piece::display(){
 	printf("%s",self.data());
@@ -73,23 +64,23 @@ Rook::Rook(Color color):Piece(color){
 	setSelf(" R");
 	type=RookT;
 }
-void Pawn::addThreats(Collection<Square *> *allThreats){
-	Rules::addPawnThreats(player->legalMoves,legalMoves,allThreats,threats,square,forwardDirection);
+void Pawn::addThreats(Collection<Move *> *allThreats){
+	Rules::addPawnThreats(player->globalMoves,localMoves,0,0,square,forwardDirection);
 }
-void King::addThreats(Collection<Square *> *allThreats){
-	Rules::addKingThreats(player->legalMoves,legalMoves,allThreats,threats,square);
+void King::addThreats(Collection<Move *> *allThreats){
+	Rules::addKingThreats(player->globalMoves,localMoves,0,0,square);
 }
-void Queen::addThreats(Collection<Square *> *allThreats){
-	Rules::addQueenThreats(player->legalMoves,legalMoves,allThreats,threats,square);
+void Queen::addThreats(Collection<Move *> *allThreats){
+	Rules::addQueenThreats(player->globalMoves,localMoves,0,0,square);
 }
-void Knight::addThreats(Collection<Square *> *allThreats){
-	Rules::addKnightThreats(player->legalMoves,legalMoves,allThreats,threats,square);
+void Knight::addThreats(Collection<Move *> *allThreats){
+	Rules::addKnightThreats(player->globalMoves,localMoves,0,0,square);
 }
-void Bishop::addThreats(Collection<Square *> *allThreats){
-	Rules::addBishopThreats(player->legalMoves,legalMoves,allThreats,threats,square);
+void Bishop::addThreats(Collection<Move *> *allThreats){
+	Rules::addBishopThreats(player->globalMoves,localMoves,0,0,square);
 }
-void Rook::addThreats(Collection<Square *> *allThreats){
-	Rules::addRookThreats(player->legalMoves,legalMoves,allThreats,threats,square);
+void Rook::addThreats(Collection<Move *> *allThreats){
+	Rules::addRookThreats(player->globalMoves,localMoves,0,0,square);
 }
 void Piece::print(){
 	display();

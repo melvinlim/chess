@@ -1,6 +1,7 @@
 #include"player.h"
 void helperFunc(Piece *p){
-	p->addThreats(p->player->threats);
+	//p->addThreats(p->player->threats);
+	p->addThreats(p->player->globalMoves);
 }
 Player::Player(enum Color c,Board *board){
 	color=c;
@@ -12,8 +13,7 @@ Player::Player(enum Color c,Board *board){
 		this->pieces=board->blackPieces;
 	}
 	this->captured=new Collection<Piece *>();
-	this->threats=new Collection<Square *>();
-	this->legalMoves=new Collection<Square *>();
+	this->globalMoves=new Collection<Move *>();
 	this->board=board;
 	result=Playing;
 /*

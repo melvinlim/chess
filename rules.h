@@ -24,11 +24,11 @@ namespace Rules{
 	void updateAllLists(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Square *);
 	void addBothLegalMoves(Collection<Square *> *,Collection<Square *> *,Square *);
 	void addBothThreats(Collection<Square *> *,Collection<Square *> *,Square *);
-	void addKingThreats(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,const Square *);
-	void addQueenThreats(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,const Square *);
-	void addBishopThreats(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,const Square *);
-	void addKnightThreats(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,const Square *);
-	void addRookThreats(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,const Square *);
-	void addPawnThreats(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,const Square *,int);
+	void addKingThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
+	void addQueenThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
+	void addBishopThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
+	void addKnightThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
+	void addRookThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
+	void addPawnThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *,int);
 }
 #endif

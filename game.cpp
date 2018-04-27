@@ -1,13 +1,15 @@
 #include"game.h"
 using namespace std;
 int nLegalMoves(Player *player){
+	int count=0;
+/*
 	Node<Square *> *sptr;
 	sptr=player->legalMoves->list.root;
-	int count=0;
 	while(sptr->next){
 		sptr=sptr->next;
 		if(sptr->item->valid)	count++;
 	}
+*/
 	return count;
 }
 void printInvalidated(Square *square){
@@ -66,6 +68,7 @@ void validate(Square *square){
 	square->valid=true;
 }
 bool Game::gameOver(Player *player){
+/*
 	Piece *p;
 	bool invalidMove;
 	Move testMove,tmpMove;
@@ -130,6 +133,7 @@ bool Game::gameOver(Player *player){
 		player->result=Draw;
 		player->nextPlayer->result=Draw;
 	}
+*/
 	return true;
 }
 void Game::step(Player *player){
@@ -145,6 +149,7 @@ void Game::step(Player *player){
 	player->pieces->print();
 	printf("\ncaptured:");
 	player->captured->print();
+/*
 	printf("\nthreats:");
 	player->threats->printAll();
 	printf("\nlegalmoves:");
@@ -152,6 +157,7 @@ void Game::step(Player *player){
 	printf("\ninvalidated:");
 	player->legalMoves->list.apply(printInvalidated);
 	printf("\n((%d))",nLegalMoves(player));
+*/
 	printf("\nkingSquare:");
 	player->kingSquare->print();
 	printf("\ncheck:");

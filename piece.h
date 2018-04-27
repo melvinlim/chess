@@ -13,8 +13,7 @@ class Player;
 class Piece{
 public:
 	enum Color color;
-	Collection<Square *> *threats;
-	Collection<Square *> *legalMoves;
+	Collection<Move *> *localMoves;
 	int forwardDirection;
 	Player *player;
 	PieceType type;
@@ -26,37 +25,37 @@ public:
 	void setSelf(string s);
 	void removePiece();
 	virtual void place();
-	virtual void addThreats(Collection<Square *> *)=0;
+	virtual void addThreats(Collection<Move *> *)=0;
 };
 class King:public Piece{
 public:
 	King(Color color);
-	void addThreats(Collection<Square *> *);
+	void addThreats(Collection<Move *> *);
 	void place();
 };
 class Pawn:public Piece{
 public:
 	Pawn(Color color);
-	void addThreats(Collection<Square *> *);
+	void addThreats(Collection<Move *> *);
 };
 class Queen:public Piece{
 public:
 	Queen(Color color);
-	void addThreats(Collection<Square *> *);
+	void addThreats(Collection<Move *> *);
 };
 class Knight:public Piece{
 public:
 	Knight(Color color);
-	void addThreats(Collection<Square *> *);
+	void addThreats(Collection<Move *> *);
 };
 class Bishop:public Piece{
 public:
 	Bishop(Color color);
-	void addThreats(Collection<Square *> *);
+	void addThreats(Collection<Move *> *);
 };
 class Rook:public Piece{
 public:
 	Rook(Color color);
-	void addThreats(Collection<Square *> *);
+	void addThreats(Collection<Move *> *);
 };
 #endif
