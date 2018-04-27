@@ -3,7 +3,7 @@ using namespace std;
 int nLegalMoves(Player *player){
 	int count=0;
 	Node<Move *> *sptr;
-	sptr=player->globalMoves->list.root;
+	sptr=player->originalMoves->list.root;
 	while(sptr->next){
 		sptr=sptr->next;
 		if(sptr->item->valid)	count++;
@@ -70,11 +70,12 @@ bool Game::gameOver(Player *player){
 	Piece *p;
 	bool invalidMove;
 	Move testMove,tmpMove;
-	Node<Move *> *sptr=player->globalMoves->list.root;
+	Node<Move *> *sptr;
 	bool escapePossible=false;
 	delete player->originalMoves;
 	player->originalMoves=new Collection<Move *>(player->globalMoves);
-	player->globalMoves->list.apply(validate);
+	player->originalMoves->list.apply(validate);
+	sptr=player->originalMoves->list.root;
 		invalidMove=false;
 		while(sptr->next){
 			sptr=sptr->next;
@@ -106,10 +107,12 @@ bool Game::gameOver(Player *player){
 				p->place();
 			}
 			if(invalidMove){
+				invalidMove=false;
 				sptr->item->valid=false;
-				board->square[testMove.dst.i][testMove.dst.j]->valid=false;
+//				board->square[testMove.dst.i][testMove.dst.j]->valid=false;
 				printf("((%d))\n",nLegalMoves(player));
-				printf("removing:%s\t",board->square[testMove.dst.i][testMove.dst.j]->strId.data());
+				printf("removed:");
+				sptr->item->print();
 //				printf("sz0:%d,%d\t",sptr->item->size(),player->legalMoves->size());
 				//pptr->item->legalMoves->remove(board->square[testMove.dst.i][testMove.dst.j]);
 				//player->legalMoves->remove(board->square[testMove.dst.i][testMove.dst.j]);
@@ -143,9 +146,9 @@ void Game::step(Player *player){
 	printf("\nattacks:");
 	player->globalAttacks->print();
 	printf("\nlegalmoves:");
-	player->globalMoves->print();
+	player->originalMoves->print();
 	printf("\ninvalidated:");
-	player->globalMoves->list.apply(printInvalidated);
+	player->originalMoves->list.apply(printInvalidated);
 	printf("\n((%d))",nLegalMoves(player));
 	printf("\nkingSquare:");
 	player->kingSquare->print();

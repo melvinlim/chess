@@ -9,6 +9,7 @@ bool Rules::checked(const Player *player){
 		j=ptr->item->dst.j;
 		attackedSquare=player->board->square[i][j];
 		if(attackedSquare==player->kingSquare){
+			player->kingSquare->print();
 			return true;
 		}
 	}
