@@ -19,6 +19,7 @@ public:
 	void print();
 	void printAll();
 	void clear();
+	void deepClear();
 	Node<T> *find(T);
 	bool isEmpty();
 	T randomElement();
@@ -90,6 +91,10 @@ template<typename T>
 void printHelper(T *data){
 	//printf("%x\n",data);
 	data->print();
+}
+template<typename T>
+void Collection<T>::deepClear(){
+	list.deepClear();
 }
 template<typename T>
 void Collection<T>::clear(){

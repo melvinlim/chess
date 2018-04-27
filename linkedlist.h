@@ -15,7 +15,8 @@ public:
 		this->next=0;
 	}
 	~Node(){
-		//delete item;
+		if(item)
+			delete item;
 	}
 };
 template<typename T>
@@ -161,6 +162,17 @@ public:
 			sPtr->next=new Node<T>(item);
 			sPtr=sPtr->next;
 		}
+	}
+	//shallow clear
+	void deepClear(){
+		Node<T> *ptr=root->next;
+		Node<T> *prev;
+		while(ptr){
+			prev=ptr;
+			ptr=ptr->next;
+			delete prev;
+		}
+		size=0;
 	}
 	//shallow clear
 	void clear(){
