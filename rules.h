@@ -5,6 +5,7 @@
 #include"piece.h"
 #include"square.h"
 #include"player.h"
+#include"utility.h"
 #include<string>
 class Player;
 class Square;
