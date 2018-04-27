@@ -2,19 +2,18 @@
 using namespace std;
 int nLegalMoves(Player *player){
 	int count=0;
-/*
-	Node<Square *> *sptr;
-	sptr=player->legalMoves->list.root;
+	Node<Move *> *sptr;
+	sptr=player->globalMoves->list.root;
 	while(sptr->next){
 		sptr=sptr->next;
 		if(sptr->item->valid)	count++;
 	}
-*/
 	return count;
 }
-void printInvalidated(Square *square){
-	if(!square->valid){
-		printf("%s ",square->strId.data());
+void printInvalidated(Move *move){
+	if(!move->valid){
+		move->print();
+		//printf("%s ",square->strId.data());
 	}
 }
 Game::Game(){
@@ -54,7 +53,7 @@ void Game::test(){
 	testMove("a6","a5");
 }
 void Game::start(){
-//	test();
+	test();
 	while(running){
 		step();
 	}
@@ -153,12 +152,12 @@ void Game::step(Player *player){
 /*
 	printf("\nthreats:");
 	player->threats->printAll();
-	printf("\nlegalmoves:");
-	player->legalMoves->print();
-	printf("\ninvalidated:");
-	player->legalMoves->list.apply(printInvalidated);
-	printf("\n((%d))",nLegalMoves(player));
 */
+	printf("\nlegalmoves:");
+	player->globalMoves->print();
+	printf("\ninvalidated:");
+	player->globalMoves->list.apply(printInvalidated);
+	printf("\n((%d))",nLegalMoves(player));
 	printf("\nkingSquare:");
 	player->kingSquare->print();
 	printf("\ncheck:");
