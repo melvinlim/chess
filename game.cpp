@@ -10,6 +10,11 @@ int nLegalMoves(Player *player){
 	}
 	return count;
 }
+void printInvalidated(Square *square){
+	if(!square->valid){
+		printf("%s ",square->strId.data());
+	}
+}
 Game::Game(){
 	board=new Board();
 	board->players=this->players;
@@ -144,6 +149,8 @@ void Game::step(Player *player){
 	player->threats->printAll();
 	printf("\nlegalmoves:");
 	player->legalMoves->print();
+	printf("\ninvalidated:");
+	player->legalMoves->list.apply(printInvalidated);
 	printf("\n((%d))",nLegalMoves(player));
 	printf("\nkingSquare:");
 	player->kingSquare->print();
