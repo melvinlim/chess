@@ -133,8 +133,9 @@ bool Game::gameOver(Player *player){
 		player->result=Draw;
 		player->nextPlayer->result=Draw;
 	}
-*/
 	return true;
+*/
+	return false;
 }
 void Game::step(Player *player){
 	if(gameOver(player)){
