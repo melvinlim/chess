@@ -30,10 +30,12 @@ void Random::decide(Move &move){
 	srand(time(0));
 	Piece *chosenPiece;
 	Square *dstSquare;
+again:
 	do{	//this is potentially very inefficient.
 		chosenPiece=pieces->randomElement();
 	}while(chosenPiece->legalMoves->list.size==0);
 	dstSquare=chosenPiece->legalMoves->randomElement();
+	if(!dstSquare->valid)	goto again;
 	move.src.i=chosenPiece->square->i;
 	move.src.j=chosenPiece->square->j;
 	move.dst.i=dstSquare->i;
