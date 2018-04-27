@@ -18,6 +18,7 @@ public:
 	Collection<Move *> *globalAttacks;
 	Collection<Piece *> *pieces;
 	Collection<Piece *> *captured;
+	Collection<Move *> *originalMoves;
 	Square *kingSquare;
 	Player *nextPlayer;
 	string str;

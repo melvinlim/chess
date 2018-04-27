@@ -25,6 +25,7 @@ public:
 	T randomElement();
 	Collection();
 	Collection(Piece *);
+	Collection(Collection<T> *);
 	Piece *piece;
 	int size();
 	int index;
@@ -70,6 +71,11 @@ Collection<T>::~Collection(){
 template<typename T>
 Collection<T>::Collection(){
 	index=0;
+}
+template<typename T>
+Collection<T>::Collection(Collection<T> *p){
+	index=0;
+	list.deepCopy(&p->list);
 }
 template<typename T>
 Collection<T>::Collection(Piece *p){

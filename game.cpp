@@ -53,7 +53,7 @@ void Game::test(){
 	testMove("a6","a5");
 }
 void Game::start(){
-//	test();
+	test();
 	while(running){
 		step();
 	}
@@ -72,6 +72,8 @@ bool Game::gameOver(Player *player){
 	Move testMove,tmpMove;
 	Node<Move *> *sptr=player->globalMoves->list.root;
 	bool escapePossible=false;
+	delete player->originalMoves;
+	player->originalMoves=new Collection<Move *>(player->globalMoves);
 	player->globalMoves->list.apply(validate);
 		invalidMove=false;
 		while(sptr->next){
@@ -138,10 +140,8 @@ void Game::step(Player *player){
 	player->pieces->print();
 	printf("\ncaptured:");
 	player->captured->print();
-/*
-	printf("\nthreats:");
-	player->threats->printAll();
-*/
+	printf("\nattacks:");
+	player->globalAttacks->print();
 	printf("\nlegalmoves:");
 	player->globalMoves->print();
 	printf("\ninvalidated:");

@@ -151,14 +151,14 @@ public:
 			sPtr=sPtr->next;
 		}
 	}
-	void deepcopy(List<T> *list){
+	void deepCopy(List<T> *list){
 		size=list->size;
 		Node<T> *ptr=list->root;
 		Node<T> *sPtr=root;
-		T *item;
+		T item;
 		while(ptr->next){
 			ptr=ptr->next;
-			item=new T(*(ptr->item));
+			item=*(new T(ptr->item));
 			sPtr->next=new Node<T>(item);
 			sPtr=sPtr->next;
 		}
