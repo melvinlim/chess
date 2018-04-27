@@ -13,6 +13,7 @@ public:
 	Collection<Piece *> *attackers;
 	Piece *piece;
 	string strId;
+	bool valid;
 	Square(int,int,Board *);
 	void place(Piece *p);
 	void display();

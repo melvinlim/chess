@@ -1,5 +1,15 @@
 #include"game.h"
 using namespace std;
+int nLegalMoves(Player *player){
+	Node<Square *> *sptr;
+	sptr=player->legalMoves->list.root;
+	int count=0;
+	while(sptr->next){
+		sptr=sptr->next;
+		if(sptr->item->valid)	count++;
+	}
+	return count;
+}
 Game::Game(){
 	board=new Board();
 	board->players=this->players;
@@ -47,6 +57,9 @@ void Game::step(){
 	if(!running)	return;
 	activePlayer=activePlayer->nextPlayer;
 }
+void validate(Square *square){
+	square->valid=true;
+}
 bool Game::gameOver(Player *player){
 	Piece *p;
 	bool invalidMove;
@@ -54,6 +67,7 @@ bool Game::gameOver(Player *player){
 	Node<Square *> *sptr;
 	Node<Piece *> *pptr=player->pieces->list.root;
 	bool escapePossible=false;
+	player->legalMoves->list.apply(validate);
 	while(pptr->next){
 		invalidMove=false;
 		pptr=pptr->next;
@@ -90,6 +104,8 @@ bool Game::gameOver(Player *player){
 				p->place();
 			}
 			if(invalidMove){
+				board->square[testMove.dst.i][testMove.dst.j]->valid=false;
+				printf("((%d))\n",nLegalMoves(player));
 				printf("removing:%s\t",board->square[testMove.dst.i][testMove.dst.j]->strId.data());
 				printf("sz0:%d,%d\t",pptr->item->legalMoves->size(),player->legalMoves->size());
 				//pptr->item->legalMoves->remove(sptr->item);
@@ -128,6 +144,7 @@ void Game::step(Player *player){
 	player->threats->printAll();
 	printf("\nlegalmoves:");
 	player->legalMoves->print();
+	printf("\n((%d))",nLegalMoves(player));
 	printf("\nkingSquare:");
 	player->kingSquare->print();
 	printf("\ncheck:");
