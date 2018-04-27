@@ -3,14 +3,18 @@ using namespace std;
 void updatePieceHelper(Piece *piece){
 	piece->player->globalMoves->remove(piece->localMoves);
 	piece->localMoves->clear();
+	piece->player->globalAttacks->remove(piece->localAttacks);
+	piece->localAttacks->clear();
 	piece->addThreats(piece->player->globalMoves);
 }
 void Piece::removePiece(){
 	player->globalMoves->remove(localMoves);
+	player->globalAttacks->remove(localAttacks);
 	square->attackers->remove(this);
 	square->piece=0;
 	//threats->removePiece(this);
 	localMoves->clear();
+	localAttacks->clear();
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::place(){
@@ -26,6 +30,7 @@ Piece::Piece(Color color){
 		forwardDirection=1;
 	}
 	localMoves=new Collection<Move *>(this);
+	localAttacks=new Collection<Move *>(this);
 }
 void Piece::display(){
 	printf("%s",self.data());

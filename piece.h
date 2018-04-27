@@ -14,6 +14,7 @@ class Piece{
 public:
 	enum Color color;
 	Collection<Move *> *localMoves;
+	Collection<Move *> *localAttacks;
 	int forwardDirection;
 	Player *player;
 	PieceType type;

@@ -15,6 +15,7 @@ class Board;
 class Player{
 public:
 	Collection<Move *> *globalMoves;
+	Collection<Move *> *globalAttacks;
 	Collection<Piece *> *pieces;
 	Collection<Piece *> *captured;
 	Square *kingSquare;

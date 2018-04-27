@@ -28,18 +28,18 @@ void Player::initThreatsList(){
 Random::Random(enum Color c,Board *board):Player(c,board){}
 void Random::decide(Move &move){
 	Piece *chosenPiece;
-	Square *dstSquare;
+	Move *chosenMove;
 again:
 	srand(time(0));
 	do{	//this is potentially very inefficient.
 		chosenPiece=pieces->randomElement();
-	}while(chosenPiece->legalMoves->list.size==0);
-	dstSquare=chosenPiece->legalMoves->randomElement();
-	if(!dstSquare->valid)	goto again;
+	}while(chosenPiece->localMoves->list.size==0);
+	chosenMove=chosenPiece->localMoves->randomElement();
+	if(!chosenMove->valid)	goto again;
 	move.src.i=chosenPiece->square->i;
 	move.src.j=chosenPiece->square->j;
-	move.dst.i=dstSquare->i;
-	move.dst.j=dstSquare->j;
+	move.dst.i=chosenMove->dst.i;
+	move.dst.j=chosenMove->dst.j;
 }
 Human::Human(enum Color c,Board *board):Player(c,board){}
 int Human::getCoord(string type,Move &move){
