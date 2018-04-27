@@ -232,7 +232,7 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	}
 	return true;
 }
-void Rules::addBothLegalMoves(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Square *src,Square *dst){
+void Rules::addBothLegalMoves(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,const Square *src,const Square *dst){
 	Move *move=new Move();
 	move->src.i=src->i;
 	move->src.j=src->j;
@@ -241,18 +241,23 @@ void Rules::addBothLegalMoves(Collection<Move *> *allLegalMoves,Collection<Move 
 	allLegalMoves->add(move);
 	localLegalMoves->add(move);
 }
-void Rules::updateAllLists(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *src,Square *dst){
+void Rules::updateAllLists(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *src,const Square *dst){
 	if((!dst->piece)||(dst->piece->player!=localLegalMoves->piece->player)){
 		addBothLegalMoves(allLegalMoves,localLegalMoves,src,dst);
 	}
 	addBothThreats(allThreats,localThreats,src,dst);
 }
-void Rules::addBothThreats(Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *src,Square *dst){
-	if(target->attackers->list.find(localThreats->piece)==0){
-		target->attackers->add(localThreats->piece);
+void Rules::addBothThreats(Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *src,const Square *dst){
+	Move *move=new Move();
+	move->src.i=src->i;
+	move->src.j=src->j;
+	move->dst.i=dst->i;
+	move->dst.j=dst->j;
+	if(dst->attackers->list.find(localThreats->piece)==0){
+		dst->attackers->add(localThreats->piece);
 	}
-	allThreats->add(target);
-	localThreats->add(target);
+	allThreats->add(move);
+	localThreats->add(move);
 }
 void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,const Square *start){
 	Square *(*square)[8]=start->board->square;
