@@ -21,9 +21,9 @@ namespace Rules{
 	bool verifyColor(const Piece *,const enum Color &);
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);
-	void updateAllLists(Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Collection<Square *> *,Square *);
-	void addBothLegalMoves(Collection<Square *> *,Collection<Square *> *,Square *);
-	void addBothThreats(Collection<Square *> *,Collection<Square *> *,Square *);
+	void updateAllLists(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
+	void addBothLegalMoves(Collection<Move *> *,Collection<Move *> *,Square *);
+	void addBothThreats(Collection<Move *> *,Collection<Move *> *,Square *);
 	void addKingThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
 	void addQueenThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
 	void addBishopThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);

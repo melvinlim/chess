@@ -1,7 +1,16 @@
 #include"rules.h"
 bool Rules::checked(const Player *player){
-	if(player->nextPlayer->threats->list.find(player->kingSquare)){
-		return true;
+	int i,j;
+	Square *attackedSquare;
+	Node<Move *> *ptr=player->nextPlayer->globalAttacks->list.root;
+	while(ptr->next){
+		ptr=ptr->next;
+		i=ptr->item->dst.i;
+		j=ptr->item->dst.j;
+		attackedSquare=player->board->square[i][j];
+		if(attackedSquare==player->kingSquare){
+			return true;
+		}
 	}
 	return false;
 }
