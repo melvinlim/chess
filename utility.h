@@ -19,5 +19,6 @@ public:
 //		printf("(%d,%d)->(%d,%d) ",src.i,src.j,dst.i,dst.j);
 		printf(" %s->%s",src.str,dst.str);
 	}
+	Move(){	valid=true;}
 };
 #endif

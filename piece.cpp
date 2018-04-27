@@ -2,9 +2,9 @@
 using namespace std;
 void updatePieceHelper(Piece *piece){
 	piece->player->globalMoves->remove(piece->localMoves);
-	piece->localMoves->deepClear();
+	piece->localMoves->clear();
 	piece->player->globalAttacks->remove(piece->localAttacks);
-	piece->localAttacks->deepClear();
+	piece->localAttacks->clear();
 	piece->addThreats(piece->player->globalMoves);
 }
 void Piece::removePiece(){
@@ -12,9 +12,8 @@ void Piece::removePiece(){
 	player->globalAttacks->remove(localAttacks);
 	square->attackers->remove(this);
 	square->piece=0;
-	//threats->removePiece(this);
-	localMoves->deepClear();
-	localAttacks->deepClear();
+	localMoves->clear();
+	localAttacks->clear();
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::place(){

@@ -27,6 +27,8 @@ public:
 	Collection(Piece *);
 	Piece *piece;
 	int size();
+	int index;
+	T nextElement();
 };
 template<typename T>
 int Collection<T>::size(){
@@ -39,6 +41,11 @@ Node<T> *Collection<T>::find(T item){
 template<typename T>
 bool Collection<T>::isEmpty(){
 	return(list.size==0);
+}
+template<typename T>
+T Collection<T>::nextElement(){
+	index=(index+1)%list.size;
+	return list.atIndex(index);
 }
 template<typename T>
 T Collection<T>::randomElement(){
@@ -62,9 +69,11 @@ Collection<T>::~Collection(){
 }
 template<typename T>
 Collection<T>::Collection(){
+	index=0;
 }
 template<typename T>
 Collection<T>::Collection(Piece *p){
+	index=0;
 	piece=p;
 }
 template<typename T>
