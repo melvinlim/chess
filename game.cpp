@@ -102,7 +102,6 @@ bool Game::gameOver(Player *player){
 			}
 			board->move(tmpMove);
 			if(p){
-				board->square[testMove.dst.i][testMove.dst.j]->piece=p;
 				p->place(board->square[testMove.dst.i][testMove.dst.j]);
 			}
 			if(invalidMove){

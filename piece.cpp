@@ -1,6 +1,7 @@
 #include"piece.h"
 using namespace std;
 void updatePieceHelper(Piece *piece){
+	if(piece->removed)	return;
 	piece->player->globalMoves->remove(piece->localMoves);
 	piece->localMoves->clear();
 	piece->player->globalAttacks->remove(piece->localAttacks);
@@ -8,6 +9,7 @@ void updatePieceHelper(Piece *piece){
 	piece->addThreats(piece->player->globalMoves);
 }
 void Piece::removePiece(){
+	removed=true;
 	player->globalMoves->remove(localMoves);
 	player->globalAttacks->remove(localAttacks);
 	square->attackers->remove(this);
@@ -17,6 +19,7 @@ void Piece::removePiece(){
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::place(Square *targetSquare){
+	removed=false;
 	square=targetSquare;
 	square->piece=this;
 	addThreats(this->player->globalMoves);
@@ -31,6 +34,7 @@ Piece::Piece(Color color){
 	}
 	localMoves=new Collection<Move *>(this);
 	localAttacks=new Collection<Move *>(this);
+	removed=false;
 }
 void Piece::display(){
 	printf("%s",self.data());

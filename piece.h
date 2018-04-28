@@ -28,6 +28,7 @@ public:
 	virtual void place(Square *);
 	virtual void addThreats(Collection<Move *> *)=0;
 	virtual ~Piece(){};
+	bool removed;
 };
 class King:public Piece{
 public:
