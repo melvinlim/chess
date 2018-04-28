@@ -34,6 +34,8 @@ void Board::placePiece(int i,int j,enum Color color,Piece *p){
 			blackPieces->add(p);
 			p->player=players[1];
 		break;
+		default:
+			assert(false);
 	}
 	square[i][j]->place(p);
 	p->place(square[i][j]);

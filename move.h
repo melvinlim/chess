@@ -23,6 +23,7 @@ public:
 		printf(" %s->%s",src.str,dst.str);
 	}
 	Move();
+	~Move();
 	Move(Piece *);
 	Move(Move *);
 };

@@ -14,3 +14,5 @@ Move::Move(Move *item){
 	src=item->src;
 	dst=item->dst;
 }
+Move::~Move(){
+}

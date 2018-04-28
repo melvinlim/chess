@@ -159,8 +159,8 @@ public:
 		T item;
 		while(ptr->next){
 			ptr=ptr->next;
-			item=(T)malloc(100);
-			std::memcpy(item,ptr->item,100);
+			item=(T)malloc(48);
+			std::memcpy(item,ptr->item,48);
 			sPtr->next=new Node<T>(item);
 			sPtr=sPtr->next;
 		}
