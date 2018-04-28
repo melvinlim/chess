@@ -16,8 +16,10 @@ void Piece::removePiece(){
 	player->globalAttacks->remove(localAttacks);
 	square->attackers->remove(this);
 	square->piece=0;
-	localMoves->clear();
-	localAttacks->clear();
+	delete localMoves;
+	localMoves=new Collection<Move *>(this);
+	delete localAttacks;
+	localAttacks=new Collection<Move *>(this);
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::place(Square *targetSquare){
