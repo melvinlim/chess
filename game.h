@@ -15,6 +15,7 @@ private:
 	bool running;
 public:
 	Game();
+	void reset();
 	void step();
 	void step(Player *);
 	bool gameOver(Player *);

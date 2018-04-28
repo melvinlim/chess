@@ -9,6 +9,13 @@ Board::Board(){
 	blackPieces=new Collection<Piece *>();
 }
 Board::~Board(){}
+void removeAllHelper(Piece *p){
+	p->removePiece();
+}
+void Board::removeAllPieces(){
+	whitePieces->list.apply(removeAllHelper);
+	blackPieces->list.apply(removeAllHelper);
+}
 void Board::placePiece(int i,int j,enum Color color,Piece *p){
 	switch(color){
 		case White:

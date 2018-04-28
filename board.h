@@ -24,6 +24,7 @@ public:
 	void placePieces();
 	void placePawns();
 	void placeAllPieces();
+	void removeAllPieces();
 	void debug();
 	void display(bool labels=true);
 	Piece *move(const Move &);

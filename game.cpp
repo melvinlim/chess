@@ -31,6 +31,13 @@ Game::Game(){
 	board->placeAllPieces();
 	running=true;
 }
+void Game::reset(){
+	board->removeAllPieces();
+	activePlayer=p1;
+	move.quit=false;
+	board->placeAllPieces();
+	running=true;
+}
 void Game::testMove(const char *src,const char *dst){
 	Move move;
 	Piece *p;
@@ -54,8 +61,11 @@ void Game::test(){
 }
 void Game::start(){
 //	test();
-	while(running){
-		step();
+	for(;;){
+		while(running){
+			step();
+		}
+		reset();
 	}
 }
 void Game::step(){
