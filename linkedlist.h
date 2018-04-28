@@ -1,6 +1,7 @@
 #ifndef _LINKEDLIST_H
 #define _LINKEDLIST_H
 #include<stdio.h>
+#include<string.h>
 template<typename T>
 class Node{
 public:
@@ -158,7 +159,8 @@ public:
 		T item;
 		while(ptr->next){
 			ptr=ptr->next;
-			item=*(new T(ptr->item));
+			item=(T)malloc(100);
+			std::memcpy(item,ptr->item,100);
 			sPtr->next=new Node<T>(item);
 			sPtr=sPtr->next;
 		}

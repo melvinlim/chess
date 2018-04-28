@@ -3,9 +3,11 @@ using namespace std;
 void updatePieceHelper(Piece *piece){
 	if(piece->removed)	return;
 	piece->player->globalMoves->remove(piece->localMoves);
-	piece->localMoves->clear();
+	delete piece->localMoves;
+	piece->localMoves=new Collection<Move *>(piece);
 	piece->player->globalAttacks->remove(piece->localAttacks);
-	piece->localAttacks->clear();
+	delete piece->localAttacks;
+	piece->localAttacks=new Collection<Move *>(piece);
 	piece->addThreats(piece->player->globalMoves);
 }
 void Piece::removePiece(){
