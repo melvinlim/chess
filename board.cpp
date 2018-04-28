@@ -21,8 +21,7 @@ void Board::placePiece(int i,int j,enum Color color,Piece *p){
 		break;
 	}
 	square[i][j]->place(p);
-	p->square=square[i][j];
-	p->place();
+	p->place(square[i][j]);
 }
 void Board::placeSidePieces(int row,enum Color color){
 	Piece *p;
@@ -51,8 +50,7 @@ Piece *Board::move(const Move &move){
 	Piece *dstPiece=dstSquare->piece;
 	if(dstPiece)	dstPiece->removePiece();
 	srcPiece->removePiece();
-	srcPiece->square=dstSquare;
-	srcPiece->place();
+	srcPiece->place(dstSquare);
 	return dstPiece;
 }
 void Board::placeRowPieces(int row,enum Color color){

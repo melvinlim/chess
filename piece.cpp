@@ -16,7 +16,8 @@ void Piece::removePiece(){
 	localAttacks->clear();
 	square->attackers->list.apply(updatePieceHelper);
 }
-void Piece::place(){
+void Piece::place(Square *targetSquare){
+	square=targetSquare;
 	square->piece=this;
 	addThreats(this->player->globalMoves);
 	square->attackers->list.apply(updatePieceHelper);
@@ -40,9 +41,9 @@ void Piece::setSelf(string s){
 		self[1]+=32;
 	}
 }
-void King::place(){
-	Piece::place();
-	player->kingSquare=square;
+void King::place(Square *targetSquare){
+	Piece::place(targetSquare);
+	player->kingSquare=targetSquare;
 }
 King::King(Color color):Piece(color){
 	setSelf(" K");

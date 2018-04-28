@@ -25,7 +25,7 @@ public:
 	void print();
 	void setSelf(string s);
 	void removePiece();
-	virtual void place();
+	virtual void place(Square *);
 	virtual void addThreats(Collection<Move *> *)=0;
 	virtual ~Piece(){};
 };
@@ -33,7 +33,7 @@ class King:public Piece{
 public:
 	King(Color color);
 	void addThreats(Collection<Move *> *);
-	void place();
+	void place(Square *);
 };
 class Pawn:public Piece{
 public:
