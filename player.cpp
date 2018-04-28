@@ -3,6 +3,9 @@ void helperFunc(Piece *p){
 	//p->addThreats(p->player->threats);
 	p->addThreats(p->player->globalMoves);
 }
+void Player::reset(){
+	captured->clear();
+}
 Player::Player(enum Color c,Board *board){
 	color=c;
 	if(color==White){

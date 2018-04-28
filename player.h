@@ -27,6 +27,7 @@ public:
 	enum Result result;
 	Board *board;
 	Move move;
+	void reset();
 	Player(enum Color,Board *);
 	virtual void decide(Move &)=0;
 	void initThreatsList();

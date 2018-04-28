@@ -32,6 +32,8 @@ Game::Game(){
 	running=true;
 }
 void Game::reset(){
+	p1->reset();
+	p2->reset();
 	board->removeAllPieces();
 	activePlayer=p1;
 	move.quit=false;
