@@ -15,6 +15,14 @@ void removeAllHelper(Piece *p){
 void Board::removeAllPieces(){
 	whitePieces->list.apply(removeAllHelper);
 	blackPieces->list.apply(removeAllHelper);
+/*
+	delete whitePieces;
+	delete blackPieces;
+	whitePieces=new Collection<Piece *>();
+	blackPieces=new Collection<Piece *>();
+*/
+	whitePieces->deepClear();
+	blackPieces->deepClear();
 }
 void Board::placePiece(int i,int j,enum Color color,Piece *p){
 	switch(color){

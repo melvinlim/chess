@@ -165,7 +165,6 @@ public:
 			sPtr=sPtr->next;
 		}
 	}
-	//shallow clear
 	void deepClear(){
 		Node<T> *ptr=root->next;
 		Node<T> *prev;
@@ -174,6 +173,7 @@ public:
 			ptr=ptr->next;
 			delete prev;
 		}
+		root->next=0;
 		size=0;
 	}
 	//shallow clear
