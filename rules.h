@@ -23,14 +23,14 @@ namespace Rules{
 	bool verifyColor(const Piece *,const enum Color &);
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);
-	void updateAllLists(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *,const Square *);
-	void addBothLegalMoves(Collection<Move *> *,Collection<Move *> *,const Square *,const Square *);
-	void addBothThreats(Collection<Move *> *,Collection<Move *> *,const Square *,const Square *);
-	void addKingThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
-	void addQueenThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
-	void addBishopThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
-	void addKnightThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
-	void addRookThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *);
-	void addPawnThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,const Square *,int);
+	void updateAllLists(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *,Square *);
+	void addBothLegalMoves(Collection<Move *> *,Collection<Move *> *,Square *,Square *);
+	void addBothThreats(Collection<Move *> *,Collection<Move *> *,Square *,Square *);
+	void addKingThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
+	void addQueenThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
+	void addBishopThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
+	void addKnightThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
+	void addRookThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
+	void addPawnThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *,int);
 }
 #endif
