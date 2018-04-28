@@ -1,7 +1,7 @@
 CXX =				g++
 CXXFLAGS =	-std=c++11 -Wall -g -c
 LFLAGS =		-std=c++11 -Wall -g -o chess
-OBJECTS =		main.o board.o square.o piece.o game.o player.o utility.o rules.o
+OBJECTS =		main.o board.o square.o piece.o game.o player.o utility.o rules.o move.o
 chess:		$(OBJECTS)
 	$(CXX) $(LFLAGS) $(OBJECTS)
 main:			main.cpp
@@ -20,5 +20,7 @@ utility:	utility.cpp defs.h
 	$(CXX) $(CXXFLAGS) utility.cpp
 rules:		rules.cpp defs.h board.h piece.h
 	$(CXX) $(CXXFLAGS) rules.cpp
+move:			move.cpp
+	$(CXX) $(CXXFLAGS) move.cpp
 clean:
 	rm -f chess *.o a.out

@@ -6,10 +6,12 @@
 #include"rules.h"
 #include"collection.h"
 #include"piece.h"
+#include"move.h"
 #include<string>
 #include<iostream>
 using namespace std;
 class Square;
+class Move;
 class Piece;
 class Board;
 class Player{
@@ -26,7 +28,7 @@ public:
 	enum Color color;
 	enum Result result;
 	Board *board;
-	Move move;
+	//Move move;
 	void reset();
 	Player(enum Color,Board *);
 	virtual void decide(Move &)=0;

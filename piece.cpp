@@ -10,8 +10,12 @@ void updatePieceHelper(Piece *piece){
 	piece->localAttacks=new Collection<Move *>(piece);
 	piece->addThreats(piece->player->globalMoves);
 }
+void removeHelper(Move *move){
+}
 void Piece::removePiece(){
 	removed=true;
+	//have to find a way to remove this Piece from all squares in localAttacks->dst.
+//	localAttacks->list.apply(removeHelper);
 	player->globalMoves->remove(localMoves);
 	player->globalAttacks->remove(localAttacks);
 	square->attackers->remove(this);

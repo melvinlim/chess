@@ -7,6 +7,9 @@
 #include"piece.h"
 #include"player.h"
 #include"defs.h"
+#include"move.h"
+class Move;
+class Player;
 class Square;
 class Piece;
 class Board{

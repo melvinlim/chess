@@ -20,7 +20,7 @@ enum PieceType{
 	KingT
 };
 struct Coord{
-	char str[2];
+	char str[3];
 	int i;
 	int j;
 };
