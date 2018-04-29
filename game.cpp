@@ -32,8 +32,8 @@ Game::Game(){
 #else
 	p1=new Human(White,board);
 #endif
-	p2=new Human(Black,board);
-//	p2=new Random(Black,board);
+//	p2=new Human(Black,board);
+	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
 	p2->nextPlayer=p1;
 	players[0]=p1;
@@ -94,7 +94,7 @@ void Game::addToRecord(const Move &item){
 	activePlayer->previousMove=newRecord;
 }
 void Game::start(){
-	test();
+//	test();
 	for(;;){
 		while(running){
 			step();
@@ -301,6 +301,7 @@ player->isChecked();
 			currentMove.src.i=player->enPassant->square->i;
 			currentMove.src.j=player->enPassant->square->j;
 			board->makeMove(currentMove,false);
+player->isChecked();
 			board->display(1);
 		}
 	}
