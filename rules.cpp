@@ -500,6 +500,7 @@ void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 				(previousMove->src.i==1)	){
 			square=board->square[forwardSquare][previousMove->dst.j];
 			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
+			currentPlayer->enPassant=previousPiece;
 		}
 	}else if((start->i==4)&&(start->piece->player->color==Black)){
 		Move *previousMove=currentPlayer->nextPlayer->previousMove;
@@ -507,11 +508,12 @@ void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 		Piece *previousPiece=board->square[previousMove->dst.i][previousMove->dst.j]->piece;
 		if(	(previousPiece)	&&
 				(previousPiece->type==PawnT)	&&
-				(abs(previousMove->dst.j-start->j)==6)	&&
+				(abs(previousMove->dst.j-start->j)==1)	&&
 				(previousMove->dst.i==4)	&&
 				(previousMove->src.i==6)	){
 			square=board->square[forwardSquare][previousMove->dst.j];
 			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
+			currentPlayer->enPassant=previousPiece;
 		}
 	}
 }

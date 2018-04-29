@@ -18,6 +18,7 @@ void helperFunc(Piece *p){
 void Player::reset(){
 	previousMove=0;
 	promotedPawn=0;
+	enPassant=0;
 	captured->clear();
 }
 Player::Player(enum Color c,Board *board){
@@ -35,6 +36,7 @@ Player::Player(enum Color c,Board *board){
 	result=Playing;
 	promotedPawn=0;
 	previousMove=0;
+	enPassant=0;
 /*
 	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){
 		(*it)->addThreats(threats);

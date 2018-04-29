@@ -60,10 +60,11 @@ void Game::reset(){
 void Game::testMove(const char *src,const char *dst){
 	Move move;
 	Piece *p;
-//	gameOver(activePlayer);
+	gameOver(activePlayer);
 	Utility::stringToCoord(src,move.src);
 	Utility::stringToCoord(dst,move.dst);
 	p=board->makeMove(move);
+	addToRecord(move);
 	if(p){
 		activePlayer->captured->add(p);
 		activePlayer->nextPlayer->pieces->remove(p);
@@ -72,11 +73,16 @@ void Game::testMove(const char *src,const char *dst){
 }
 void Game::test(){
 	testMove("e2","e4");
+	testMove("b8","a6");
+	testMove("e4","e5");
+//	testMove("d7","d5");
+/*
 	testMove("e7","e5");
 	testMove("f1","c4");
 	testMove("a7","a6");
 	testMove("d1","f3");
 	testMove("a6","a5");
+*/
 }
 void Game::addToRecord(const Move &item){
 	Move *newRecord=new Move();
@@ -88,7 +94,7 @@ void Game::addToRecord(const Move &item){
 	activePlayer->previousMove=newRecord;
 }
 void Game::start(){
-//	test();
+	test();
 	for(;;){
 		while(running){
 			step();
@@ -276,5 +282,13 @@ void Game::step(Player *player){
 		currentMove.src.j=0;
 		currentMove.dst.j=3;
 		board->makeMove(currentMove,false);
+	}else if(player->enPassant){
+		if(	(currentMove.src.i==player->enPassant->square->i)		&&
+				(currentMove.dst.j==player->enPassant->square->j)		&&
+				(board->square[currentMove.dst.i][currentMove.dst.j]->piece->type==PawnT)){
+			player->enPassant->removePiece();
+			player->enPassant=0;
+			board->display(1);
+		}
 	}
 }
