@@ -286,8 +286,21 @@ void Game::step(Player *player){
 		if(	(currentMove.src.i==player->enPassant->square->i)		&&
 				(currentMove.dst.j==player->enPassant->square->j)		&&
 				(board->square[currentMove.dst.i][currentMove.dst.j]->piece->type==PawnT)){
+/*
 			player->enPassant->removePiece();
 			player->enPassant=0;
+*/
+			currentMove.src.i=currentMove.dst.i;
+			currentMove.src.j=currentMove.dst.j;
+			currentMove.dst.i=player->enPassant->square->i;
+			currentMove.dst.j=player->enPassant->square->j;
+			board->makeMove(currentMove,false);
+player->isChecked();
+			currentMove.dst.i=currentMove.src.i;
+			currentMove.dst.j=currentMove.src.j;
+			currentMove.src.i=player->enPassant->square->i;
+			currentMove.src.j=player->enPassant->square->j;
+			board->makeMove(currentMove,false);
 			board->display(1);
 		}
 	}
