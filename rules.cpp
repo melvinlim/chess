@@ -69,7 +69,13 @@ bool Rules::verifyKing(const Board *board,const Move &move){
 				return false;
 			}
 		}else if(dx==-2){
-			return false;
+			if(	(board->square[move.src.i][move.src.j]->piece->hasMoved)	||
+					(board->square[move.src.i][move.src.j-1]->piece!=0)				||
+					(board->square[move.src.i][move.src.j-2]->piece!=0)				||
+					(dy!=0)																										){
+				printf("King can only move 1 square in any direction.\n");
+				return false;
+			}
 		}else{
 			printf("King can only move 1 square in any direction.\n");
 			return false;
@@ -314,6 +320,17 @@ void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 				if(square[si][sj+2]->piece==0){
 					if(!checked(start->piece->player,square[si][sj+2])){
 						updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj+2]);
+					}
+				}
+			}
+		}
+		if(square[si][sj-1]->piece==0){
+			if(!checked(start->piece->player,square[si][sj-1])){
+				if(square[si][sj-2]->piece==0){
+					if(square[si][sj-3]->piece==0){
+						if(!checked(start->piece->player,square[si][sj-2])){
+							updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj-2]);
+						}
 					}
 				}
 			}

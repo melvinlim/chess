@@ -166,14 +166,14 @@ void Game::step(Player *player){
 				return;
 			}
 			valid=Rules::verify(player->color,board,currentMove);
-			//assert(valid);
+			assert(valid);
 		}
 		player->promotedPawn=0;
 		p=board->makeMove(currentMove,false);
 		if(!player->isChecked()){
 			break;
 		}
-//		assert(false);
+		assert(false);
 		printf("move cannot result in king being under attack.\n");
 		tmpMove.src.i=currentMove.dst.i;
 		tmpMove.src.j=currentMove.dst.j;
