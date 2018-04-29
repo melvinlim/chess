@@ -20,6 +20,7 @@ public:
 	Collection<Piece *> *pieces;
 	Collection<Piece *> *captured;
 	Collection<Move *> *originalMoves;
+	Piece *promotedPawn;
 	Square *kingSquare;
 	Player *nextPlayer;
 	bool isChecked();

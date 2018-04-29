@@ -176,6 +176,7 @@ void Game::step(Player *player){
 			}
 			valid=Rules::verify(player->color,board,move);
 		}
+		player->promotedPawn=0;
 		p=board->move(move);
 		if(!player->isChecked()){
 			break;
@@ -191,9 +192,17 @@ void Game::step(Player *player){
 			p->place(board->square[move.dst.i][move.dst.j]);
 		}
 	}
-	
 	if(p){
 		player->captured->add(p);
 		player->nextPlayer->pieces->remove(p);
+	}
+	if(player->promotedPawn){
+		Square *square=player->promotedPawn->square;
+		Piece *p=new Queen(player->color);
+		board->placePiece(square->i,square->j,player->color,p);
+		player->pieces->remove(player->promotedPawn);
+		player->promotedPawn->removePiece();
+		delete player->promotedPawn;
+		player->promotedPawn=0;
 	}
 }

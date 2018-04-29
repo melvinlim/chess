@@ -40,6 +40,7 @@ class Pawn:public Piece{
 public:
 	Pawn(Color color);
 	void addThreats(Collection<Move *> *);
+	void place(Square *);
 };
 class Queen:public Piece{
 public:

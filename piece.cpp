@@ -3,7 +3,9 @@ using namespace std;
 void Piece::removePiece(){
 	removed=true;
 	player->globalMoves->remove(localMoves);
-	square->piece=0;
+	if(square->piece==this){
+		square->piece=0;
+	}
 	delete localMoves;
 	localMoves=new Collection<Move *>(this);
 }
@@ -35,6 +37,12 @@ void Piece::setSelf(string s){
 void King::place(Square *targetSquare){
 	Piece::place(targetSquare);
 	player->kingSquare=targetSquare;
+}
+void Pawn::place(Square *targetSquare){
+	Piece::place(targetSquare);
+	if((targetSquare->i==0)||(targetSquare->i==7)){
+		player->promotedPawn=this;
+	}
 }
 King::King(Color color):Piece(color){
 	setSelf(" K");

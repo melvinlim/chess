@@ -32,6 +32,7 @@ Player::Player(enum Color c,Board *board){
 	this->globalMoves=new Collection<Move *>();
 	this->board=board;
 	result=Playing;
+	promotedPawn=0;
 /*
 	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){
 		(*it)->addThreats(threats);
