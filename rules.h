@@ -14,6 +14,7 @@ class Board;
 class Piece;
 namespace Rules{
 	bool checked(const Player *);
+	bool checked(const Player *,Square *);
 	bool verify(const enum Color &,const Board *,const Move &);
 	bool verifyRook(const Board *,const Move &);
 	bool verifyBishop(const Board *,const Move &);

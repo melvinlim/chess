@@ -1,4 +1,19 @@
 #include"rules.h"
+bool Rules::checked(const Player *player,Square *dstSquare){
+	int i,j;
+	Square *attackedSquare;
+	Node<Move *> *ptr=player->nextPlayer->globalMoves->list.root;
+	while(ptr->next){
+		ptr=ptr->next;
+		i=ptr->item->dst.i;
+		j=ptr->item->dst.j;
+		attackedSquare=player->board->square[i][j];
+		if(attackedSquare==dstSquare){
+			return true;
+		}
+	}
+	return false;
+}
 bool Rules::checked(const Player *player){
 	int i,j;
 	Square *attackedSquare;
@@ -45,8 +60,19 @@ bool Rules::verifyKing(const Board *board,const Move &move){
 	dx=dst.j-src.j;
 	dy=dst.i-src.i;
 	if((abs(dx)>1)||(abs(dy)>1)){
-		printf("King can only move 1 square in any direction.\n");
-		return false;
+		if(dx==2){
+			if(	(board->square[move.src.i][move.src.j]->piece->hasMoved)	||
+					(board->square[move.src.i][move.src.j+1]->piece!=0)				||
+					(board->square[move.src.i][move.src.j+2]->piece!=0)				){
+				printf("King can only move 1 square in any direction.\n");
+				return false;
+			}
+		}else if(dx==-2){
+			return false;
+		}else{
+			printf("King can only move 1 square in any direction.\n");
+			return false;
+		}
 	}
 	return true;
 }
@@ -279,6 +305,17 @@ void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 	}
 	if(si<7){
 		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si+1][sj]);
+	}
+	if(!start->piece->hasMoved){
+		if(square[si][sj+1]->piece==0){
+			if(!checked(start->piece->player,square[si][sj+1])){
+				if(square[si][sj+2]->piece==0){
+					if(!checked(start->piece->player,square[si][sj+2])){
+						updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj+2]);
+					}
+				}
+			}
+		}
 	}
 }
 void Rules::addQueenThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *start){

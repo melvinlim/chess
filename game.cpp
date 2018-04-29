@@ -166,6 +166,7 @@ void Game::step(Player *player){
 				return;
 			}
 			valid=Rules::verify(player->color,board,move);
+			assert(valid);
 		}
 		player->promotedPawn=0;
 		p=board->makeMove(move,false);
