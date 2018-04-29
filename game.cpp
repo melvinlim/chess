@@ -168,7 +168,7 @@ void Game::step(Player *player){
 			valid=Rules::verify(player->color,board,move);
 		}
 		player->promotedPawn=0;
-		p=board->makeMove(move);
+		p=board->makeMove(move,false);
 		if(!player->isChecked()){
 			break;
 		}
