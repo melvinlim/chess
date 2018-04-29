@@ -171,6 +171,22 @@ bool Game::gameOver(Player *player){
 	printf("\n((%d))",nLegalMoves(player));
 	return true;
 }
+bool Game::coordsMatch(const Move &move){
+	Node<Move *> *sptr;
+	sptr=activePlayer->globalMoves->list.root;
+	while(sptr->next){
+		sptr=sptr->next;
+		if(sptr->item->valid){
+			if(	(sptr->item->src.i==move.src.i)	&&
+					(sptr->item->src.j==move.src.j)	&&
+					(sptr->item->dst.j==move.dst.j)	&&
+					(sptr->item->dst.j==move.dst.j)	){
+				return true;
+			}
+		}
+	}
+	return false;
+}
 void Game::step(Player *player){
 	if(gameOver(player)){
 		printf("game over\n");
@@ -205,8 +221,12 @@ void Game::step(Player *player){
 				running=false;
 				return;
 			}
-			valid=Rules::verify(player->color,board,currentMove);
+			valid=coordsMatch(currentMove);
+			if(!valid){
+				printf("invalid move.\n");
+			}
 #ifdef DEBUG
+			valid=Rules::verify(player->color,board,currentMove);
 			assert(valid);
 #endif
 		}

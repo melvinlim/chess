@@ -28,6 +28,7 @@ public:
 	void start();
 	void test();
 	void updateMoveList();
+	bool coordsMatch(const Move &);
 	void addToRecord(const Move &);
 	void testMove(const char *,const char *);
 };
