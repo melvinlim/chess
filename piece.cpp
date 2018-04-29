@@ -1,12 +1,5 @@
 #include"piece.h"
 using namespace std;
-void updatePieceHelper(Piece *piece){
-	if(piece->removed)	return;
-	piece->player->globalMoves->remove(piece->localMoves);
-	delete piece->localMoves;
-	piece->localMoves=new Collection<Move *>(piece);
-	piece->addThreats(piece->player->globalMoves);
-}
 void Piece::removePiece(){
 	removed=true;
 	player->globalMoves->remove(localMoves);

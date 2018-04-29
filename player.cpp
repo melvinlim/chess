@@ -1,5 +1,13 @@
 #include"player.h"
+void updatePieceHelper(Piece *piece){
+	if(piece->removed)	return;
+	piece->player->globalMoves->remove(piece->localMoves);
+	delete piece->localMoves;
+	piece->localMoves=new Collection<Move *>(piece);
+	piece->addThreats(piece->player->globalMoves);
+}
 bool Player::isChecked(){
+	nextPlayer->pieces->list.apply(updatePieceHelper);
 	return Rules::checked(this);
 }
 void helperFunc(Piece *p){
