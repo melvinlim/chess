@@ -6,8 +6,11 @@ void updatePieceHelper(Piece *piece){
 	piece->localMoves=new Collection<Move *>(piece);
 	piece->addThreats(piece->player->globalMoves);
 }
+void Player::updateGlobalMoves(){
+	pieces->list.apply(updatePieceHelper);
+}
 bool Player::isChecked(){
-	nextPlayer->pieces->list.apply(updatePieceHelper);
+	nextPlayer->updateGlobalMoves();
 	return Rules::checked(this);
 }
 void helperFunc(Piece *p){

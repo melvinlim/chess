@@ -98,6 +98,8 @@ void Board::placePawns(){
 void Board::placeAllPieces(){
 	placePawns();
 	placePieces();
+	players[0]->updateGlobalMoves();
+	players[1]->updateGlobalMoves();
 }
 void Board::debug(){
 	printf("+--+--+--+--+--+--+--+--+\n");

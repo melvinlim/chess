@@ -30,6 +30,7 @@ public:
 	Board *board;
 	//Move move;
 	void reset();
+	void updateGlobalMoves();
 	Player(enum Color,Board *);
 	virtual void decide(Move &)=0;
 	void initThreatsList();
