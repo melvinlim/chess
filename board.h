@@ -30,6 +30,6 @@ public:
 	void removeAllPieces();
 	void debug();
 	void display(bool labels=true);
-	Piece *move(const Move &);
+	Piece *makeMove(const Move &);
 };
 #endif

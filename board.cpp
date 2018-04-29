@@ -55,7 +55,7 @@ void Board::placeSidePieces(int row,enum Color color){
 	p=new Rook(color);
 	placePiece(row,7,color,p);
 }
-Piece *Board::move(const Move &move){
+Piece *Board::makeMove(const Move &move){
 	int i=move.src.i;
 	int j=move.src.j;
 	int di=move.dst.i;

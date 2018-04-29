@@ -47,7 +47,7 @@ void Game::testMove(const char *src,const char *dst){
 //	gameOver(activePlayer);
 	Utility::stringToCoord(src,move.src);
 	Utility::stringToCoord(dst,move.dst);
-	p=board->move(move);
+	p=board->makeMove(move);
 	if(p){
 		activePlayer->captured->add(p);
 		activePlayer->nextPlayer->pieces->remove(p);
@@ -89,47 +89,38 @@ bool Game::gameOver(Player *player){
 	player->originalMoves=new Collection<Move *>(player->globalMoves);
 	player->originalMoves->list.apply(validate);
 	sptr=player->originalMoves->list.root;
-		invalidMove=false;
-		while(sptr->next){
-			sptr=sptr->next;
-			testMove.src.i=sptr->item->src.i;
-			testMove.src.j=sptr->item->src.j;
-			testMove.dst.i=sptr->item->dst.i;
-			testMove.dst.j=sptr->item->dst.j;
-			if((testMove.dst.i==testMove.src.i)&&(testMove.dst.j==testMove.src.j)){
-				assert(false);
-			}
-			p=board->move(testMove);
-			if(player->isChecked()){
-				printf("checked\n");
-				invalidMove=true;
-			}else{
-				escapePossible=true;
-			}
-			tmpMove.src.i=testMove.dst.i;
-			tmpMove.src.j=testMove.dst.j;
-			tmpMove.dst.i=testMove.src.i;
-			tmpMove.dst.j=testMove.src.j;
-			if(board->square[tmpMove.src.i][tmpMove.src.j]->piece==0){
-				assert(false);
-			}
-			board->move(tmpMove);
-			if(p){
-				p->place(board->square[testMove.dst.i][testMove.dst.j]);
-			}
-			if(invalidMove){
-				invalidMove=false;
-				sptr->item->valid=false;
-//				board->square[testMove.dst.i][testMove.dst.j]->valid=false;
-				printf("((%d))\n",nLegalMoves(player));
-				printf("removed:");
-				sptr->item->print();
-//				printf("sz0:%d,%d\t",sptr->item->size(),player->legalMoves->size());
-				//pptr->item->legalMoves->remove(board->square[testMove.dst.i][testMove.dst.j]);
-				//player->legalMoves->remove(board->square[testMove.dst.i][testMove.dst.j]);
-//				printf("sz1:%d,%d\n",sptr->item->size(),player->legalMoves->size());
-			}
+	invalidMove=false;
+	while(sptr->next){
+		sptr=sptr->next;
+		testMove.src.i=sptr->item->src.i;
+		testMove.src.j=sptr->item->src.j;
+		testMove.dst.i=sptr->item->dst.i;
+		testMove.dst.j=sptr->item->dst.j;
+		if((testMove.dst.i==testMove.src.i)&&(testMove.dst.j==testMove.src.j)){
+			assert(false);
 		}
+		p=board->makeMove(testMove);
+		if(player->isChecked()){
+			invalidMove=true;
+		}else{
+			escapePossible=true;
+		}
+		tmpMove.src.i=testMove.dst.i;
+		tmpMove.src.j=testMove.dst.j;
+		tmpMove.dst.i=testMove.src.i;
+		tmpMove.dst.j=testMove.src.j;
+		if(board->square[tmpMove.src.i][tmpMove.src.j]->piece==0){
+			assert(false);
+		}
+		board->makeMove(tmpMove);
+		if(p){
+			p->place(board->square[testMove.dst.i][testMove.dst.j]);
+		}
+		if(invalidMove){
+			invalidMove=false;
+			sptr->item->valid=false;
+		}
+	}
 	//if(!player->legalMoves->isEmpty())	return false;
 	if(escapePossible)	return false;
 	if(player->isChecked()){
@@ -177,7 +168,7 @@ void Game::step(Player *player){
 			valid=Rules::verify(player->color,board,move);
 		}
 		player->promotedPawn=0;
-		p=board->move(move);
+		p=board->makeMove(move);
 		if(!player->isChecked()){
 			break;
 		}
@@ -187,7 +178,7 @@ void Game::step(Player *player){
 		tmpMove.src.j=move.dst.j;
 		tmpMove.dst.i=move.src.i;
 		tmpMove.dst.j=move.src.j;
-		board->move(tmpMove);
+		board->makeMove(tmpMove);
 		if(p){
 			board->square[move.dst.i][move.dst.j]->piece=p;
 			p->place(board->square[move.dst.i][move.dst.j]);
