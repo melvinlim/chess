@@ -3,7 +3,7 @@ using namespace std;
 int nLegalMoves(Player *player){
 	int count=0;
 	Node<Move *> *sptr;
-	sptr=player->originalMoves->list.root;
+	sptr=player->globalMoves->list.root;
 	while(sptr->next){
 		sptr=sptr->next;
 		if(sptr->item->valid)	count++;
@@ -19,8 +19,8 @@ void printInvalidated(Move *move){
 Game::Game(){
 	board=new Board();
 	board->players=this->players;
-	p1=new Human(White,board);
-//	p1=new Random(White,board);
+//	p1=new Human(White,board);
+	p1=new Random(White,board);
 //	p2=new Human(Black,board);
 	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
@@ -85,10 +85,8 @@ bool Game::gameOver(Player *player){
 	Move testMove,tmpMove;
 	Node<Move *> *sptr;
 	bool escapePossible=false;
-	delete player->originalMoves;
-	player->originalMoves=new Collection<Move *>(player->globalMoves);
-	player->originalMoves->list.apply(validate);
-	sptr=player->originalMoves->list.root;
+	player->globalMoves->list.apply(validate);
+	sptr=player->globalMoves->list.root;
 	invalidMove=false;
 	while(sptr->next){
 		sptr=sptr->next;
@@ -146,9 +144,9 @@ void Game::step(Player *player){
 	printf("\ncaptured:");
 	player->captured->print();
 	printf("\nlegalmoves:");
-	player->originalMoves->print();
+	player->globalMoves->print();
 	printf("\ninvalidated:");
-	player->originalMoves->list.apply(printInvalidated);
+	player->globalMoves->list.apply(printInvalidated);
 	printf("\n((%d))",nLegalMoves(player));
 	printf("\nkingSquare:");
 	player->kingSquare->print();

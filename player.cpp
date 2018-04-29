@@ -45,9 +45,9 @@ Random::Random(enum Color c,Board *board):Player(c,board){}
 void Random::decide(Move &move){
 	Move *chosenMove;
 	srand(time(0));
-	chosenMove=originalMoves->randomElement();
+	chosenMove=globalMoves->randomElement();
 	while(!chosenMove->valid){
-		chosenMove=originalMoves->nextElement();
+		chosenMove=globalMoves->nextElement();
 	}
 	move.src.i=chosenMove->src.i;
 	move.src.j=chosenMove->src.j;
