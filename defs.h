@@ -1,6 +1,7 @@
 #ifndef _VARS_H
 #define _VARS_H
 #include<stdio.h>
+#define DEBUG
 enum Result{
 	Playing,
 	Win,

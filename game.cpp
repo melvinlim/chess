@@ -153,13 +153,21 @@ bool Game::gameOver(Player *player){
 	}
 	//if(!player->legalMoves->isEmpty())	return false;
 	if(escapePossible)	return false;
+	moveRecord->front()->print();
 	if(player->isChecked()){
+		printf("\ncheckmate detected\n");
 		player->result=Lose;
 		player->nextPlayer->result=Win;
 	}else{
+		printf("\nstalemate detected\n");
 		player->result=Draw;
 		player->nextPlayer->result=Draw;
 	}
+	printf("\nlegalmoves:");
+	player->globalMoves->print();
+	printf("\ninvalidated:");
+	player->globalMoves->list.apply(printInvalidated);
+	printf("\n((%d))",nLegalMoves(player));
 	return true;
 }
 void Game::step(Player *player){
