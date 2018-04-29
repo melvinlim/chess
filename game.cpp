@@ -197,5 +197,13 @@ void Game::step(Player *player){
 		player->promotedPawn->removePiece();
 		delete player->promotedPawn;
 		player->promotedPawn=0;
+	}else if(	(currentMove.src.j==4)											&&
+						(currentMove.dst.j==6)											&&
+						(player->kingSquare->j==6)									&&
+						(currentMove.src.i==currentMove.dst.i)			&&
+						(player->kingSquare->i==currentMove.dst.i)	){
+		currentMove.src.j=7;
+		currentMove.dst.j=5;
+		board->makeMove(currentMove,false);
 	}
 }
