@@ -85,6 +85,7 @@ void Game::addToRecord(const Move &item){
 	newRecord->dst.i=item.dst.i;
 	newRecord->dst.j=item.dst.j;
 	moveRecord->push_front(newRecord);
+	activePlayer->previousMove=newRecord;
 }
 void Game::start(){
 //	test();

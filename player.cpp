@@ -16,6 +16,8 @@ void helperFunc(Piece *p){
 	p->addThreats(p->player->globalMoves);
 }
 void Player::reset(){
+	previousMove=0;
+	promotedPawn=0;
 	captured->clear();
 }
 Player::Player(enum Color c,Board *board){
@@ -32,6 +34,7 @@ Player::Player(enum Color c,Board *board){
 	this->board=board;
 	result=Playing;
 	promotedPawn=0;
+	previousMove=0;
 /*
 	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){
 		(*it)->addThreats(threats);

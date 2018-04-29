@@ -28,7 +28,7 @@ public:
 	enum Color color;
 	enum Result result;
 	Board *board;
-//	Move *previousMove;
+	Move *previousMove;
 	void reset();
 	void updateGlobalMoves();
 	Player(enum Color,Board *);
