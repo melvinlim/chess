@@ -290,7 +290,6 @@ void Game::step(Player *player){
 			player->enPassant->removePiece();
 			player->enPassant=0;
 */
-			player->enPassant=0;
 			currentMove.src.i=currentMove.dst.i;
 			currentMove.src.j=currentMove.dst.j;
 			currentMove.dst.i=player->enPassant->square->i;
@@ -302,6 +301,7 @@ void Game::step(Player *player){
 			currentMove.src.j=player->enPassant->square->j;
 			board->makeMove(currentMove,false);
 			board->display(1);
+			player->enPassant=0;
 		}
 	}
 	player->nextPlayer->updateGlobalMoves();
