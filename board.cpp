@@ -55,7 +55,7 @@ void Board::placeSidePieces(int row,enum Color color){
 	p=new Rook(color);
 	placePiece(row,7,color,p);
 }
-Piece *Board::makeMove(const Move &move){
+Piece *Board::makeMove(const Move &move,const bool testMove){
 	int i=move.src.i;
 	int j=move.src.j;
 	int di=move.dst.i;
@@ -68,6 +68,7 @@ Piece *Board::makeMove(const Move &move){
 	if(dstPiece)	dstPiece->removePiece();
 	srcPiece->removePiece();
 	srcPiece->place(dstSquare);
+	if(!testMove)	srcPiece->hasMoved=true;
 	return dstPiece;
 }
 void Board::placeRowPieces(int row,enum Color color){
@@ -112,7 +113,7 @@ void Board::debug(){
 		printf("\n+--+--+--+--+--+--+--+--+\n");
 	}
 }
-void Board::display(bool labels){
+void Board::display(const bool labels){
 	if(labels)	printf("  ");
 	printf("+--+--+--+--+--+--+--+--+\n");
 	for(int i=0;i<8;i++){

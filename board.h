@@ -29,7 +29,7 @@ public:
 	void placeAllPieces();
 	void removeAllPieces();
 	void debug();
-	void display(bool labels=true);
-	Piece *makeMove(const Move &);
+	void display(const bool=true);
+	Piece *makeMove(const Move &,const bool=true);
 };
 #endif
