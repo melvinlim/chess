@@ -5,26 +5,15 @@ void updatePieceHelper(Piece *piece){
 	piece->player->globalMoves->remove(piece->localMoves);
 	delete piece->localMoves;
 	piece->localMoves=new Collection<Move *>(piece);
-	piece->player->globalAttacks->remove(piece->localAttacks);
-	delete piece->localAttacks;
-	piece->localAttacks=new Collection<Move *>(piece);
 	piece->addThreats(piece->player->globalMoves);
-}
-void removeHelper(Move *move){
-	move->dstSquare->attackers->remove(move->piece);
 }
 void Piece::removePiece(){
 	removed=true;
-	//have to find a way to remove this Piece from all squares in localAttacks->dst.
-	localAttacks->list.apply(removeHelper);
 	player->globalMoves->remove(localMoves);
-	player->globalAttacks->remove(localAttacks);
 	square->attackers->remove(this);
 	square->piece=0;
 	delete localMoves;
 	localMoves=new Collection<Move *>(this);
-	delete localAttacks;
-	localAttacks=new Collection<Move *>(this);
 	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::place(Square *targetSquare){
@@ -42,7 +31,6 @@ Piece::Piece(Color color){
 		forwardDirection=1;
 	}
 	localMoves=new Collection<Move *>(this);
-	localAttacks=new Collection<Move *>(this);
 	removed=false;
 }
 void Piece::display(){
