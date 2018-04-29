@@ -13,7 +13,6 @@ class Player;
 class Piece{
 public:
 	enum Color color;
-	Collection<Move *> *localMoves;
 	int forwardDirection;
 	Player *player;
 	PieceType type;
@@ -27,7 +26,6 @@ public:
 	virtual void place(Square *);
 	virtual void addThreats(Collection<Move *> *)=0;
 	virtual ~Piece(){};
-	//virtual ~Piece(){delete localMoves;delete localAttacks;};
 	bool removed;
 };
 class King:public Piece{

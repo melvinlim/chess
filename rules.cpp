@@ -234,17 +234,17 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 }
 void Rules::addBothLegalMoves(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Square *src,Square *dst){
 	Move *move=new Move();
-	move->piece=localLegalMoves->piece;
+	move->piece=src->piece;
 	move->dstSquare=dst;
 	move->src.i=src->i;
 	move->src.j=src->j;
 	move->dst.i=dst->i;
 	move->dst.j=dst->j;
 	allLegalMoves->add(move);
-	localLegalMoves->add(move);
+//	localLegalMoves->add(move);
 }
 void Rules::updateAllLists(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *src,Square *dst){
-	if((!dst->piece)||(dst->piece->player!=localLegalMoves->piece->player)){
+	if((!dst->piece)||(dst->piece->player!=src->piece->player)){
 		addBothLegalMoves(allLegalMoves,localLegalMoves,src,dst);
 	}
 	addBothThreats(allThreats,localThreats,src,dst);
@@ -398,14 +398,14 @@ void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 	if((forwardSquare>7)||(forwardSquare<0))	return;
 	if(start->j>0){
 		square=board->square[start->i+forwardDirection][start->j-1];
-		if(square->piece&&(square->piece->player!=localLegalMoves->piece->player)){
+		if(square->piece&&(square->piece->player!=start->piece->player)){
 			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 		}
 		addBothThreats(allThreats,localThreats,start,square);
 	}
 	if(start->j<7){
 		square=board->square[start->i+forwardDirection][start->j+1];
-		if(square->piece&&(square->piece->player!=localLegalMoves->piece->player)){
+		if(square->piece&&(square->piece->player!=start->piece->player)){
 			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 		}
 		addBothThreats(allThreats,localThreats,start,square);

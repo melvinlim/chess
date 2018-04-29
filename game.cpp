@@ -19,8 +19,8 @@ void printInvalidated(Move *move){
 Game::Game(){
 	board=new Board();
 	board->players=this->players;
-	p1=new Human(White,board);
-//	p1=new Random(White,board);
+//	p1=new Human(White,board);
+	p1=new Random(White,board);
 //	p2=new Human(Black,board);
 	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
@@ -181,6 +181,7 @@ void Game::step(Player *player){
 		if(!player->isChecked()){
 			break;
 		}
+		assert(false);
 		printf("move cannot result in king being under attack.\n");
 		tmpMove.src.i=move.dst.i;
 		tmpMove.src.j=move.dst.j;
