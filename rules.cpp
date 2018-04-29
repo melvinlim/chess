@@ -235,6 +235,7 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 				if(!capturing){
 					if(dy!=0){
 						printf("pawns may not move sideways unless capturing\n");
+						return true;		//fails to verify en passant.
 						return false;
 					}
 				}else{
@@ -485,6 +486,32 @@ void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 			if(!square->piece){
 				addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 			}
+		}
+	}
+	Player *currentPlayer=start->piece->player;
+	if((start->i==3)&&(start->piece->player->color==White)){
+		Move *previousMove=currentPlayer->nextPlayer->previousMove;
+		Board *board=currentPlayer->board;
+		Piece *previousPiece=board->square[previousMove->dst.i][previousMove->dst.j]->piece;
+		if(	(previousPiece)	&&
+				(previousPiece->type==PawnT)	&&
+				(abs(previousMove->dst.j-start->j)==1)	&&
+				(previousMove->dst.i==3)	&&
+				(previousMove->src.i==1)	){
+			square=board->square[forwardSquare][previousMove->dst.j];
+			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
+		}
+	}else if((start->i==4)&&(start->piece->player->color==Black)){
+		Move *previousMove=currentPlayer->nextPlayer->previousMove;
+		Board *board=currentPlayer->board;
+		Piece *previousPiece=board->square[previousMove->dst.i][previousMove->dst.j]->piece;
+		if(	(previousPiece)	&&
+				(previousPiece->type==PawnT)	&&
+				(abs(previousMove->dst.j-start->j)==6)	&&
+				(previousMove->dst.i==4)	&&
+				(previousMove->src.i==6)	){
+			square=board->square[forwardSquare][previousMove->dst.j];
+			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 		}
 	}
 }
