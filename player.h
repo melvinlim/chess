@@ -22,6 +22,7 @@ public:
 	Collection<Move *> *originalMoves;
 	Square *kingSquare;
 	Player *nextPlayer;
+	bool isChecked();
 	string str;
 	char colorStr[5];
 	enum Color color;

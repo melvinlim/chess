@@ -1,4 +1,7 @@
 #include"player.h"
+bool Player::isChecked(){
+	return Rules::checked(this);
+}
 void helperFunc(Piece *p){
 	p->addThreats(p->player->globalMoves);
 }

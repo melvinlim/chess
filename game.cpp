@@ -99,7 +99,7 @@ bool Game::gameOver(Player *player){
 				assert(false);
 			}
 			p=board->move(testMove);
-			if(Rules::checked(player)){
+			if(player->isChecked()){
 				printf("checked\n");
 				invalidMove=true;
 			}else{
@@ -131,7 +131,7 @@ bool Game::gameOver(Player *player){
 		}
 	//if(!player->legalMoves->isEmpty())	return false;
 	if(escapePossible)	return false;
-	if(Rules::checked(player)){
+	if(player->isChecked()){
 		player->result=Lose;
 		player->nextPlayer->result=Win;
 	}else{
@@ -160,8 +160,6 @@ void Game::step(Player *player){
 	printf("\n((%d))",nLegalMoves(player));
 	printf("\nkingSquare:");
 	player->kingSquare->print();
-	printf("\ncheck:");
-	Rules::checked(player->nextPlayer) ? printf("true") : printf("false");
 	printf("\n");
 //	board->whitePieces->print();
 //	board->blackPieces->print();
@@ -178,7 +176,7 @@ void Game::step(Player *player){
 			valid=Rules::verify(player->color,board,move);
 		}
 		p=board->move(move);
-		if(!Rules::checked(player)){
+		if(!player->isChecked()){
 			break;
 		}
 		printf("move cannot result in king being under attack.\n");
