@@ -17,7 +17,12 @@ void printInvalidated(Move *move){
 	}
 }
 void Game::updateMoveList(){
-	moveRecord->print();
+	int i=1;
+	for(auto rit=moveRecord->crbegin();rit!=moveRecord->crend();rit++){
+		printf("\n%d:",i++);
+		(*rit)->print();
+	}
+	printf("\n");
 }
 Game::Game(){
 	board=new Board();
@@ -33,7 +38,7 @@ Game::Game(){
 	activePlayer=p1;
 	currentMove.quit=false;
 	board->placeAllPieces();
-	moveRecord=new Collection<Move *>();
+	moveRecord=new list<Move *>();
 	running=true;
 }
 void Game::reset(){
@@ -45,7 +50,7 @@ void Game::reset(){
 	board->placeAllPieces();
 	running=true;
 	delete moveRecord;
-	moveRecord=new Collection<Move *>();
+	moveRecord=new list<Move *>();
 }
 void Game::testMove(const char *src,const char *dst){
 	Move move;
@@ -74,7 +79,7 @@ void Game::addToRecord(const Move &item){
 	newRecord->src.j=item.src.j;
 	newRecord->dst.i=item.dst.i;
 	newRecord->dst.j=item.dst.j;
-	moveRecord->add(newRecord);
+	moveRecord->push_front(newRecord);
 }
 void Game::start(){
 //	test();

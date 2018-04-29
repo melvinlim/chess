@@ -4,6 +4,7 @@
 #include"player.h"
 #include"rules.h"
 #include"defs.h"
+#include<list>
 class Game{
 private:
 	bool valid;
@@ -13,7 +14,7 @@ private:
 	Player *p1,*p2,*activePlayer;
 	Move currentMove;
 	bool running;
-	Collection<Move *> *moveRecord;
+	std::list<Move *> *moveRecord;
 public:
 	Game();
 	void reset();
