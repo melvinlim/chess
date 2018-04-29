@@ -319,7 +319,9 @@ void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 			if(!checked(start->piece->player,square[si][sj+1])){
 				if(square[si][sj+2]->piece==0){
 					if(!checked(start->piece->player,square[si][sj+2])){
-						updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj+2]);
+						if((square[si][sj+3]->piece)&&(!square[si][sj+3]->piece->hasMoved)){
+							updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj+2]);
+						}
 					}
 				}
 			}
@@ -329,7 +331,9 @@ void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 				if(square[si][sj-2]->piece==0){
 					if(square[si][sj-3]->piece==0){
 						if(!checked(start->piece->player,square[si][sj-2])){
-							updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj-2]);
+							if((square[si][sj-4]->piece)&&(!square[si][sj-4]->piece->hasMoved)){
+								updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj-2]);
+							}
 						}
 					}
 				}

@@ -14,6 +14,7 @@ private:
 	Player *p1,*p2,*activePlayer;
 	Move currentMove;
 	bool running;
+	int moveNumber;
 	std::list<Move *> *moveRecord;
 public:
 	Game();

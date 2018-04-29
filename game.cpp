@@ -27,8 +27,11 @@ void Game::updateMoveList(){
 Game::Game(){
 	board=new Board();
 	board->players=this->players;
+#ifdef DEBUG
+	p1=new Random(White,board);
+#else
 	p1=new Human(White,board);
-//	p1=new Random(White,board);
+#endif
 //	p2=new Human(Black,board);
 	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
@@ -40,6 +43,7 @@ Game::Game(){
 	board->placeAllPieces();
 	moveRecord=new list<Move *>();
 	running=true;
+	moveNumber=0;
 }
 void Game::reset(){
 	p1->reset();
@@ -49,6 +53,7 @@ void Game::reset(){
 	currentMove.quit=false;
 	board->placeAllPieces();
 	running=true;
+	moveNumber=0;
 	delete moveRecord;
 	moveRecord=new list<Move *>();
 }
@@ -87,13 +92,21 @@ void Game::start(){
 		while(running){
 			step();
 		}
+#ifdef DEBUG
+board->display(1);
+getchar();
+#endif
 		reset();
 	}
 }
 void Game::step(){
+	moveNumber++;
 	step(activePlayer);
 	if(!running)	return;
 	activePlayer=activePlayer->nextPlayer;
+#ifdef DEBUG
+if(moveNumber>=500)	running=false;
+#endif
 }
 void validate(Move *move){
 	move->valid=true;
@@ -184,7 +197,9 @@ void Game::step(Player *player){
 				return;
 			}
 			valid=Rules::verify(player->color,board,currentMove);
+#ifdef DEBUG
 			assert(valid);
+#endif
 		}
 		player->promotedPawn=0;
 		p=board->makeMove(currentMove,false);
