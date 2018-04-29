@@ -63,7 +63,8 @@ bool Rules::verifyKing(const Board *board,const Move &move){
 		if(dx==2){
 			if(	(board->square[move.src.i][move.src.j]->piece->hasMoved)	||
 					(board->square[move.src.i][move.src.j+1]->piece!=0)				||
-					(board->square[move.src.i][move.src.j+2]->piece!=0)				){
+					(board->square[move.src.i][move.src.j+2]->piece!=0)				||
+					(dy!=0)																										){
 				printf("King can only move 1 square in any direction.\n");
 				return false;
 			}
