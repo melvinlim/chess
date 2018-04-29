@@ -219,10 +219,11 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 			}
 			dy=dst.j-src.j;
 			if(dx==2){
-				if(src.i!=startingRank){
-					printf("pawns may move 2 squares only on their first move.\n");
-					return false;
+				if((src.i!=startingRank)||(dy!=0)){
+						printf("pawns may move 2 squares only on their first move.\n");
+						return false;
 				}
+				return true;
 			}else if(dx==1){
 				if(!capturing){
 					if(dy!=0){

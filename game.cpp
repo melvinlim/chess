@@ -28,7 +28,7 @@ Game::Game(){
 	players[0]=p1;
 	players[1]=p2;
 	activePlayer=p1;
-	move.quit=false;
+	currentMove.quit=false;
 	board->placeAllPieces();
 	running=true;
 }
@@ -37,7 +37,7 @@ void Game::reset(){
 	p2->reset();
 	board->removeAllPieces();
 	activePlayer=p1;
-	move.quit=false;
+	currentMove.quit=false;
 	board->placeAllPieces();
 	running=true;
 }
@@ -160,29 +160,29 @@ void Game::step(Player *player){
 	for(;;){
 		valid=false;
 		while(!valid){
-			player->decide(move);
-			if(move.quit){
+			player->decide(currentMove);
+			if(currentMove.quit){
 				running=false;
 				return;
 			}
-			valid=Rules::verify(player->color,board,move);
-			assert(valid);
+			valid=Rules::verify(player->color,board,currentMove);
+			//assert(valid);
 		}
 		player->promotedPawn=0;
-		p=board->makeMove(move,false);
+		p=board->makeMove(currentMove,false);
 		if(!player->isChecked()){
 			break;
 		}
-		assert(false);
+//		assert(false);
 		printf("move cannot result in king being under attack.\n");
-		tmpMove.src.i=move.dst.i;
-		tmpMove.src.j=move.dst.j;
-		tmpMove.dst.i=move.src.i;
-		tmpMove.dst.j=move.src.j;
+		tmpMove.src.i=currentMove.dst.i;
+		tmpMove.src.j=currentMove.dst.j;
+		tmpMove.dst.i=currentMove.src.i;
+		tmpMove.dst.j=currentMove.src.j;
 		board->makeMove(tmpMove);
 		if(p){
-			board->square[move.dst.i][move.dst.j]->piece=p;
-			p->place(board->square[move.dst.i][move.dst.j]);
+			board->square[currentMove.dst.i][currentMove.dst.j]->piece=p;
+			p->place(board->square[currentMove.dst.i][currentMove.dst.j]);
 		}
 	}
 	if(p){

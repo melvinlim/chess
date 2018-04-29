@@ -11,7 +11,7 @@ private:
 	Player *players[2];
 	Board *board;
 	Player *p1,*p2,*activePlayer;
-	Move move;
+	Move currentMove;
 	bool running;
 public:
 	Game();
