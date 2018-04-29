@@ -185,7 +185,7 @@ bool Game::coordsMatch(const Move &move){
 		if(sptr->item->valid){
 			if(	(sptr->item->src.i==move.src.i)	&&
 					(sptr->item->src.j==move.src.j)	&&
-					(sptr->item->dst.j==move.dst.j)	&&
+					(sptr->item->dst.i==move.dst.i)	&&
 					(sptr->item->dst.j==move.dst.j)	){
 				return true;
 			}
@@ -295,14 +295,13 @@ void Game::step(Player *player){
 			currentMove.dst.i=player->enPassant->square->i;
 			currentMove.dst.j=player->enPassant->square->j;
 			board->makeMove(currentMove,false);
-player->isChecked();
 			currentMove.dst.i=currentMove.src.i;
 			currentMove.dst.j=currentMove.src.j;
 			currentMove.src.i=player->enPassant->square->i;
 			currentMove.src.j=player->enPassant->square->j;
 			board->makeMove(currentMove,false);
-player->isChecked();
 			board->display(1);
 		}
 	}
+	player->nextPlayer->updateGlobalMoves();
 }
