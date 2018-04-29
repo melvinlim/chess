@@ -10,18 +10,15 @@ void updatePieceHelper(Piece *piece){
 void Piece::removePiece(){
 	removed=true;
 	player->globalMoves->remove(localMoves);
-	square->attackers->remove(this);
 	square->piece=0;
 	delete localMoves;
 	localMoves=new Collection<Move *>(this);
-	square->attackers->list.apply(updatePieceHelper);
 }
 void Piece::place(Square *targetSquare){
 	removed=false;
 	square=targetSquare;
 	square->piece=this;
 	addThreats(this->player->globalMoves);
-	square->attackers->list.apply(updatePieceHelper);
 }
 Piece::Piece(Color color){
 	this->color=color;

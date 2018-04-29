@@ -1,6 +1,5 @@
 #include"player.h"
 void helperFunc(Piece *p){
-	//p->addThreats(p->player->threats);
 	p->addThreats(p->player->globalMoves);
 }
 void Player::reset(){

@@ -10,7 +10,6 @@ Square::Square(int i,int j,Board *board){
 	int reversedRow=8-row;
 	strId[0]=(column)+65;
 	strId[1]=(reversedRow)+48;
-	attackers=new Collection<Piece *>();
 	//printf("%s\n",strId.data());
 	//printf("%d %d\n",i,j);
 }
@@ -24,14 +23,6 @@ void Square::display(){
 	}else{
 		printf("  ");
 	}
-}
-void Square::printAll(){
-	printf("[");
-	if(attackers){
-		attackers->print();
-	}
-	printf("]:");
-	print();
 }
 void Square::print(){
 	printf("%s ",strId.data());

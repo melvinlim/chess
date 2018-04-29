@@ -298,11 +298,6 @@ void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 			break;
 		}
 	}
-	i++;
-	j++;
-	while(i<=7&&j<=7){
-		square[i++][j++]->attackers->remove(localLegalMoves->piece);
-	}
 	i=si-1;
 	j=sj-1;
 	while(i>=0&&j>=0){
@@ -310,11 +305,6 @@ void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 		if(square[i--][j--]->piece){
 			break;
 		}
-	}
-	i--;
-	j--;
-	while(i>=0&&j>=0){
-		square[i--][j--]->attackers->remove(localLegalMoves->piece);
 	}
 	i=si+1;
 	j=sj-1;
@@ -324,11 +314,6 @@ void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 			break;
 		}
 	}
-	i++;
-	j--;
-	while(i<=7&&j>=0){
-		square[i++][j--]->attackers->remove(localLegalMoves->piece);
-	}
 	i=si-1;
 	j=sj+1;
 	while(i>=0&&j<=7){
@@ -336,11 +321,6 @@ void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 		if(square[i--][j++]->piece){
 			break;
 		}
-	}
-	i--;
-	j++;
-	while(i>=0&&j<=7){
-		square[i--][j++]->attackers->remove(localLegalMoves->piece);
 	}
 }
 void Rules::addKnightThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *start){
@@ -392,19 +372,11 @@ void Rules::addRookThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 			break;
 		}
 	}
-	j++;
-	while(j<=7){
-		square[si][j++]->attackers->remove(localLegalMoves->piece);
-	}
 	for(j=sj-1;j>=0;j--){
 		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][j]);
 		if(square[si][j]->piece){
 			break;
 		}
-	}
-	j--;
-	while(j>=0){
-		square[si][j--]->attackers->remove(localLegalMoves->piece);
 	}
 	for(i=si+1;i<=7;i++){
 		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[i][sj]);
@@ -412,19 +384,11 @@ void Rules::addRookThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 			break;
 		}
 	}
-	i++;
-	while(i<=7){
-		square[i++][sj]->attackers->remove(localLegalMoves->piece);
-	}
 	for(i=si-1;i>=0;i--){
 		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[i][sj]);
 		if(square[i][sj]->piece){
 			break;
 		}
-	}
-	i--;
-	while(i>=0){
-		square[i--][sj]->attackers->remove(localLegalMoves->piece);
 	}
 }
 void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *start,int forwardDirection){
@@ -449,9 +413,5 @@ void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 	square=board->square[start->i+forwardDirection][start->j];
 	if(!square->piece){
 		addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
-		//pawns cannot capture forwards but this ensures pawn legal moves are updated when necessary.  will have to check if this causes any problems.
-		if(square->attackers->list.find(localLegalMoves->piece)==0){
-			square->attackers->add(localLegalMoves->piece);
-		}
 	}
 }

@@ -10,7 +10,6 @@ class Square{
 public:
 	int i,j;
 	Board *board;
-	Collection<Piece *> *attackers;
 	Piece *piece;
 	string strId;
 	bool valid;
