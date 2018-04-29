@@ -2,7 +2,7 @@
 bool Rules::checked(const Player *player){
 	int i,j;
 	Square *attackedSquare;
-	Node<Move *> *ptr=player->nextPlayer->globalAttacks->list.root;
+	Node<Move *> *ptr=player->nextPlayer->globalMoves->list.root;
 	while(ptr->next){
 		ptr=ptr->next;
 		i=ptr->item->dst.i;
