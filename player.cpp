@@ -17,7 +17,6 @@ Player::Player(enum Color c,Board *board){
 	}
 	this->captured=new Collection<Piece *>();
 	this->globalMoves=new Collection<Move *>();
-	this->globalAttacks=new Collection<Move *>();
 	this->board=board;
 	result=Playing;
 /*

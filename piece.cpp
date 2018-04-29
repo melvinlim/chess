@@ -71,22 +71,22 @@ Rook::Rook(Color color):Piece(color){
 	type=RookT;
 }
 void Pawn::addThreats(Collection<Move *> *allThreats){
-	Rules::addPawnThreats(player->globalMoves,localMoves,player->globalAttacks,localAttacks,square,forwardDirection);
+	Rules::addPawnThreats(player->globalMoves,localMoves,0,0,square,forwardDirection);
 }
 void King::addThreats(Collection<Move *> *allThreats){
-	Rules::addKingThreats(player->globalMoves,localMoves,player->globalAttacks,localAttacks,square);
+	Rules::addKingThreats(player->globalMoves,localMoves,0,0,square);
 }
 void Queen::addThreats(Collection<Move *> *allThreats){
-	Rules::addQueenThreats(player->globalMoves,localMoves,player->globalAttacks,localAttacks,square);
+	Rules::addQueenThreats(player->globalMoves,localMoves,0,0,square);
 }
 void Knight::addThreats(Collection<Move *> *allThreats){
-	Rules::addKnightThreats(player->globalMoves,localMoves,player->globalAttacks,localAttacks,square);
+	Rules::addKnightThreats(player->globalMoves,localMoves,0,0,square);
 }
 void Bishop::addThreats(Collection<Move *> *allThreats){
-	Rules::addBishopThreats(player->globalMoves,localMoves,player->globalAttacks,localAttacks,square);
+	Rules::addBishopThreats(player->globalMoves,localMoves,0,0,square);
 }
 void Rook::addThreats(Collection<Move *> *allThreats){
-	Rules::addRookThreats(player->globalMoves,localMoves,player->globalAttacks,localAttacks,square);
+	Rules::addRookThreats(player->globalMoves,localMoves,0,0,square);
 }
 void Piece::print(){
 	display();

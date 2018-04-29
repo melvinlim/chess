@@ -153,8 +153,6 @@ void Game::step(Player *player){
 	player->pieces->print();
 	printf("\ncaptured:");
 	player->captured->print();
-	printf("\nattacks:");
-	player->globalAttacks->print();
 	printf("\nlegalmoves:");
 	player->originalMoves->print();
 	printf("\ninvalidated:");
