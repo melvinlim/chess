@@ -205,5 +205,13 @@ void Game::step(Player *player){
 		currentMove.src.j=7;
 		currentMove.dst.j=5;
 		board->makeMove(currentMove,false);
+	}else if(	(currentMove.src.j==4)											&&
+						(currentMove.dst.j==2)											&&
+						(player->kingSquare->j==2)									&&
+						(currentMove.src.i==currentMove.dst.i)			&&
+						(player->kingSquare->i==currentMove.dst.i)	){
+		currentMove.src.j=0;
+		currentMove.dst.j=3;
+		board->makeMove(currentMove,false);
 	}
 }
