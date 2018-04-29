@@ -27,6 +27,7 @@ public:
 	virtual void addThreats(Collection<Move *> *)=0;
 	virtual ~Piece(){};
 	bool removed;
+	bool hasMoved;
 };
 class King:public Piece{
 public:

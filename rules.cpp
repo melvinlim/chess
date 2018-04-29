@@ -397,21 +397,31 @@ void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 	int forwardSquare=start->i+forwardDirection;
 	if((forwardSquare>7)||(forwardSquare<0))	return;
 	if(start->j>0){
-		square=board->square[start->i+forwardDirection][start->j-1];
+		square=board->square[forwardSquare][start->j-1];
 		if(square->piece&&(square->piece->player!=start->piece->player)){
 			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 		}
 		addBothThreats(allThreats,localThreats,start,square);
 	}
 	if(start->j<7){
-		square=board->square[start->i+forwardDirection][start->j+1];
+		square=board->square[forwardSquare][start->j+1];
 		if(square->piece&&(square->piece->player!=start->piece->player)){
 			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 		}
 		addBothThreats(allThreats,localThreats,start,square);
 	}
-	square=board->square[start->i+forwardDirection][start->j];
+	square=board->square[forwardSquare][start->j];
 	if(!square->piece){
+		addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
+	}
+	if(!start->piece->hasMoved){
+		start->piece->hasMoved=true;
+		if(start->i==1){
+			square=board->square[3][start->j];
+		}
+		if(start->i==6){
+			square=board->square[4][start->j];
+		}
 		addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 	}
 }

@@ -19,6 +19,7 @@ Piece::Piece(Color color){
 		forwardDirection=1;
 	}
 	removed=false;
+	hasMoved=false;
 }
 void Piece::display(){
 	printf("%s",self.data());
