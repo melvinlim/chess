@@ -16,11 +16,14 @@ void printInvalidated(Move *move){
 		//printf("%s ",square->strId.data());
 	}
 }
+void Game::updateMoveList(){
+	moveRecord->print();
+}
 Game::Game(){
 	board=new Board();
 	board->players=this->players;
-//	p1=new Human(White,board);
-	p1=new Random(White,board);
+	p1=new Human(White,board);
+//	p1=new Random(White,board);
 //	p2=new Human(Black,board);
 	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
@@ -30,6 +33,7 @@ Game::Game(){
 	activePlayer=p1;
 	currentMove.quit=false;
 	board->placeAllPieces();
+	moveRecord=new Collection<Move *>();
 	running=true;
 }
 void Game::reset(){
@@ -40,6 +44,8 @@ void Game::reset(){
 	currentMove.quit=false;
 	board->placeAllPieces();
 	running=true;
+	delete moveRecord;
+	moveRecord=new Collection<Move *>();
 }
 void Game::testMove(const char *src,const char *dst){
 	Move move;
@@ -61,6 +67,14 @@ void Game::test(){
 	testMove("a7","a6");
 	testMove("d1","f3");
 	testMove("a6","a5");
+}
+void Game::addToRecord(const Move &item){
+	Move *newRecord=new Move();
+	newRecord->src.i=item.src.i;
+	newRecord->src.j=item.src.j;
+	newRecord->dst.i=item.dst.i;
+	newRecord->dst.j=item.dst.j;
+	moveRecord->add(newRecord);
 }
 void Game::start(){
 //	test();
@@ -151,6 +165,7 @@ void Game::step(Player *player){
 	printf("\nkingSquare:");
 	player->kingSquare->print();
 	printf("\n");
+	updateMoveList();
 //	board->whitePieces->print();
 //	board->blackPieces->print();
 	Move tmpMove;
@@ -168,6 +183,7 @@ void Game::step(Player *player){
 		}
 		player->promotedPawn=0;
 		p=board->makeMove(currentMove,false);
+		addToRecord(currentMove);
 		if(!player->isChecked()){
 			break;
 		}

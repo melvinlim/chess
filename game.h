@@ -13,6 +13,7 @@ private:
 	Player *p1,*p2,*activePlayer;
 	Move currentMove;
 	bool running;
+	Collection<Move *> *moveRecord;
 public:
 	Game();
 	void reset();
@@ -24,5 +25,7 @@ public:
 	Square *coordToSquare(string,Coord &);
 	void start();
 	void test();
+	void updateMoveList();
+	void addToRecord(const Move &);
 	void testMove(const char *,const char *);
 };
