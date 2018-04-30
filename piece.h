@@ -28,6 +28,7 @@ public:
 	virtual ~Piece(){};
 	bool removed;
 	bool hasMoved;
+	bool enPassant;
 };
 class King:public Piece{
 public:

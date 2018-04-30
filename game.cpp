@@ -301,6 +301,7 @@ void Game::step(Player *player){
 			currentMove.src.j=player->enPassant->square->j;
 			board->makeMove(currentMove,false);
 			board->display(1);
+			player->enPassant->enPassant=0;
 			player->enPassant=0;
 		}
 	}

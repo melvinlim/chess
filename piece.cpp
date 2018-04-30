@@ -1,6 +1,9 @@
 #include"piece.h"
 using namespace std;
 void Piece::removePiece(){
+	if(enPassant){
+		player->nextPlayer->enPassant=0;
+	}
 	removed=true;
 	if(square->piece==this){
 		square->piece=0;
@@ -20,6 +23,7 @@ Piece::Piece(Color color){
 	}
 	removed=false;
 	hasMoved=false;
+	enPassant=false;
 }
 void Piece::display(){
 	printf("%s",self.data());
