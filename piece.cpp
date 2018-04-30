@@ -2,6 +2,7 @@
 using namespace std;
 void Piece::removePiece(){
 	if(enPassant){
+		enPassant=0;
 		player->nextPlayer->enPassant=0;
 	}
 	removed=true;
