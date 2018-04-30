@@ -32,8 +32,8 @@ Game::Game(){
 #else
 	p1=new Human(White,board);
 #endif
-//	p2=new Human(Black,board);
-	p2=new Random(Black,board);
+	p2=new Human(Black,board);
+//	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
 	p2->nextPlayer=p1;
 	players[0]=p1;
@@ -94,7 +94,7 @@ void Game::addToRecord(const Move &item){
 	activePlayer->previousMove=newRecord;
 }
 void Game::start(){
-//	test();
+	test();
 	for(;;){
 		while(running){
 			step();
@@ -286,22 +286,8 @@ void Game::step(Player *player){
 		if(	(currentMove.src.i==player->enPassant->square->i)		&&
 				(currentMove.dst.j==player->enPassant->square->j)		&&
 				(board->square[currentMove.dst.i][currentMove.dst.j]->piece->type==PawnT)){
-/*
 			player->enPassant->removePiece();
-			player->enPassant=0;
-*/
-			currentMove.src.i=currentMove.dst.i;
-			currentMove.src.j=currentMove.dst.j;
-			currentMove.dst.i=player->enPassant->square->i;
-			currentMove.dst.j=player->enPassant->square->j;
-			board->makeMove(currentMove,false);
-			currentMove.dst.i=currentMove.src.i;
-			currentMove.dst.j=currentMove.src.j;
-			currentMove.src.i=player->enPassant->square->i;
-			currentMove.src.j=player->enPassant->square->j;
-			board->makeMove(currentMove,false);
 			board->display(1);
-			player->enPassant->enPassant=0;
 			player->enPassant=0;
 		}
 	}
