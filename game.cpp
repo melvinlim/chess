@@ -32,8 +32,8 @@ Game::Game(){
 #else
 	p1=new Human(White,board);
 #endif
-	p2=new Human(Black,board);
-//	p2=new Random(Black,board);
+//	p2=new Human(Black,board);
+	p2=new Random(Black,board);
 	p1->nextPlayer=p2;
 	p2->nextPlayer=p1;
 	players[0]=p1;
@@ -101,7 +101,7 @@ void Game::start(){
 		}
 #ifdef DEBUG
 board->display(1);
-getchar();
+//getchar();
 #endif
 		reset();
 	}
@@ -214,7 +214,7 @@ void Game::step(Player *player){
 	printf("\nkingSquare:");
 	player->kingSquare->print();
 	printf("\n");
-	updateMoveList();
+	//updateMoveList();
 //	board->whitePieces->print();
 //	board->blackPieces->print();
 	Move tmpMove;
