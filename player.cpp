@@ -4,8 +4,9 @@ void updatePieceHelper(Piece *piece){
 	piece->addThreats();
 }
 void Player::updateGlobalMoves(){
-	delete globalMoves;
-	globalMoves=new Collection<Move *>();
+//	delete globalMoves;
+//	globalMoves=new Collection<Move *>();
+	globalMoves->clear();
 	pieces->list.apply(updatePieceHelper);
 }
 bool Player::isChecked(){
