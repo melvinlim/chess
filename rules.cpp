@@ -282,9 +282,6 @@ void Rules::updateAllLists(Collection<Move *> *allLegalMoves,Collection<Move *> 
 	if((!dst->piece)||(dst->piece->player!=src->piece->player)){
 		addBothLegalMoves(allLegalMoves,localLegalMoves,src,dst);
 	}
-	addBothThreats(allThreats,localThreats,src,dst);
-}
-void Rules::addBothThreats(Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *src,Square *dst){
 }
 void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *start){
 	Square *(*square)[8]=start->board->square;
@@ -462,14 +459,12 @@ void Rules::addPawnThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 		if(square->piece&&(square->piece->player!=start->piece->player)){
 			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 		}
-		addBothThreats(allThreats,localThreats,start,square);
 	}
 	if(start->j<7){
 		square=board->square[forwardSquare][start->j+1];
 		if(square->piece&&(square->piece->player!=start->piece->player)){
 			addBothLegalMoves(allLegalMoves,localLegalMoves,start,square);
 		}
-		addBothThreats(allThreats,localThreats,start,square);
 	}
 	square=board->square[forwardSquare][start->j];
 	if(!square->piece){
