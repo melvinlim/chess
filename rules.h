@@ -26,11 +26,11 @@ namespace Rules{
 	bool verifyDst(const Board *,const Coord &);
 	void updateAllLists(Collection<Move *> *,Square *,Square *);
 	void addBothLegalMoves(Collection<Move *> *,Square *,Square *);
-	void addKingThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
-	void addQueenThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
-	void addBishopThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
-	void addKnightThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
-	void addRookThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *);
-	void addPawnThreats(Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Collection<Move *> *,Square *,int);
+	void addKingThreats(Collection<Move *> *,Square *);
+	void addQueenThreats(Collection<Move *> *,Square *);
+	void addBishopThreats(Collection<Move *> *,Square *);
+	void addKnightThreats(Collection<Move *> *,Square *);
+	void addRookThreats(Collection<Move *> *,Square *);
+	void addPawnThreats(Collection<Move *> *,Square *,int);
 }
 #endif
