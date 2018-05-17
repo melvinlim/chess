@@ -24,7 +24,7 @@ public:
 	void setSelf(string s);
 	void removePiece();
 	virtual void place(Square *);
-	virtual void addThreats(Collection<Move *> *)=0;
+	virtual void addThreats()=0;
 	virtual ~Piece(){};
 	bool removed;
 	bool hasMoved;
@@ -33,33 +33,33 @@ public:
 class King:public Piece{
 public:
 	King(Color color);
-	void addThreats(Collection<Move *> *);
+	void addThreats();
 	void place(Square *);
 };
 class Pawn:public Piece{
 public:
 	Pawn(Color color);
-	void addThreats(Collection<Move *> *);
+	void addThreats();
 	void place(Square *);
 };
 class Queen:public Piece{
 public:
 	Queen(Color color);
-	void addThreats(Collection<Move *> *);
+	void addThreats();
 };
 class Knight:public Piece{
 public:
 	Knight(Color color);
-	void addThreats(Collection<Move *> *);
+	void addThreats();
 };
 class Bishop:public Piece{
 public:
 	Bishop(Color color);
-	void addThreats(Collection<Move *> *);
+	void addThreats();
 };
 class Rook:public Piece{
 public:
 	Rook(Color color);
-	void addThreats(Collection<Move *> *);
+	void addThreats();
 };
 #endif

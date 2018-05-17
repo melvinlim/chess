@@ -1,7 +1,7 @@
 #include"player.h"
 void updatePieceHelper(Piece *piece){
 	if(piece->removed)	return;
-	piece->addThreats(piece->player->globalMoves);
+	piece->addThreats();
 }
 void Player::updateGlobalMoves(){
 	delete globalMoves;
@@ -13,7 +13,7 @@ bool Player::isChecked(){
 	return Rules::checked(this);
 }
 void helperFunc(Piece *p){
-	p->addThreats(p->player->globalMoves);
+	p->addThreats();
 }
 void Player::reset(){
 	previousMove=0;
