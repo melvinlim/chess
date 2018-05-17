@@ -27,7 +27,7 @@ public:
 	Square *coordToSquare(string,Coord &);
 	void start();
 	void test();
-	void updateMoveList();
+	void printMoveList();
 	bool coordsMatch(const Move &);
 	void addToRecord(const Move &);
 	void testMove(const char *,const char *);

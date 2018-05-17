@@ -16,7 +16,7 @@ void printInvalidated(Move *move){
 		//printf("%s ",square->strId.data());
 	}
 }
-void Game::updateMoveList(){
+void Game::printMoveList(){
 	int i=1;
 	for(auto rit=moveRecord->crbegin();rit!=moveRecord->crend();rit++){
 		printf("\n%d:",i++);
@@ -214,7 +214,7 @@ void Game::step(Player *player){
 	printf("\nkingSquare:");
 	player->kingSquare->print();
 	printf("\n");
-	updateMoveList();
+	printMoveList();
 //	board->whitePieces->print();
 //	board->blackPieces->print();
 	Move tmpMove;
