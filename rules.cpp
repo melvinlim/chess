@@ -277,7 +277,7 @@ void Rules::addBothLegalMoves(Collection<Move *> *allLegalMoves,Square *src,Squa
 	move->dst.j=dst->j;
 	allLegalMoves->add(move);
 }
-void Rules::updateAllLists(Collection<Move *> *allLegalMoves,Collection<Move *> *localLegalMoves,Collection<Move *> *allThreats,Collection<Move *> *localThreats,Square *src,Square *dst){
+void Rules::updateAllLists(Collection<Move *> *allLegalMoves,Square *src,Square *dst){
 	if((!dst->piece)||(dst->piece->player!=src->piece->player)){
 		addBothLegalMoves(allLegalMoves,src,dst);
 	}
@@ -288,28 +288,28 @@ void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 	si=start->i;
 	sj=start->j;
 	if(sj>0){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj-1]);
+		updateAllLists(allLegalMoves,start,square[si][sj-1]);
 		if(si>0){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si-1][sj-1]);
+			updateAllLists(allLegalMoves,start,square[si-1][sj-1]);
 		}
 		if(si<7){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si+1][sj-1]);
+			updateAllLists(allLegalMoves,start,square[si+1][sj-1]);
 		}
 	}
 	if(sj<7){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj+1]);
+		updateAllLists(allLegalMoves,start,square[si][sj+1]);
 		if(si>0){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si-1][sj+1]);
+			updateAllLists(allLegalMoves,start,square[si-1][sj+1]);
 		}
 		if(si<7){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si+1][sj+1]);
+			updateAllLists(allLegalMoves,start,square[si+1][sj+1]);
 		}
 	}
 	if(si>0){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si-1][sj]);
+		updateAllLists(allLegalMoves,start,square[si-1][sj]);
 	}
 	if(si<7){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si+1][sj]);
+		updateAllLists(allLegalMoves,start,square[si+1][sj]);
 	}
 	if(!start->piece->hasMoved){
 		if(square[si][sj+1]->piece==0){
@@ -317,7 +317,7 @@ void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 				if(square[si][sj+2]->piece==0){
 					if(!checked(start->piece->player,square[si][sj+2])){
 						if((square[si][sj+3]->piece)&&(!square[si][sj+3]->piece->hasMoved)){
-							updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj+2]);
+							updateAllLists(allLegalMoves,start,square[si][sj+2]);
 						}
 					}
 				}
@@ -329,7 +329,7 @@ void Rules::addKingThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 					if(square[si][sj-3]->piece==0){
 						if(!checked(start->piece->player,square[si][sj-2])){
 							if((square[si][sj-4]->piece)&&(!square[si][sj-4]->piece->hasMoved)){
-								updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][sj-2]);
+								updateAllLists(allLegalMoves,start,square[si][sj-2]);
 							}
 						}
 					}
@@ -350,7 +350,7 @@ void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 	i=si+1;
 	j=sj+1;
 	while(i<=7&&j<=7){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[i][j]);
+		updateAllLists(allLegalMoves,start,square[i][j]);
 		if(square[i++][j++]->piece){
 			break;
 		}
@@ -358,7 +358,7 @@ void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 	i=si-1;
 	j=sj-1;
 	while(i>=0&&j>=0){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[i][j]);
+		updateAllLists(allLegalMoves,start,square[i][j]);
 		if(square[i--][j--]->piece){
 			break;
 		}
@@ -366,7 +366,7 @@ void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 	i=si+1;
 	j=sj-1;
 	while(i<=7&&j>=0){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[i][j]);
+		updateAllLists(allLegalMoves,start,square[i][j]);
 		if(square[i++][j--]->piece){
 			break;
 		}
@@ -374,7 +374,7 @@ void Rules::addBishopThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 	i=si-1;
 	j=sj+1;
 	while(i>=0&&j<=7){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[i][j]);
+		updateAllLists(allLegalMoves,start,square[i][j]);
 		if(square[i--][j++]->piece){
 			break;
 		}
@@ -387,34 +387,34 @@ void Rules::addKnightThreats(Collection<Move *> *allLegalMoves,Collection<Move *
 	sj=start->j;
 	if(sj>1){
 		if(si>0){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si-1][sj-2]);
+			updateAllLists(allLegalMoves,start,square[si-1][sj-2]);
 		}
 		if(si<7){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si+1][sj-2]);
+			updateAllLists(allLegalMoves,start,square[si+1][sj-2]);
 		}
 	}
 	if(sj<6){
 		if(si>0){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si-1][sj+2]);
+			updateAllLists(allLegalMoves,start,square[si-1][sj+2]);
 		}
 		if(si<7){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si+1][sj+2]);
+			updateAllLists(allLegalMoves,start,square[si+1][sj+2]);
 		}
 	}
 	if(si>1){
 		if(sj>0){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si-2][sj-1]);
+			updateAllLists(allLegalMoves,start,square[si-2][sj-1]);
 		}
 		if(sj<7){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si-2][sj+1]);
+			updateAllLists(allLegalMoves,start,square[si-2][sj+1]);
 		}
 	}
 	if(si<6){
 		if(sj>0){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si+2][sj-1]);
+			updateAllLists(allLegalMoves,start,square[si+2][sj-1]);
 		}
 		if(sj<7){
-			updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si+2][sj+1]);
+			updateAllLists(allLegalMoves,start,square[si+2][sj+1]);
 		}
 	}
 }
@@ -424,25 +424,25 @@ void Rules::addRookThreats(Collection<Move *> *allLegalMoves,Collection<Move *> 
 	si=start->i;
 	sj=start->j;
 	for(j=sj+1;j<=7;j++){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][j]);
+		updateAllLists(allLegalMoves,start,square[si][j]);
 		if(square[si][j]->piece){
 			break;
 		}
 	}
 	for(j=sj-1;j>=0;j--){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[si][j]);
+		updateAllLists(allLegalMoves,start,square[si][j]);
 		if(square[si][j]->piece){
 			break;
 		}
 	}
 	for(i=si+1;i<=7;i++){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[i][sj]);
+		updateAllLists(allLegalMoves,start,square[i][sj]);
 		if(square[i][sj]->piece){
 			break;
 		}
 	}
 	for(i=si-1;i>=0;i--){
-		updateAllLists(allLegalMoves,localLegalMoves,allThreats,localThreats,start,square[i][sj]);
+		updateAllLists(allLegalMoves,start,square[i][sj]);
 		if(square[i][sj]->piece){
 			break;
 		}
