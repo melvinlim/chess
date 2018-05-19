@@ -3,6 +3,12 @@ Move::Move(){
 	valid=true;
 	piece=0;
 }
+Move::Move(const Move &move){
+	valid=move.valid;
+	piece=move.piece;
+	this->src=move.src;
+	this->dst=move.dst;
+}
 Move::Move(const struct Coord &src,const struct Coord &dst){
 	valid=true;
 	piece=0;
