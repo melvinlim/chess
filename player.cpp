@@ -78,14 +78,16 @@ int Human::getCoord(string type,Move &move){
 		printf("%s must be a letter from A-H followed by a number from 1-8.\n",type.data());
 		return -1;
 	}
+	char srcbuf[2];
+	char dstbuf[2];
 	if(type[0]=='s'){
-		strncpy(move.src.str,str.data(),2);
+		strncpy(srcbuf,str.data(),2);
 		Utility::stringToCoord(str,move.src);
 		if(!Rules::verifySrc(board,move.src)){
 			return -1;
 		}
 	}else{
-		strncpy(move.dst.str,str.data(),2);
+		strncpy(dstbuf,str.data(),2);
 		Utility::stringToCoord(str,move.dst);
 	}
 	return 0;
