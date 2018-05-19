@@ -16,6 +16,11 @@ int nLegalMoves(Player *player){
 */
 	return count;
 }
+void printPieces(std::list<Piece *> *stack){
+	for(auto it=stack->begin();it!=stack->end();it++){
+		(*it)->print();
+	}
+}
 void printLegalMoves(Stack<Move *> *stack){
 	Move *move;
 	int n=stack->size;
@@ -267,8 +272,10 @@ void Game::step(Player *player){
 	board->display();
 	printf("pieces:");
 	//player->pieces->print();
+	printPieces(player->pieces);
 	printf("\ncaptured:");
 	//player->captured->print();
+	printPieces(player->captured);
 	printf("\nlegalmoves:");
 	printLegalMoves(player->globalMoves);
 	//player->globalMoves->print();
