@@ -15,7 +15,7 @@ private:
 	Move currentMove;
 	bool running;
 	int moveNumber;
-	std::list<Move *> *moveRecord;
+	std::list<Move *> moveRecord;
 public:
 	Game();
 	void reset();
