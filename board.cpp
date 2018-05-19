@@ -13,11 +13,16 @@ void removeAllHelper(Piece *p){
 	p->removePiece();
 }
 void Board::removeAllPieces(){
+	Piece *p;
 	for(auto it=whitePieces->begin();it!=whitePieces->end();it++){
-		removeAllHelper(*it);
+		p=*it;
+		removeAllHelper(p);
+		delete p;
 	}
 	for(auto it=blackPieces->begin();it!=blackPieces->end();it++){
-		removeAllHelper(*it);
+		p=*it;
+		removeAllHelper(p);
+		delete p;
 	}
 //	whitePieces->list.apply(removeAllHelper);
 //	blackPieces->list.apply(removeAllHelper);
