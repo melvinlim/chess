@@ -6,14 +6,6 @@ int nLegalMoves(Player *player){
 	for(int i=0;i<n;i++){
 		if(player->globalMoves->atIndex(i)->valid)	count++;
 	}
-/*
-	Node<Move *> *sptr;
-	sptr=player->globalMoves->list.root;
-	while(sptr->next){
-		sptr=sptr->next;
-		if(sptr->item->valid)	count++;
-	}
-*/
 	return count;
 }
 void printPieces(std::list<Piece *> *stack){
@@ -41,12 +33,6 @@ void printInvalidated(Stack<Move *> *stack){
 			//printf("%s ",square->strId.data());
 		}
 	}
-/*
-	if(!move->valid){
-		move->print();
-		//printf("%s ",square->strId.data());
-	}
-*/
 }
 void Game::printMoveList(){
 	int i=1;
@@ -122,14 +108,6 @@ void Game::test(){
 }
 void Game::addToRecord(const Move &item){
 	Move *newRecord=new Move(item);
-	//Move *newRecord=new Move(item.src.i,item.src.j,item.dst.i,item.dst.j);
-/*
-	Move *newRecord=new Move();
-	newRecord->src.i=item.src.i;
-	newRecord->src.j=item.src.j;
-	newRecord->dst.i=item.dst.i;
-	newRecord->dst.j=item.dst.j;
-*/
 	moveRecord.push_front(*newRecord);
 	activePlayer->previousMove=newRecord;
 }
@@ -173,12 +151,6 @@ bool Game::gameOver(Player *player){
 //	sptr=player->globalMoves->list.root;
 	invalidMove=false;
 	for(int i=0;i<n;i++){
-//	while(sptr->next){
-//		sptr=sptr->next;
-//		testMove.src.i=sptr->item->src.i;
-//		testMove.src.j=sptr->item->src.j;
-//		testMove.dst.i=sptr->item->dst.i;
-//		testMove.dst.j=sptr->item->dst.j;
 		mptr=player->globalMoves->atIndex(i);
 		testMove.src.i=mptr->src.i;
 		testMove.src.j=mptr->src.j;
