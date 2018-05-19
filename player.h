@@ -35,7 +35,6 @@ public:
 	void updateGlobalMoves();
 	Player(enum Color,Board *);
 	virtual void decide(Move &)=0;
-	void initThreatsList();
 };
 class Random:public Player{
 public:
