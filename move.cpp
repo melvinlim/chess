@@ -15,7 +15,7 @@ Move::Move(const struct Coord &src,const struct Coord &dst){
 	this->src=src;
 	this->dst=dst;
 }
-Move::Move(int srci,int srcj,int dsti,int dstj){
+Move::Move(const int &srci,const int &srcj,const int &dsti,const int &dstj){
 	valid=true;
 	piece=0;
 	src.i=srci;

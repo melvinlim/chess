@@ -25,7 +25,7 @@ public:
 		printf(" %s->%s",buf1,buf2);
 	}
 	Move();
-	Move(int,int,int,int);
+	Move(const int &,const int &,const int &,const int &);
 	Move(const struct Coord &,const struct Coord &);
 	Move(const Move &);
 	~Move();
