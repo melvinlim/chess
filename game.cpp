@@ -121,7 +121,8 @@ void Game::test(){
 */
 }
 void Game::addToRecord(const Move &item){
-	Move *newRecord=new Move(item.src.i,item.src.j,item.dst.i,item.dst.j);
+	Move *newRecord=new Move(item.src,item.dst);
+	//Move *newRecord=new Move(item.src.i,item.src.j,item.dst.i,item.dst.j);
 /*
 	Move *newRecord=new Move();
 	newRecord->src.i=item.src.i;

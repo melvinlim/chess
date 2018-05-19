@@ -26,6 +26,7 @@ public:
 	}
 	Move();
 	Move(int,int,int,int);
+	Move(const struct Coord &,const struct Coord &);
 	~Move();
 	Move(Piece *);
 	Move(Move *);
