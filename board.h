@@ -15,6 +15,8 @@ class Piece;
 class Board{
 public:
 	Player **players;
+	Player *whitePlayer;
+	Player *blackPlayer;
 	Collection<Piece *> *whitePieces;
 	Collection<Piece *> *blackPieces;
 	Square *square[8][8];

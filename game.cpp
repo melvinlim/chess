@@ -66,6 +66,10 @@ Game::Game(){
 	players[0]=p1;
 	players[1]=p2;
 	activePlayer=p1;
+	board->whitePlayer=p1;
+	board->blackPlayer=p2;
+	board->whitePlayer->pieces=board->whitePieces;
+	board->blackPlayer->pieces=board->blackPieces;
 	currentMove.quit=false;
 	board->placeAllPieces();
 	moveRecord=new list<Move *>();
@@ -78,6 +82,8 @@ void Game::reset(){
 	board->removeAllPieces();
 	activePlayer=p1;
 	currentMove.quit=false;
+	board->whitePlayer->pieces=board->whitePieces;
+	board->blackPlayer->pieces=board->blackPieces;
 	board->placeAllPieces();
 	running=true;
 	moveNumber=0;
