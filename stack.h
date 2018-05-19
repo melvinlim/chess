@@ -15,6 +15,9 @@ public:
 		item=new T[maxSize];
 	}
 	~Stack(){
+		for(int i=0;i<size;i++){
+			delete item[i];
+		}
 		delete[] item;
 	}
 	void push_back(T &x){

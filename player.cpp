@@ -4,9 +4,9 @@ void updatePieceHelper(Piece *piece){
 	piece->addMoves();
 }
 void Player::updateGlobalMoves(){
-//	delete globalMoves;
-//	globalMoves=new Collection<Move *>();
-	globalMoves->clear();
+	delete globalMoves;
+	globalMoves=new Stack<Move *>(MAXMOVESZ);
+//	globalMoves->clear();
 	pieces->list.apply(updatePieceHelper);
 }
 bool Player::isChecked(){
