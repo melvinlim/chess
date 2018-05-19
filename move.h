@@ -25,6 +25,7 @@ public:
 		printf(" %s->%s",buf1,buf2);
 	}
 	Move();
+	Move(int,int,int,int);
 	~Move();
 	Move(Piece *);
 	Move(Move *);

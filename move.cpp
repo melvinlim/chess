@@ -3,6 +3,14 @@ Move::Move(){
 	valid=true;
 	piece=0;
 }
+Move::Move(int srci,int srcj,int dsti,int dstj){
+	valid=true;
+	piece=0;
+	src.i=srci;
+	src.j=srcj;
+	dst.i=dsti;
+	dst.j=dstj;
+}
 Move::Move(Piece *piece){
 	valid=true;
 	this->piece=piece;
