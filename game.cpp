@@ -52,7 +52,7 @@ void Game::printMoveList(){
 	int i=1;
 	for(auto rit=moveRecord.crbegin();rit!=moveRecord.crend();rit++){
 		printf("\n%d:",i++);
-		(*rit)->print();
+		(*rit).print();
 	}
 	printf("\n");
 }
@@ -126,7 +126,7 @@ void Game::addToRecord(const Move &item){
 	newRecord->src.j=item.src.j;
 	newRecord->dst.i=item.dst.i;
 	newRecord->dst.j=item.dst.j;
-	moveRecord.push_front(newRecord);
+	moveRecord.push_front(*newRecord);
 	activePlayer->previousMove=newRecord;
 }
 void Game::start(){
@@ -208,7 +208,7 @@ bool Game::gameOver(Player *player){
 	}
 	//if(!player->legalMoves->isEmpty())	return false;
 	if(escapePossible)	return false;
-	moveRecord.front()->print();
+	moveRecord.front().print();
 	if(player->isChecked()){
 		printf("\ncheckmate detected\n");
 		player->result=Lose;

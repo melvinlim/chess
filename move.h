@@ -16,11 +16,13 @@ public:
 	bool valid;
 	bool isCapture;
 	bool quit;
-	void print(){
-		Utility::coordToString(src.str,src);
-		Utility::coordToString(dst.str,dst);
+	void print() const{
+		char buf1[256];
+		char buf2[256];
+		Utility::coordToString(buf1,src);
+		Utility::coordToString(buf2,dst);
 //		printf("(%d,%d)->(%d,%d) ",src.i,src.j,dst.i,dst.j);
-		printf(" %s->%s",src.str,dst.str);
+		printf(" %s->%s",buf1,buf2);
 	}
 	Move();
 	~Move();
