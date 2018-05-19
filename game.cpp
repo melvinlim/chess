@@ -2,19 +2,46 @@
 using namespace std;
 int nLegalMoves(Player *player){
 	int count=0;
+	int n=player->globalMoves->size;
+	for(int i=0;i<n;i++){
+		if(player->globalMoves->atIndex(i)->valid)	count++;
+	}
+/*
 	Node<Move *> *sptr;
 	sptr=player->globalMoves->list.root;
 	while(sptr->next){
 		sptr=sptr->next;
 		if(sptr->item->valid)	count++;
 	}
+*/
 	return count;
 }
-void printInvalidated(Move *move){
+void printLegalMoves(Stack<Move *> *stack){
+	Move *move;
+	int n=stack->size;
+	for(int i=0;i<n;i++){
+		move=stack->atIndex(i);
+		if(move->valid){
+			move->print();
+		}
+	}
+}
+void printInvalidated(Stack<Move *> *stack){
+	Move *move;
+	int n=stack->size;
+	for(int i=0;i<n;i++){
+		move=stack->atIndex(i);
+		if(!move->valid){
+			move->print();
+			//printf("%s ",square->strId.data());
+		}
+	}
+/*
 	if(!move->valid){
 		move->print();
 		//printf("%s ",square->strId.data());
 	}
+*/
 }
 void Game::printMoveList(){
 	int i=1;
@@ -122,17 +149,28 @@ bool Game::gameOver(Player *player){
 	Piece *p;
 	bool invalidMove;
 	Move testMove,tmpMove;
-	Node<Move *> *sptr;
+	//Node<Move *> *sptr;
+	Move *mptr;
 	bool escapePossible=false;
-	player->globalMoves->list.apply(validate);
-	sptr=player->globalMoves->list.root;
+	int n=player->globalMoves->size;
+	for(int i=0;i<n;i++){
+		validate(player->globalMoves->atIndex(i));
+	}
+//	player->globalMoves->list.apply(validate);
+//	sptr=player->globalMoves->list.root;
 	invalidMove=false;
-	while(sptr->next){
-		sptr=sptr->next;
-		testMove.src.i=sptr->item->src.i;
-		testMove.src.j=sptr->item->src.j;
-		testMove.dst.i=sptr->item->dst.i;
-		testMove.dst.j=sptr->item->dst.j;
+	for(int i=0;i<n;i++){
+//	while(sptr->next){
+//		sptr=sptr->next;
+//		testMove.src.i=sptr->item->src.i;
+//		testMove.src.j=sptr->item->src.j;
+//		testMove.dst.i=sptr->item->dst.i;
+//		testMove.dst.j=sptr->item->dst.j;
+		mptr=player->globalMoves->atIndex(i);
+		testMove.src.i=mptr->src.i;
+		testMove.src.j=mptr->src.j;
+		testMove.dst.i=mptr->dst.i;
+		testMove.dst.j=mptr->dst.j;
 		if((testMove.dst.i==testMove.src.i)&&(testMove.dst.j==testMove.src.j)){
 			assert(false);
 		}
@@ -155,7 +193,8 @@ bool Game::gameOver(Player *player){
 		}
 		if(invalidMove){
 			invalidMove=false;
-			sptr->item->valid=false;
+			//sptr->item->valid=false;
+			mptr->valid=false;
 		}
 	}
 	//if(!player->legalMoves->isEmpty())	return false;
@@ -171,13 +210,30 @@ bool Game::gameOver(Player *player){
 		player->nextPlayer->result=Draw;
 	}
 	printf("\nlegalmoves:");
-	player->globalMoves->print();
+//	player->globalMoves->print();
+	printLegalMoves(player->globalMoves);
 	printf("\ninvalidated:");
-	player->globalMoves->list.apply(printInvalidated);
+	//player->globalMoves->list.apply(printInvalidated);
+	printInvalidated(player->globalMoves);
 	printf("\n((%d))",nLegalMoves(player));
 	return true;
 }
 bool Game::coordsMatch(const Move &move){
+	Move *mptr;
+	int n=activePlayer->globalMoves->size;
+	for(int i=0;i<n;i++){
+		mptr=activePlayer->globalMoves->atIndex(i);
+		if(mptr->valid){
+			if(	(mptr->src.i==move.src.i)	&&
+					(mptr->src.j==move.src.j)	&&
+					(mptr->dst.i==move.dst.i)	&&
+					(mptr->dst.j==move.dst.j)	){
+				return true;
+			}
+		}
+	}
+	return false;
+/*
 	Node<Move *> *sptr;
 	sptr=activePlayer->globalMoves->list.root;
 	while(sptr->next){
@@ -192,6 +248,7 @@ bool Game::coordsMatch(const Move &move){
 		}
 	}
 	return false;
+*/
 }
 void Game::step(Player *player){
 	if(gameOver(player)){
@@ -207,9 +264,11 @@ void Game::step(Player *player){
 	printf("\ncaptured:");
 	player->captured->print();
 	printf("\nlegalmoves:");
-	player->globalMoves->print();
+	printLegalMoves(player->globalMoves);
+	//player->globalMoves->print();
 	printf("\ninvalidated:");
-	player->globalMoves->list.apply(printInvalidated);
+	//player->globalMoves->list.apply(printInvalidated);
+	printInvalidated(player->globalMoves);
 	printf("\n((%d))",nLegalMoves(player));
 	printf("\nkingSquare:");
 	player->kingSquare->print();

@@ -29,7 +29,8 @@ Player::Player(enum Color c,Board *board){
 		this->pieces=board->blackPieces;
 	}
 	this->captured=new Collection<Piece *>();
-	this->globalMoves=new Collection<Move *>();
+	//this->globalMoves=new Collection<Move *>();
+	this->globalMoves=new Stack<Move *>(MAXMOVESZ);
 	this->board=board;
 	result=Playing;
 	promotedPawn=0;
@@ -45,9 +46,15 @@ Random::Random(enum Color c,Board *board):Player(c,board){}
 void Random::decide(Move &move){
 	Move *chosenMove;
 	srand(time(0));
-	chosenMove=globalMoves->randomElement();
+	int n=globalMoves->size;
+	int i=random()%n;
+	//chosenMove=globalMoves->randomElement();
+	chosenMove=globalMoves->atIndex(i);
 	while(!chosenMove->valid){
-		chosenMove=globalMoves->nextElement();
+		i++;
+		i=i%n;
+		chosenMove=globalMoves->atIndex(i);
+//		chosenMove=globalMoves->nextElement();
 	}
 	move.src.i=chosenMove->src.i;
 	move.src.j=chosenMove->src.j;

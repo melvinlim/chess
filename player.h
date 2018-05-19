@@ -5,6 +5,7 @@
 #include"utility.h"
 #include"rules.h"
 #include"collection.h"
+#include"stack.h"
 #include"piece.h"
 #include"move.h"
 #include<string>
@@ -16,7 +17,7 @@ class Piece;
 class Board;
 class Player{
 public:
-	Collection<Move *> *globalMoves;
+	Stack<Move *> *globalMoves;
 	Collection<Piece *> *pieces;
 	Collection<Piece *> *captured;
 	Piece *promotedPawn;

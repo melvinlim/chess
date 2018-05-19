@@ -2,6 +2,7 @@
 #define _RULES_H
 #include"defs.h"
 #include"move.h"
+#include"stack.h"
 #include"board.h"
 #include"piece.h"
 #include"square.h"
@@ -24,13 +25,13 @@ namespace Rules{
 	bool verifyColor(const Piece *,const enum Color &);
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);
-	void updateAllLists(Collection<Move *> *,Square *,Square *);
-	void addBothLegalMoves(Collection<Move *> *,Square *,Square *);
-	void addKingMoves(Collection<Move *> *,Square *);
-	void addQueenMoves(Collection<Move *> *,Square *);
-	void addBishopMoves(Collection<Move *> *,Square *);
-	void addKnightMoves(Collection<Move *> *,Square *);
-	void addRookMoves(Collection<Move *> *,Square *);
-	void addPawnMoves(Collection<Move *> *,Square *,int);
+	void updateAllLists(Stack<Move *> *,Square *,Square *);
+	void addBothLegalMoves(Stack<Move *> *,Square *,Square *);
+	void addKingMoves(Stack<Move *> *,Square *);
+	void addQueenMoves(Stack<Move *> *,Square *);
+	void addBishopMoves(Stack<Move *> *,Square *);
+	void addKnightMoves(Stack<Move *> *,Square *);
+	void addRookMoves(Stack<Move *> *,Square *);
+	void addPawnMoves(Stack<Move *> *,Square *,int);
 }
 #endif

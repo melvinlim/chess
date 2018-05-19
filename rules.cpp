@@ -2,6 +2,18 @@
 bool Rules::checked(const Player *player,Square *dstSquare){
 	int i,j;
 	Square *attackedSquare;
+	Move *mptr;
+	int n=player->nextPlayer->globalMoves->size;
+	for(int x=0;x<n;x++){
+		mptr=player->nextPlayer->globalMoves->atIndex(x);
+		i=mptr->dst.i;
+		j=mptr->dst.j;
+		attackedSquare=player->board->square[i][j];
+		if(attackedSquare==dstSquare){
+			return true;
+		}
+	}
+/*
 	Node<Move *> *ptr=player->nextPlayer->globalMoves->list.root;
 	while(ptr->next){
 		ptr=ptr->next;
@@ -12,11 +24,24 @@ bool Rules::checked(const Player *player,Square *dstSquare){
 			return true;
 		}
 	}
+*/
 	return false;
 }
 bool Rules::checked(const Player *player){
 	int i,j;
 	Square *attackedSquare;
+	Move *mptr;
+	int n=player->nextPlayer->globalMoves->size;
+	for(int x=0;x<n;x++){
+		mptr=player->nextPlayer->globalMoves->atIndex(x);
+		i=mptr->dst.i;
+		j=mptr->dst.j;
+		attackedSquare=player->board->square[i][j];
+		if(attackedSquare==player->kingSquare){
+			return true;
+		}
+	}
+/*
 	Node<Move *> *ptr=player->nextPlayer->globalMoves->list.root;
 	while(ptr->next){
 		ptr=ptr->next;
@@ -27,6 +52,7 @@ bool Rules::checked(const Player *player){
 			return true;
 		}
 	}
+*/
 	return false;
 }
 bool Rules::verifySrc(const Board *board,const Coord &coord){
@@ -267,7 +293,7 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	}
 	return true;
 }
-void Rules::addBothLegalMoves(Collection<Move *> *allLegalMoves,Square *src,Square *dst){
+void Rules::addBothLegalMoves(Stack<Move *> *allLegalMoves,Square *src,Square *dst){
 	Move *move=new Move();
 	move->piece=src->piece;
 	move->dstSquare=dst;
@@ -275,14 +301,14 @@ void Rules::addBothLegalMoves(Collection<Move *> *allLegalMoves,Square *src,Squa
 	move->src.j=src->j;
 	move->dst.i=dst->i;
 	move->dst.j=dst->j;
-	allLegalMoves->add(move);
+	allLegalMoves->push_back(move);
 }
-void Rules::updateAllLists(Collection<Move *> *allLegalMoves,Square *src,Square *dst){
+void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,Square *dst){
 	if((!dst->piece)||(dst->piece->player!=src->piece->player)){
 		addBothLegalMoves(allLegalMoves,src,dst);
 	}
 }
-void Rules::addKingMoves(Collection<Move *> *allLegalMoves,Square *start){
+void Rules::addKingMoves(Stack<Move *> *allLegalMoves,Square *start){
 	Square *(*square)[8]=start->board->square;
 	int si,sj;
 	si=start->i;
@@ -338,11 +364,11 @@ void Rules::addKingMoves(Collection<Move *> *allLegalMoves,Square *start){
 		}
 	}
 }
-void Rules::addQueenMoves(Collection<Move *> *allLegalMoves,Square *start){
+void Rules::addQueenMoves(Stack<Move *> *allLegalMoves,Square *start){
 	addRookMoves(allLegalMoves,start);
 	addBishopMoves(allLegalMoves,start);
 }
-void Rules::addBishopMoves(Collection<Move *> *allLegalMoves,Square *start){
+void Rules::addBishopMoves(Stack<Move *> *allLegalMoves,Square *start){
 	Square *(*square)[8]=start->board->square;
 	int si,sj,i,j;
 	si=start->i;
@@ -380,7 +406,7 @@ void Rules::addBishopMoves(Collection<Move *> *allLegalMoves,Square *start){
 		}
 	}
 }
-void Rules::addKnightMoves(Collection<Move *> *allLegalMoves,Square *start){
+void Rules::addKnightMoves(Stack<Move *> *allLegalMoves,Square *start){
 	Square *(*square)[8]=start->board->square;
 	int si,sj;
 	si=start->i;
@@ -418,7 +444,7 @@ void Rules::addKnightMoves(Collection<Move *> *allLegalMoves,Square *start){
 		}
 	}
 }
-void Rules::addRookMoves(Collection<Move *> *allLegalMoves,Square *start){
+void Rules::addRookMoves(Stack<Move *> *allLegalMoves,Square *start){
 	Square *(*square)[8]=start->board->square;
 	int si,sj,i,j;
 	si=start->i;
@@ -448,7 +474,7 @@ void Rules::addRookMoves(Collection<Move *> *allLegalMoves,Square *start){
 		}
 	}
 }
-void Rules::addPawnMoves(Collection<Move *> *allLegalMoves,Square *start,int forwardDirection){
+void Rules::addPawnMoves(Stack<Move *> *allLegalMoves,Square *start,int forwardDirection){
 	Board *board=start->board;
 	Square *square;
 	int forwardSquare=start->i+forwardDirection;
