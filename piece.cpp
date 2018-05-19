@@ -69,23 +69,23 @@ Rook::Rook(Color color):Piece(color){
 	setSelf(" R");
 	type=RookT;
 }
-void Pawn::addThreats(){
-	Rules::addPawnThreats(player->globalMoves,square,forwardDirection);
+void Pawn::addMoves(){
+	Rules::addPawnMoves(player->globalMoves,square,forwardDirection);
 }
-void King::addThreats(){
-	Rules::addKingThreats(player->globalMoves,square);
+void King::addMoves(){
+	Rules::addKingMoves(player->globalMoves,square);
 }
-void Queen::addThreats(){
-	Rules::addQueenThreats(player->globalMoves,square);
+void Queen::addMoves(){
+	Rules::addQueenMoves(player->globalMoves,square);
 }
-void Knight::addThreats(){
-	Rules::addKnightThreats(player->globalMoves,square);
+void Knight::addMoves(){
+	Rules::addKnightMoves(player->globalMoves,square);
 }
-void Bishop::addThreats(){
-	Rules::addBishopThreats(player->globalMoves,square);
+void Bishop::addMoves(){
+	Rules::addBishopMoves(player->globalMoves,square);
 }
-void Rook::addThreats(){
-	Rules::addRookThreats(player->globalMoves,square);
+void Rook::addMoves(){
+	Rules::addRookMoves(player->globalMoves,square);
 }
 void Piece::print(){
 	display();

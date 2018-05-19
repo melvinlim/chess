@@ -1,7 +1,7 @@
 #include"player.h"
 void updatePieceHelper(Piece *piece){
 	if(piece->removed)	return;
-	piece->addThreats();
+	piece->addMoves();
 }
 void Player::updateGlobalMoves(){
 //	delete globalMoves;
@@ -37,7 +37,7 @@ Player::Player(enum Color c,Board *board){
 	enPassant=0;
 /*
 	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){
-		(*it)->addThreats(threats);
+		(*it)->addMoves(threats);
 	}
 */
 }
