@@ -20,6 +20,11 @@ void Player::reset(){
 	previousMove=0;
 	promotedPawn=0;
 	enPassant=0;
+	Piece *p;
+	for(auto it=captured->begin();it!=captured->end();it++){
+		p=*it;
+		delete p;
+	}
 	captured->clear();
 }
 Player::Player(enum Color c,Board *board){
