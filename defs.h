@@ -2,7 +2,7 @@
 #define _VARS_H
 #include<stdio.h>
 #define MAXMOVESZ (14+14+14+14+8+8+28+8)
-#define DEBUG
+//#define DEBUG
 enum Result{
 	Playing,
 	Win,

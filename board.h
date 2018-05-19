@@ -8,6 +8,7 @@
 #include"player.h"
 #include"defs.h"
 #include"move.h"
+#include<list>
 class Move;
 class Player;
 class Square;
@@ -17,8 +18,8 @@ public:
 	Player **players;
 	Player *whitePlayer;
 	Player *blackPlayer;
-	Collection<Piece *> *whitePieces;
-	Collection<Piece *> *blackPieces;
+	std::list<Piece *> *whitePieces;
+	std::list<Piece *> *blackPieces;
 	Square *square[8][8];
 	Board();
 	~Board();

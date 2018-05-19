@@ -7,7 +7,10 @@ void Player::updateGlobalMoves(){
 	delete globalMoves;
 	globalMoves=new Stack<Move *>(MAXMOVESZ);
 //	globalMoves->clear();
-	pieces->list.apply(updatePieceHelper);
+	for(auto it=pieces->begin();it!=pieces->end();it++){
+		updatePieceHelper(*it);
+	}
+//	pieces->list.apply(updatePieceHelper);
 }
 bool Player::isChecked(){
 	nextPlayer->updateGlobalMoves();
@@ -28,7 +31,8 @@ Player::Player(enum Color c,Board *board){
 		strcpy(colorStr,"Black");
 		this->pieces=board->blackPieces;
 	}
-	this->captured=new Collection<Piece *>();
+	this->captured=new std::list<Piece *>();
+	//this->captured=new Collection<Piece *>();
 	//this->globalMoves=new Collection<Move *>();
 	this->globalMoves=new Stack<Move *>(MAXMOVESZ);
 	this->board=board;

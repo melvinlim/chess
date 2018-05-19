@@ -10,6 +10,7 @@
 #include"move.h"
 #include<string>
 #include<iostream>
+#include<list>
 using namespace std;
 class Square;
 class Move;
@@ -18,8 +19,8 @@ class Board;
 class Player{
 public:
 	Stack<Move *> *globalMoves;
-	Collection<Piece *> *pieces;
-	Collection<Piece *> *captured;
+	std::list<Piece *> *pieces;
+	std::list<Piece *> *captured;
 	Piece *promotedPawn;
 	Piece *enPassant;
 	Square *kingSquare;

@@ -99,7 +99,7 @@ void Game::testMove(const char *src,const char *dst){
 	p=board->makeMove(move);
 	addToRecord(move);
 	if(p){
-		activePlayer->captured->add(p);
+		activePlayer->captured->push_back(p);
 		activePlayer->nextPlayer->pieces->remove(p);
 	}
 	activePlayer=activePlayer->nextPlayer;
@@ -266,9 +266,9 @@ void Game::step(Player *player){
 //	board->display(false);
 	board->display();
 	printf("pieces:");
-	player->pieces->print();
+	//player->pieces->print();
 	printf("\ncaptured:");
-	player->captured->print();
+	//player->captured->print();
 	printf("\nlegalmoves:");
 	printLegalMoves(player->globalMoves);
 	//player->globalMoves->print();
@@ -320,7 +320,7 @@ void Game::step(Player *player){
 		}
 	}
 	if(p){
-		player->captured->add(p);
+		player->captured->push_back(p);
 		player->nextPlayer->pieces->remove(p);
 	}
 	if(player->promotedPawn){

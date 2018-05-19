@@ -5,31 +5,37 @@ Board::Board(){
 			square[i][j]=new Square(i,j,this);
 		}
 	}
-	whitePieces=new Collection<Piece *>();
-	blackPieces=new Collection<Piece *>();
+	whitePieces=new std::list<Piece *>();
+	blackPieces=new std::list<Piece *>();
 }
 Board::~Board(){}
 void removeAllHelper(Piece *p){
 	p->removePiece();
 }
 void Board::removeAllPieces(){
-	whitePieces->list.apply(removeAllHelper);
-	blackPieces->list.apply(removeAllHelper);
-	whitePieces->deepClear();
-	blackPieces->deepClear();
+	for(auto it=whitePieces->begin();it!=whitePieces->end();it++){
+		removeAllHelper(*it);
+	}
+	for(auto it=blackPieces->begin();it!=blackPieces->end();it++){
+		removeAllHelper(*it);
+	}
+//	whitePieces->list.apply(removeAllHelper);
+//	blackPieces->list.apply(removeAllHelper);
+//	whitePieces->deepClear();
+//	blackPieces->deepClear();
 	delete whitePieces;
 	delete blackPieces;
-	whitePieces=new Collection<Piece *>();
-	blackPieces=new Collection<Piece *>();
+	whitePieces=new std::list<Piece *>();
+	blackPieces=new std::list<Piece *>();
 }
 void Board::placePiece(int i,int j,enum Color color,Piece *p){
 	switch(color){
 		case White:
-			whitePieces->add(p);
+			whitePieces->push_back(p);
 			p->player=players[0];
 		break;
 		case Black:
-			blackPieces->add(p);
+			blackPieces->push_back(p);
 			p->player=players[1];
 		break;
 		default:
