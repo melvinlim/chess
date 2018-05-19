@@ -13,9 +13,6 @@ bool Player::isChecked(){
 	nextPlayer->updateGlobalMoves();
 	return Rules::checked(this);
 }
-void helperFunc(Piece *p){
-	p->addThreats();
-}
 void Player::reset(){
 	previousMove=0;
 	promotedPawn=0;
@@ -43,9 +40,6 @@ Player::Player(enum Color c,Board *board){
 		(*it)->addThreats(threats);
 	}
 */
-}
-void Player::initThreatsList(){
-	pieces->list.apply(helperFunc);
 }
 Random::Random(enum Color c,Board *board):Player(c,board){}
 void Random::decide(Move &move){
