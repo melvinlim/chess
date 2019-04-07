@@ -1,16 +1,14 @@
 #include"rules.h"
 //bool Rules::checked(const Player *player,Square *dstSquare){
-bool Rules::checked(const Player *player,const Square &dstSquare){
+bool Rules::checked(const Board *board,const Player *player,const Square &dstSquare){
 	int i,j;
-	Square *attackedSquare;
 	Move *mptr;
 	int n=player->nextPlayer->globalMoves->size;
 	for(int x=0;x<n;x++){
 		mptr=player->nextPlayer->globalMoves->atIndex(x);
 		i=mptr->dst.i;
 		j=mptr->dst.j;
-		attackedSquare=&player->board->square[i][j];
-		if(attackedSquare==&dstSquare){
+		if(&board->square[i][j]==&dstSquare){
 			return true;
 		}
 	}
@@ -357,9 +355,9 @@ void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 	}
 	if(!start->piece->hasMoved){
 		if(square[si][sj+1].piece==0){
-			if(!checked(start->piece->player,square[si][sj+1])){
+			if(!checked(board,start->piece->player,square[si][sj+1])){
 				if(square[si][sj+2].piece==0){
-					if(!checked(start->piece->player,square[si][sj+2])){
+					if(!checked(board,start->piece->player,square[si][sj+2])){
 						if((square[si][sj+3].piece)&&(!square[si][sj+3].piece->hasMoved)){
 							updateAllLists(allLegalMoves,start,square[si][sj+2]);
 						}
@@ -368,10 +366,10 @@ void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 			}
 		}
 		if(square[si][sj-1].piece==0){
-			if(!checked(start->piece->player,square[si][sj-1])){
+			if(!checked(board,start->piece->player,square[si][sj-1])){
 				if(square[si][sj-2].piece==0){
 					if(square[si][sj-3].piece==0){
-						if(!checked(start->piece->player,square[si][sj-2])){
+						if(!checked(board,start->piece->player,square[si][sj-2])){
 							if((square[si][sj-4].piece)&&(!square[si][sj-4].piece->hasMoved)){
 								updateAllLists(allLegalMoves,start,square[si][sj-2]);
 							}
