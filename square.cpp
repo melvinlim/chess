@@ -3,7 +3,7 @@ Square::Square(int i,int j,Board *board){
 	piece=0;
 	this->i=i;
 	this->j=j;
-	this->board=board;
+//	this->board=board;
 	strId="  ";
 	int column=j;
 	int row=i;

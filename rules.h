@@ -27,11 +27,11 @@ namespace Rules{
 	bool verifyDst(const Board *,const Coord &);
 	void updateAllLists(Stack<Move *> *,Square *,Square *);
 	void addBothLegalMoves(Stack<Move *> *,Square *,Square *);
-	void addKingMoves(Stack<Move *> *,Square *);
-	void addQueenMoves(Stack<Move *> *,Square *);
-	void addBishopMoves(Stack<Move *> *,Square *);
-	void addKnightMoves(Stack<Move *> *,Square *);
-	void addRookMoves(Stack<Move *> *,Square *);
-	void addPawnMoves(Stack<Move *> *,Square *,int);
+	void addKingMoves(Board *,Stack<Move *> *,Square *);
+	void addQueenMoves(Board *,Stack<Move *> *,Square *);
+	void addBishopMoves(Board *,Stack<Move *> *,Square *);
+	void addKnightMoves(Board *,Stack<Move *> *,Square *);
+	void addRookMoves(Board *,Stack<Move *> *,Square *);
+	void addPawnMoves(Board *,Stack<Move *> *,Square *,int);
 }
 #endif

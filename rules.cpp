@@ -308,8 +308,8 @@ void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,Square *dst)
 		addBothLegalMoves(allLegalMoves,src,dst);
 	}
 }
-void Rules::addKingMoves(Stack<Move *> *allLegalMoves,Square *start){
-	Square *(*square)[8]=start->board->square;
+void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
+	Square *(*square)[8]=board->square;
 	int si,sj;
 	si=start->i;
 	sj=start->j;
@@ -364,12 +364,12 @@ void Rules::addKingMoves(Stack<Move *> *allLegalMoves,Square *start){
 		}
 	}
 }
-void Rules::addQueenMoves(Stack<Move *> *allLegalMoves,Square *start){
-	addRookMoves(allLegalMoves,start);
-	addBishopMoves(allLegalMoves,start);
+void Rules::addQueenMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
+	addRookMoves(board,allLegalMoves,start);
+	addBishopMoves(board,allLegalMoves,start);
 }
-void Rules::addBishopMoves(Stack<Move *> *allLegalMoves,Square *start){
-	Square *(*square)[8]=start->board->square;
+void Rules::addBishopMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
+	Square *(*square)[8]=board->square;
 	int si,sj,i,j;
 	si=start->i;
 	sj=start->j;
@@ -406,8 +406,8 @@ void Rules::addBishopMoves(Stack<Move *> *allLegalMoves,Square *start){
 		}
 	}
 }
-void Rules::addKnightMoves(Stack<Move *> *allLegalMoves,Square *start){
-	Square *(*square)[8]=start->board->square;
+void Rules::addKnightMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
+	Square *(*square)[8]=board->square;
 	int si,sj;
 	si=start->i;
 	sj=start->j;
@@ -444,8 +444,8 @@ void Rules::addKnightMoves(Stack<Move *> *allLegalMoves,Square *start){
 		}
 	}
 }
-void Rules::addRookMoves(Stack<Move *> *allLegalMoves,Square *start){
-	Square *(*square)[8]=start->board->square;
+void Rules::addRookMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
+	Square *(*square)[8]=board->square;
 	int si,sj,i,j;
 	si=start->i;
 	sj=start->j;
@@ -474,8 +474,7 @@ void Rules::addRookMoves(Stack<Move *> *allLegalMoves,Square *start){
 		}
 	}
 }
-void Rules::addPawnMoves(Stack<Move *> *allLegalMoves,Square *start,int forwardDirection){
-	Board *board=start->board;
+void Rules::addPawnMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start,int forwardDirection){
 	Square *square;
 	int forwardSquare=start->i+forwardDirection;
 	if((forwardSquare>7)||(forwardSquare<0))	return;

@@ -9,7 +9,7 @@ class Piece;
 class Square{
 public:
 	int i,j;
-	Board *board;
+//	Board *board;
 	Piece *piece;
 	string strId;
 	bool valid;

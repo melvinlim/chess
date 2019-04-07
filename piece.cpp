@@ -70,22 +70,22 @@ Rook::Rook(Color color):Piece(color){
 	type=RookT;
 }
 void Pawn::addMoves(){
-	Rules::addPawnMoves(player->globalMoves,square,forwardDirection);
+	Rules::addPawnMoves(player->board,player->globalMoves,square,forwardDirection);
 }
 void King::addMoves(){
-	Rules::addKingMoves(player->globalMoves,square);
+	Rules::addKingMoves(player->board,player->globalMoves,square);
 }
 void Queen::addMoves(){
-	Rules::addQueenMoves(player->globalMoves,square);
+	Rules::addQueenMoves(player->board,player->globalMoves,square);
 }
 void Knight::addMoves(){
-	Rules::addKnightMoves(player->globalMoves,square);
+	Rules::addKnightMoves(player->board,player->globalMoves,square);
 }
 void Bishop::addMoves(){
-	Rules::addBishopMoves(player->globalMoves,square);
+	Rules::addBishopMoves(player->board,player->globalMoves,square);
 }
 void Rook::addMoves(){
-	Rules::addRookMoves(player->globalMoves,square);
+	Rules::addRookMoves(player->board,player->globalMoves,square);
 }
 void Piece::print(){
 	display();
