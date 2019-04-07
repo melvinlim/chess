@@ -2,7 +2,6 @@
 #define _SQUARE_H
 #include<string>
 //#include"board.h"
-class Piece;
 //class Board;
 using namespace std;
 class Piece;
