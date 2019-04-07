@@ -174,12 +174,12 @@ bool Game::gameOver(Player *player){
 		tmpMove.src.j=testMove.dst.j;
 		tmpMove.dst.i=testMove.src.i;
 		tmpMove.dst.j=testMove.src.j;
-		if(board->square[tmpMove.src.i][tmpMove.src.j]->piece==0){
+		if(board->square[tmpMove.src.i][tmpMove.src.j].piece==0){
 			assert(false);
 		}
 		board->makeMove(tmpMove);
 		if(p){
-			p->place(board->square[testMove.dst.i][testMove.dst.j]);
+			p->place(&board->square[testMove.dst.i][testMove.dst.j]);
 		}
 		if(invalidMove){
 			invalidMove=false;
@@ -301,8 +301,8 @@ void Game::step(Player *player){
 		tmpMove.dst.j=currentMove.src.j;
 		board->makeMove(tmpMove);
 		if(p){
-			board->square[currentMove.dst.i][currentMove.dst.j]->piece=p;
-			p->place(board->square[currentMove.dst.i][currentMove.dst.j]);
+			board->square[currentMove.dst.i][currentMove.dst.j].piece=p;
+			p->place(&board->square[currentMove.dst.i][currentMove.dst.j]);
 		}
 	}
 	if(p){
@@ -336,7 +336,7 @@ void Game::step(Player *player){
 	}else if(player->enPassant){
 		if(	(currentMove.src.i==player->enPassant->square->i)		&&
 				(currentMove.dst.j==player->enPassant->square->j)		&&
-				(board->square[currentMove.dst.i][currentMove.dst.j]->piece->type==PawnT)){
+				(board->square[currentMove.dst.i][currentMove.dst.j].piece->type==PawnT)){
 			player->enPassant->removePiece();
 			board->display(1);
 			player->enPassant=0;

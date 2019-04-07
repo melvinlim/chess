@@ -2,7 +2,8 @@
 Board::Board(){
 	for(int i=0;i<8;i++){
 		for(int j=0;j<8;j++){
-			square[i][j]=new Square(i,j);
+//			square[i][j]=new Square(i,j);
+			square[i][j].clearAndLabel(i,j);
 		}
 	}
 	whitePieces=new std::list<Piece *>();
@@ -46,8 +47,8 @@ void Board::placePiece(int i,int j,enum Color color,Piece *p){
 		default:
 			assert(false);
 	}
-	square[i][j]->place(p);
-	p->place(square[i][j]);
+	square[i][j].place(p);
+	p->place(&square[i][j]);
 }
 void Board::placeSidePieces(int row,enum Color color){
 	Piece *p;
@@ -69,8 +70,8 @@ Piece *Board::makeMove(const Move &move,const bool testMove){
 	int j=move.src.j;
 	int di=move.dst.i;
 	int dj=move.dst.j;
-	Square *srcSquare=square[i][j];
-	Square *dstSquare=square[di][dj];
+	Square *srcSquare=&square[i][j];
+	Square *dstSquare=&square[di][dj];
 //	printf("moving %s at %d %d to %d %d\n",(square[i][j]->piece->self).data(),move.src.i,move.src.j,move.dst.i,move.dst.j);
 	Piece *srcPiece=srcSquare->piece;
 	Piece *dstPiece=dstSquare->piece;
@@ -116,7 +117,7 @@ void Board::debug(){
 	for(int i=0;i<8;i++){
 		printf("|");
 		for(int j=0;j<8;j++){
-			printf("%s",square[i][j]->strId.data());
+			printf("%s",square[i][j].strId.data());
 			printf("|");
 		}
 		printf("\n+--+--+--+--+--+--+--+--+\n");
@@ -129,7 +130,7 @@ void Board::display(const bool labels){
 		if(labels)	printf("%c ",(7-i)+48+1);
 		printf("|");
 		for(int j=0;j<8;j++){
-			square[i][j]->display();
+			square[i][j].display();
 			printf("|");
 		}
 		printf("\n");

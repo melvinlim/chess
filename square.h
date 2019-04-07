@@ -12,7 +12,8 @@ public:
 	Piece *piece;
 	string strId;
 	bool valid;
-	Square(int,int);
+	Square();
+	void clearAndLabel(int,int);
 	void place(Piece *p);
 	void display();
 	void print();

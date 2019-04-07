@@ -1,6 +1,8 @@
 #include"square.h"
 #include"piece.h"
-Square::Square(int i,int j){
+Square::Square(){
+}
+void Square::clearAndLabel(int i,int j){
 	piece=0;
 	this->i=i;
 	this->j=j;

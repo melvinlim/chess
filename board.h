@@ -20,7 +20,7 @@ public:
 	Player *blackPlayer;
 	std::list<Piece *> *whitePieces;
 	std::list<Piece *> *blackPieces;
-	Square *square[8][8];
+	Square square[8][8];
 	Board();
 	~Board();
 	void placePiece(int,int,enum Color color,Piece *);
