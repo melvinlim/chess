@@ -14,7 +14,7 @@ void Player::updateGlobalMoves(){
 }
 bool Player::isChecked(){
 	nextPlayer->updateGlobalMoves();
-	return Rules::checked(board,this);
+	return Rules::checked(board,this,*kingSquare);
 }
 void Player::reset(){
 	previousMove=0;

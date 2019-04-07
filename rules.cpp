@@ -14,21 +14,6 @@ bool Rules::checked(const Board *board,const Player *player,const Square &dstSqu
 	}
 	return false;
 }
-bool Rules::checked(const Board *board,const Player *player){
-	int i,j;
-	Move *mptr;
-	int n=player->nextPlayer->globalMoves->size;
-	for(int x=0;x<n;x++){
-		mptr=player->nextPlayer->globalMoves->atIndex(x);
-		i=mptr->dst.i;
-		j=mptr->dst.j;
-//		attackedSquare=&board->square[i][j];
-		if(&board->square[i][j]==player->kingSquare){
-			return true;
-		}
-	}
-	return false;
-}
 bool Rules::verifySrc(const Board *board,const Coord &coord){
 	if(board->square[coord.i][coord.j].piece==0){
 		printf("starting square must be occupied\n");
