@@ -1,8 +1,7 @@
 #include"rules.h"
 //bool Rules::checked(const Player *player,Square *dstSquare){
-bool Rules::checked(const Player *player,Square dSquare){
+bool Rules::checked(const Player *player,const Square &dstSquare){
 	int i,j;
-	Square *dstSquare=&dSquare;
 	Square *attackedSquare;
 	Move *mptr;
 	int n=player->nextPlayer->globalMoves->size;
@@ -11,7 +10,7 @@ bool Rules::checked(const Player *player,Square dSquare){
 		i=mptr->dst.i;
 		j=mptr->dst.j;
 		attackedSquare=&player->board->square[i][j];
-		if(attackedSquare==dstSquare){
+		if(attackedSquare==&dstSquare){
 			return true;
 		}
 	}
