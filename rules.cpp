@@ -1,5 +1,4 @@
 #include"rules.h"
-//bool Rules::checked(const Player *player,Square *dstSquare){
 bool Rules::checked(const Board *board,const Player *player,const Square &dstSquare){
 	int i,j;
 	Move *mptr;
@@ -8,50 +7,26 @@ bool Rules::checked(const Board *board,const Player *player,const Square &dstSqu
 		mptr=player->nextPlayer->globalMoves->atIndex(x);
 		i=mptr->dst.i;
 		j=mptr->dst.j;
+//		attackedSquare=&board->square[i][j];
 		if(&board->square[i][j]==&dstSquare){
 			return true;
 		}
 	}
-/*
-	Node<Move *> *ptr=player->nextPlayer->globalMoves->list.root;
-	while(ptr->next){
-		ptr=ptr->next;
-		i=ptr->item->dst.i;
-		j=ptr->item->dst.j;
-		attackedSquare=player->board->square[i][j];
-		if(attackedSquare==dstSquare){
-			return true;
-		}
-	}
-*/
 	return false;
 }
-bool Rules::checked(const Player *player){
+bool Rules::checked(const Board *board,const Player *player){
 	int i,j;
-	Square *attackedSquare;
 	Move *mptr;
 	int n=player->nextPlayer->globalMoves->size;
 	for(int x=0;x<n;x++){
 		mptr=player->nextPlayer->globalMoves->atIndex(x);
 		i=mptr->dst.i;
 		j=mptr->dst.j;
-		attackedSquare=&player->board->square[i][j];
-		if(attackedSquare==player->kingSquare){
+//		attackedSquare=&board->square[i][j];
+		if(&board->square[i][j]==player->kingSquare){
 			return true;
 		}
 	}
-/*
-	Node<Move *> *ptr=player->nextPlayer->globalMoves->list.root;
-	while(ptr->next){
-		ptr=ptr->next;
-		i=ptr->item->dst.i;
-		j=ptr->item->dst.j;
-		attackedSquare=player->board->square[i][j];
-		if(attackedSquare==player->kingSquare){
-			return true;
-		}
-	}
-*/
 	return false;
 }
 bool Rules::verifySrc(const Board *board,const Coord &coord){
