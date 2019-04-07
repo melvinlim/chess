@@ -1,4 +1,5 @@
 #include"piece.h"
+#include"square.h"
 using namespace std;
 void Piece::removePiece(){
 	if(enPassant){

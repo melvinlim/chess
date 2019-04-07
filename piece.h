@@ -5,7 +5,6 @@
 #include"defs.h"
 #include"collection.h"
 #include"rules.h"
-#include"square.h"
 #include"player.h"
 using namespace std;
 class Square;

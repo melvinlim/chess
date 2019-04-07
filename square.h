@@ -1,9 +1,9 @@
 #ifndef _SQUARE_H
 #define _SQUARE_H
 #include<string>
-#include"piece.h"
-#include"board.h"
-class Board;
+//#include"board.h"
+class Piece;
+//class Board;
 using namespace std;
 class Piece;
 class Square{
@@ -13,7 +13,7 @@ public:
 	Piece *piece;
 	string strId;
 	bool valid;
-	Square(int,int,Board *);
+	Square(int,int);
 	void place(Piece *p);
 	void display();
 	void print();
