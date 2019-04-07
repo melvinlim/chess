@@ -9,7 +9,7 @@ class Square;
 class Piece;
 class Move{
 public:
-	Square *dstSquare;
+//	Square *dstSquare;
 	Piece *piece;
 	struct Coord src;
 	struct Coord dst;

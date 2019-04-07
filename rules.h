@@ -30,7 +30,7 @@ namespace Rules{
 	void updateAllLists(Stack<Move *> *,Square *,Square *);
 	void updateAllLists(Stack<Move *> *,Square *,Square);
 	void updateAllLists(Stack<Move *> *,Square,Square);
-	void addBothLegalMoves(Stack<Move *> *,Square *,Square *);
+	void addBothLegalMoves(Stack<Move *> *,const Square *,const Square *);
 	void addKingMoves(Board *,Stack<Move *> *,Square *);
 	void addQueenMoves(Board *,Stack<Move *> *,Square *);
 	void addBishopMoves(Board *,Stack<Move *> *,Square *);

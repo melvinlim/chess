@@ -299,10 +299,10 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	}
 	return true;
 }
-void Rules::addBothLegalMoves(Stack<Move *> *allLegalMoves,Square *src,Square *dst){
+void Rules::addBothLegalMoves(Stack<Move *> *allLegalMoves,const Square *src,const Square *dst){
 	Move *move=new Move();
 	move->piece=src->piece;
-	move->dstSquare=dst;
+//	move->dstSquare=dst;
 	move->src.i=src->i;
 	move->src.j=src->j;
 	move->dst.i=dst->i;
