@@ -261,8 +261,15 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 				if(!capturing){
 					if(dy!=0){
 						printf("pawns may not move sideways unless capturing\n");
-						return true;		//fails to verify en passant.
-						return false;
+						Piece *pEnPassant=0;
+						if(color==White)
+							pEnPassant=board->square[dst.i+1][dst.j]->piece;
+						else
+							pEnPassant=board->square[dst.i-1][dst.j]->piece;
+						if(pEnPassant->enPassant)
+							return true;
+						else
+							return false;
 					}
 				}else{
 					if(abs(dy)!=1){
