@@ -260,19 +260,19 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	return true;
 }
 void Rules::addBothLegalMoves(Stack<Move *> *allLegalMoves,const Square &src,const Square &dst){
-	if((!dst.piece)||(dst.piece->player!=src.piece->player)){
-		Move *move=new Move();
-		move->piece=src.piece;
-	//	move->dstSquare=dst;
-		move->src.i=src.i;
-		move->src.j=src.j;
-		move->dst.i=dst.i;
-		move->dst.j=dst.j;
-		allLegalMoves->push_back(move);
-	}
+	Move *move=new Move();
+	move->piece=src.piece;
+//	move->dstSquare=dst;
+	move->src.i=src.i;
+	move->src.j=src.j;
+	move->dst.i=dst.i;
+	move->dst.j=dst.j;
+	allLegalMoves->push_back(move);
 }
 void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,Square dst){
-	addBothLegalMoves(allLegalMoves,*src,dst);
+	if((!dst.piece)||(dst.piece->player!=src->piece->player)){
+		addBothLegalMoves(allLegalMoves,*src,dst);
+	}
 }
 void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
 	Square (*square)[8]=board->square;
