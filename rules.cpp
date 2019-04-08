@@ -269,9 +269,9 @@ void Rules::addLegalMove(Stack<Move *> *allLegalMoves,const Square &src,const Sq
 	move->dst.j=dst.j;
 	allLegalMoves->push_back(move);
 }
-void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,const Square &dst){
-	if((!dst.piece)||(dst.piece->player!=src->piece->player)){
-		addLegalMove(allLegalMoves,*src,dst);
+void Rules::updateMoveList(Stack<Move *> *allLegalMoves,const Square &src,const Square &dst){
+	if((!dst.piece)||(dst.piece->player!=src.piece->player)){
+		addLegalMove(allLegalMoves,src,dst);
 	}
 }
 void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
@@ -280,28 +280,28 @@ void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 	si=start->i;
 	sj=start->j;
 	if(sj>0){
-		updateAllLists(allLegalMoves,start,square[si][sj-1]);
+		updateMoveList(allLegalMoves,*start,square[si][sj-1]);
 		if(si>0){
-			updateAllLists(allLegalMoves,start,square[si-1][sj-1]);
+			updateMoveList(allLegalMoves,*start,square[si-1][sj-1]);
 		}
 		if(si<7){
-			updateAllLists(allLegalMoves,start,square[si+1][sj-1]);
+			updateMoveList(allLegalMoves,*start,square[si+1][sj-1]);
 		}
 	}
 	if(sj<7){
-		updateAllLists(allLegalMoves,start,square[si][sj+1]);
+		updateMoveList(allLegalMoves,*start,square[si][sj+1]);
 		if(si>0){
-			updateAllLists(allLegalMoves,start,square[si-1][sj+1]);
+			updateMoveList(allLegalMoves,*start,square[si-1][sj+1]);
 		}
 		if(si<7){
-			updateAllLists(allLegalMoves,start,square[si+1][sj+1]);
+			updateMoveList(allLegalMoves,*start,square[si+1][sj+1]);
 		}
 	}
 	if(si>0){
-		updateAllLists(allLegalMoves,start,square[si-1][sj]);
+		updateMoveList(allLegalMoves,*start,square[si-1][sj]);
 	}
 	if(si<7){
-		updateAllLists(allLegalMoves,start,square[si+1][sj]);
+		updateMoveList(allLegalMoves,*start,square[si+1][sj]);
 	}
 	if(!start->piece->hasMoved){
 		if(square[si][sj+1].piece==0){
@@ -309,7 +309,7 @@ void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 				if(square[si][sj+2].piece==0){
 					if(!checked(board,start->piece->player,square[si][sj+2])){
 						if((square[si][sj+3].piece)&&(!square[si][sj+3].piece->hasMoved)){
-							updateAllLists(allLegalMoves,start,square[si][sj+2]);
+							updateMoveList(allLegalMoves,*start,square[si][sj+2]);
 						}
 					}
 				}
@@ -321,7 +321,7 @@ void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 					if(square[si][sj-3].piece==0){
 						if(!checked(board,start->piece->player,square[si][sj-2])){
 							if((square[si][sj-4].piece)&&(!square[si][sj-4].piece->hasMoved)){
-								updateAllLists(allLegalMoves,start,square[si][sj-2]);
+								updateMoveList(allLegalMoves,*start,square[si][sj-2]);
 							}
 						}
 					}
@@ -342,7 +342,7 @@ void Rules::addBishopMoves(Board *board,Stack<Move *> *allLegalMoves,Square *sta
 	i=si+1;
 	j=sj+1;
 	while(i<=7&&j<=7){
-		updateAllLists(allLegalMoves,start,square[i][j]);
+		updateMoveList(allLegalMoves,*start,square[i][j]);
 		if(square[i++][j++].piece){
 			break;
 		}
@@ -350,7 +350,7 @@ void Rules::addBishopMoves(Board *board,Stack<Move *> *allLegalMoves,Square *sta
 	i=si-1;
 	j=sj-1;
 	while(i>=0&&j>=0){
-		updateAllLists(allLegalMoves,start,square[i][j]);
+		updateMoveList(allLegalMoves,*start,square[i][j]);
 		if(square[i--][j--].piece){
 			break;
 		}
@@ -358,7 +358,7 @@ void Rules::addBishopMoves(Board *board,Stack<Move *> *allLegalMoves,Square *sta
 	i=si+1;
 	j=sj-1;
 	while(i<=7&&j>=0){
-		updateAllLists(allLegalMoves,start,square[i][j]);
+		updateMoveList(allLegalMoves,*start,square[i][j]);
 		if(square[i++][j--].piece){
 			break;
 		}
@@ -366,7 +366,7 @@ void Rules::addBishopMoves(Board *board,Stack<Move *> *allLegalMoves,Square *sta
 	i=si-1;
 	j=sj+1;
 	while(i>=0&&j<=7){
-		updateAllLists(allLegalMoves,start,square[i][j]);
+		updateMoveList(allLegalMoves,*start,square[i][j]);
 		if(square[i--][j++].piece){
 			break;
 		}
@@ -380,34 +380,34 @@ void Rules::addKnightMoves(Board *board,Stack<Move *> *allLegalMoves,Square *sta
 	sj=start->j;
 	if(sj>1){
 		if(si>0){
-			updateAllLists(allLegalMoves,start,square[si-1][sj-2]);
+			updateMoveList(allLegalMoves,*start,square[si-1][sj-2]);
 		}
 		if(si<7){
-			updateAllLists(allLegalMoves,start,square[si+1][sj-2]);
+			updateMoveList(allLegalMoves,*start,square[si+1][sj-2]);
 		}
 	}
 	if(sj<6){
 		if(si>0){
-			updateAllLists(allLegalMoves,start,square[si-1][sj+2]);
+			updateMoveList(allLegalMoves,*start,square[si-1][sj+2]);
 		}
 		if(si<7){
-			updateAllLists(allLegalMoves,start,square[si+1][sj+2]);
+			updateMoveList(allLegalMoves,*start,square[si+1][sj+2]);
 		}
 	}
 	if(si>1){
 		if(sj>0){
-			updateAllLists(allLegalMoves,start,square[si-2][sj-1]);
+			updateMoveList(allLegalMoves,*start,square[si-2][sj-1]);
 		}
 		if(sj<7){
-			updateAllLists(allLegalMoves,start,square[si-2][sj+1]);
+			updateMoveList(allLegalMoves,*start,square[si-2][sj+1]);
 		}
 	}
 	if(si<6){
 		if(sj>0){
-			updateAllLists(allLegalMoves,start,square[si+2][sj-1]);
+			updateMoveList(allLegalMoves,*start,square[si+2][sj-1]);
 		}
 		if(sj<7){
-			updateAllLists(allLegalMoves,start,square[si+2][sj+1]);
+			updateMoveList(allLegalMoves,*start,square[si+2][sj+1]);
 		}
 	}
 }
@@ -418,25 +418,25 @@ void Rules::addRookMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 	si=start->i;
 	sj=start->j;
 	for(j=sj+1;j<=7;j++){
-		updateAllLists(allLegalMoves,start,square[si][j]);
+		updateMoveList(allLegalMoves,*start,square[si][j]);
 		if(square[si][j].piece){
 			break;
 		}
 	}
 	for(j=sj-1;j>=0;j--){
-		updateAllLists(allLegalMoves,start,square[si][j]);
+		updateMoveList(allLegalMoves,*start,square[si][j]);
 		if(square[si][j].piece){
 			break;
 		}
 	}
 	for(i=si+1;i<=7;i++){
-		updateAllLists(allLegalMoves,start,square[i][sj]);
+		updateMoveList(allLegalMoves,*start,square[i][sj]);
 		if(square[i][sj].piece){
 			break;
 		}
 	}
 	for(i=si-1;i>=0;i--){
-		updateAllLists(allLegalMoves,start,square[i][sj]);
+		updateMoveList(allLegalMoves,*start,square[i][sj]);
 		if(square[i][sj].piece){
 			break;
 		}
