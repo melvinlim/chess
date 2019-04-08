@@ -274,16 +274,6 @@ void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,Square dst){
 		addBothLegalMoves(allLegalMoves,*src,dst);
 	}
 }
-void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,Square *dst){
-	if((!dst->piece)||(dst->piece->player!=src->piece->player)){
-		addBothLegalMoves(allLegalMoves,*src,*dst);
-	}
-}
-void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square src,Square dst){
-	if((!dst.piece)||(dst.piece->player!=src.piece->player)){
-		addBothLegalMoves(allLegalMoves,src,dst);
-	}
-}
 void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
 	Square (*square)[8]=board->square;
 	int si,sj;

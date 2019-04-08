@@ -1,0 +1,64 @@
+game.cpp:	int n=player->globalMoves->size;
+game.cpp:		if(player->globalMoves->atIndex(i)->valid)	count++;
+game.cpp:	int n=player->globalMoves->size;
+game.cpp:		validate(player->globalMoves->atIndex(i));
+game.cpp://	player->globalMoves->list.apply(validate);
+game.cpp://	sptr=player->globalMoves->list.root;
+game.cpp:		mptr=player->globalMoves->atIndex(i);
+game.cpp:		if(player->isChecked()){
+game.cpp:	//if(!player->legalMoves->isEmpty())	return false;
+game.cpp:	if(player->isChecked()){
+game.cpp:		player->result=Lose;
+game.cpp:		player->nextPlayer->result=Win;
+game.cpp:		player->result=Draw;
+game.cpp:		player->nextPlayer->result=Draw;
+game.cpp://	player->globalMoves->print();
+game.cpp:	printLegalMoves(player->globalMoves);
+game.cpp:	//player->globalMoves->list.apply(printInvalidated);
+game.cpp:	printInvalidated(player->globalMoves);
+game.cpp:	//player->pieces->print();
+game.cpp:	printPieces(player->pieces);
+game.cpp:	//player->captured->print();
+game.cpp:	printPieces(player->captured);
+game.cpp:	printLegalMoves(player->globalMoves);
+game.cpp:	//player->globalMoves->print();
+game.cpp:	//player->globalMoves->list.apply(printInvalidated);
+game.cpp:	printInvalidated(player->globalMoves);
+game.cpp:	player->kingSquare->print();
+game.cpp:			player->decide(currentMove);
+game.cpp:			valid=Rules::verify(player->color,board,currentMove);
+game.cpp:		player->promotedPawn=0;
+game.cpp:		if(!player->isChecked()){
+game.cpp:		player->captured->push_back(p);
+game.cpp:		player->nextPlayer->pieces->remove(p);
+game.cpp:	if(player->promotedPawn){
+game.cpp:		Square *square=player->promotedPawn->square;
+game.cpp:		Piece *p=new Queen(player->color);
+game.cpp:		board->placePiece(square->i,square->j,player->color,p);
+game.cpp:		player->pieces->remove(player->promotedPawn);
+game.cpp:		player->promotedPawn->removePiece();
+game.cpp:		delete player->promotedPawn;
+game.cpp:		player->promotedPawn=0;
+game.cpp:						(player->kingSquare->j==6)									&&
+game.cpp:						(player->kingSquare->i==currentMove.dst.i)	){
+game.cpp:						(player->kingSquare->j==2)									&&
+game.cpp:						(player->kingSquare->i==currentMove.dst.i)	){
+game.cpp:	}else if(player->enPassant){
+game.cpp:		if(	(currentMove.src.i==player->enPassant->square->i)		&&
+game.cpp:				(currentMove.dst.j==player->enPassant->square->j)		&&
+game.cpp:			player->enPassant->removePiece();
+game.cpp:			player->enPassant=0;
+game.cpp:	player->nextPlayer->updateGlobalMoves();
+piece.cpp:		player->nextPlayer->enPassant=0;
+piece.cpp:	player->kingSquare=targetSquare;
+piece.cpp:		player->promotedPawn=this;
+piece.cpp:	Rules::addPawnMoves(player->board,player->globalMoves,square,forwardDirection);
+piece.cpp:	Rules::addKingMoves(player->board,player->globalMoves,square);
+piece.cpp:	Rules::addQueenMoves(player->board,player->globalMoves,square);
+piece.cpp:	Rules::addKnightMoves(player->board,player->globalMoves,square);
+piece.cpp:	Rules::addBishopMoves(player->board,player->globalMoves,square);
+piece.cpp:	Rules::addRookMoves(player->board,player->globalMoves,square);
+rules.cpp:	int n=player->nextPlayer->globalMoves->size;
+rules.cpp:		mptr=player->nextPlayer->globalMoves->atIndex(x);
+rules.cpp:	if((start->i==3)&&(start->piece->player->color==White)){
+rules.cpp:	}else if((start->i==4)&&(start->piece->player->color==Black)){

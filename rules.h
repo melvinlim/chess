@@ -24,9 +24,7 @@ namespace Rules{
 	bool verifyColor(const Piece *,const enum Color &);
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);
-	void updateAllLists(Stack<Move *> *,Square *,Square *);
 	void updateAllLists(Stack<Move *> *,Square *,Square);
-	void updateAllLists(Stack<Move *> *,Square,Square);
 	void addBothLegalMoves(Stack<Move *> *,const Square &,const Square &);
 	void addKingMoves(Board *,Stack<Move *> *,Square *);
 	void addQueenMoves(Board *,Stack<Move *> *,Square *);
