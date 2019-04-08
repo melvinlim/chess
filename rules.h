@@ -25,7 +25,7 @@ namespace Rules{
 	bool verifySrc(const Board *,const Coord &);
 	bool verifyDst(const Board *,const Coord &);
 	void updateAllLists(Stack<Move *> *,Square *,Square);
-	void addBothLegalMoves(Stack<Move *> *,const Square &,const Square &);
+	void addLegalMove(Stack<Move *> *,const Square &,const Square &);
 	void addKingMoves(Board *,Stack<Move *> *,Square *);
 	void addQueenMoves(Board *,Stack<Move *> *,Square *);
 	void addBishopMoves(Board *,Stack<Move *> *,Square *);
