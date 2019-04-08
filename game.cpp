@@ -124,7 +124,9 @@ void Game::start(){
 		}
 #ifdef DEBUG
 board->display(1);
-getchar();
+char ch=getchar();
+if(ch=='q')
+	return;
 #endif
 		reset();
 	}

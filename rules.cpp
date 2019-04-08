@@ -269,7 +269,7 @@ void Rules::addLegalMove(Stack<Move *> *allLegalMoves,const Square &src,const Sq
 	move->dst.j=dst.j;
 	allLegalMoves->push_back(move);
 }
-void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,Square dst){
+void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,const Square &dst){
 	if((!dst.piece)||(dst.piece->player!=src->piece->player)){
 		addLegalMove(allLegalMoves,*src,dst);
 	}
