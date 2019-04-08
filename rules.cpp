@@ -478,7 +478,6 @@ void Rules::addPawnMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 	Player *currentPlayer=start->piece->player;
 	if((start->i==3)&&(start->piece->player->color==White)){
 		Move *previousMove=currentPlayer->nextPlayer->previousMove;
-		Board *board=currentPlayer->board;
 		Piece *previousPiece=board->square[previousMove->dst.i][previousMove->dst.j].piece;
 		if(	(previousPiece)	&&
 				(previousPiece->type==PawnT)	&&
@@ -492,7 +491,6 @@ void Rules::addPawnMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 		}
 	}else if((start->i==4)&&(start->piece->player->color==Black)){
 		Move *previousMove=currentPlayer->nextPlayer->previousMove;
-		Board *board=currentPlayer->board;
 		Piece *previousPiece=board->square[previousMove->dst.i][previousMove->dst.j].piece;
 		if(	(previousPiece)	&&
 				(previousPiece->type==PawnT)	&&
