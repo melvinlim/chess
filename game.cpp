@@ -208,7 +208,7 @@ bool Game::gameOver(Player *player){
 	printf("\n((%d))",nLegalMoves(player));
 	return true;
 }
-bool Game::coordsMatch(const Move &move){
+bool Game::isValidMove(const Move &move){
 	Move *mptr;
 	int n=activePlayer->globalMoves->size;
 	for(int i=0;i<n;i++){
@@ -276,7 +276,7 @@ void Game::step(Player *player){
 			running=false;
 			return;
 		}
-		valid=coordsMatch(currentMove);
+		valid=isValidMove(currentMove);
 		if(!valid){
 			printf("invalid move.\n");
 		}
@@ -285,7 +285,7 @@ void Game::step(Player *player){
 		assert(valid);
 #endif
 	}
-	player->promotedPawn=0;
+	player->promotedPawn=0;	//pawn may have been flagged during move validity testing.
 	p=board->makeMove(currentMove,false);
 	addToRecord(currentMove);
 	if(player->isChecked()){

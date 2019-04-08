@@ -259,7 +259,7 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 	}
 	return true;
 }
-void Rules::addBothLegalMoves(Stack<Move *> *allLegalMoves,const Square &src,const Square &dst){
+void Rules::addLegalMove(Stack<Move *> *allLegalMoves,const Square &src,const Square &dst){
 	Move *move=new Move();
 	move->piece=src.piece;
 //	move->dstSquare=dst;
@@ -271,7 +271,7 @@ void Rules::addBothLegalMoves(Stack<Move *> *allLegalMoves,const Square &src,con
 }
 void Rules::updateAllLists(Stack<Move *> *allLegalMoves,Square *src,Square dst){
 	if((!dst.piece)||(dst.piece->player!=src->piece->player)){
-		addBothLegalMoves(allLegalMoves,*src,dst);
+		addLegalMove(allLegalMoves,*src,dst);
 	}
 }
 void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
@@ -449,29 +449,29 @@ void Rules::addPawnMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 	if(start->j>0){
 		square=&board->square[forwardSquare][start->j-1];
 		if(square->piece&&(square->piece->player!=start->piece->player)){
-			addBothLegalMoves(allLegalMoves,*start,*square);
+			addLegalMove(allLegalMoves,*start,*square);
 		}
 	}
 	if(start->j<7){
 		square=&board->square[forwardSquare][start->j+1];
 		if(square->piece&&(square->piece->player!=start->piece->player)){
-			addBothLegalMoves(allLegalMoves,*start,*square);
+			addLegalMove(allLegalMoves,*start,*square);
 		}
 	}
 	square=&board->square[forwardSquare][start->j];
 	if(!square->piece){
-		addBothLegalMoves(allLegalMoves,*start,*square);
+		addLegalMove(allLegalMoves,*start,*square);
 	}
 	if(!start->piece->hasMoved){
 		if(start->i==1){
 			square=&board->square[3][start->j];
 			if(!square->piece){
-				addBothLegalMoves(allLegalMoves,*start,*square);
+				addLegalMove(allLegalMoves,*start,*square);
 			}
 		}else if(start->i==6){
 			square=&board->square[4][start->j];
 			if(!square->piece){
-				addBothLegalMoves(allLegalMoves,*start,*square);
+				addLegalMove(allLegalMoves,*start,*square);
 			}
 		}
 	}
@@ -485,7 +485,7 @@ void Rules::addPawnMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 				(previousMove->dst.i==3)	&&
 				(previousMove->src.i==1)	){
 			square=&board->square[forwardSquare][previousMove->dst.j];
-			addBothLegalMoves(allLegalMoves,*start,*square);
+			addLegalMove(allLegalMoves,*start,*square);
 			currentPlayer->enPassant=previousPiece;
 			previousPiece->enPassant=true;
 		}
@@ -498,7 +498,7 @@ void Rules::addPawnMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 				(previousMove->dst.i==4)	&&
 				(previousMove->src.i==6)	){
 			square=&board->square[forwardSquare][previousMove->dst.j];
-			addBothLegalMoves(allLegalMoves,*start,*square);
+			addLegalMove(allLegalMoves,*start,*square);
 			currentPlayer->enPassant=previousPiece;
 			previousPiece->enPassant=true;
 		}
