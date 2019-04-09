@@ -159,10 +159,8 @@ bool Game::gameOver(Player *player){
 	invalidMove=false;
 	for(int i=0;i<n;i++){
 		mptr=player->globalMoves->atIndex(i);
-		moveForward.src.i=mptr->src.i;
-		moveForward.src.j=mptr->src.j;
-		moveForward.dst.i=mptr->dst.i;
-		moveForward.dst.j=mptr->dst.j;
+		moveForward.src=mptr->src;
+		moveForward.dst=mptr->dst;
 		if((moveForward.dst.i==moveForward.src.i)&&(moveForward.dst.j==moveForward.src.j)){
 			assert(false);
 		}
@@ -172,10 +170,8 @@ bool Game::gameOver(Player *player){
 		}else{
 			escapePossible=true;
 		}
-		moveBack.src.i=moveForward.dst.i;
-		moveBack.src.j=moveForward.dst.j;
-		moveBack.dst.i=moveForward.src.i;
-		moveBack.dst.j=moveForward.src.j;
+		moveBack.src=moveForward.dst;
+		moveBack.dst=moveForward.src;
 		if(board->square[moveBack.src.i][moveBack.src.j].piece==0){
 			assert(false);
 		}
