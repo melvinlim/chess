@@ -66,18 +66,16 @@ void Board::placeSidePieces(int row,enum Color color){
 	placePiece(row,7,color,p);
 }
 Piece *Board::makeMove(const Move &move,const bool testMove){
-	int i=move.src.i;
-	int j=move.src.j;
+	int si=move.src.i;
+	int sj=move.src.j;
 	int di=move.dst.i;
 	int dj=move.dst.j;
-	Square *srcSquare=&square[i][j];
-	Square *dstSquare=&square[di][dj];
-//	printf("moving %s at %d %d to %d %d\n",(square[i][j]->piece->self).data(),move.src.i,move.src.j,move.dst.i,move.dst.j);
-	Piece *srcPiece=srcSquare->piece;
-	Piece *dstPiece=dstSquare->piece;
+//	printf("moving %s at %d %d to %d %d\n",(square[i][j].piece->self).data(),move.src.i,move.src.j,move.dst.i,move.dst.j);
+	Piece *srcPiece=square[si][sj].piece;
+	Piece *dstPiece=square[di][dj].piece;
 	if(dstPiece)	dstPiece->removePiece();
 	srcPiece->removePiece();
-	srcPiece->place(dstSquare);
+	srcPiece->place(&square[di][dj]);
 	if(!testMove)	srcPiece->hasMoved=true;
 	return dstPiece;
 }
