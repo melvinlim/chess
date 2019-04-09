@@ -146,7 +146,7 @@ void validate(Move *move){
 bool Game::gameOver(Player *player){
 	Piece *p;
 	bool invalidMove;
-	Move testMove,tmpMove;
+	Move moveForward,moveBack;
 	//Node<Move *> *sptr;
 	Move *mptr;
 	bool escapePossible=false;
@@ -159,29 +159,29 @@ bool Game::gameOver(Player *player){
 	invalidMove=false;
 	for(int i=0;i<n;i++){
 		mptr=player->globalMoves->atIndex(i);
-		testMove.src.i=mptr->src.i;
-		testMove.src.j=mptr->src.j;
-		testMove.dst.i=mptr->dst.i;
-		testMove.dst.j=mptr->dst.j;
-		if((testMove.dst.i==testMove.src.i)&&(testMove.dst.j==testMove.src.j)){
+		moveForward.src.i=mptr->src.i;
+		moveForward.src.j=mptr->src.j;
+		moveForward.dst.i=mptr->dst.i;
+		moveForward.dst.j=mptr->dst.j;
+		if((moveForward.dst.i==moveForward.src.i)&&(moveForward.dst.j==moveForward.src.j)){
 			assert(false);
 		}
-		p=board->makeMove(testMove);
+		p=board->makeMove(moveForward);
 		if(player->isChecked()){
 			invalidMove=true;
 		}else{
 			escapePossible=true;
 		}
-		tmpMove.src.i=testMove.dst.i;
-		tmpMove.src.j=testMove.dst.j;
-		tmpMove.dst.i=testMove.src.i;
-		tmpMove.dst.j=testMove.src.j;
-		if(board->square[tmpMove.src.i][tmpMove.src.j].piece==0){
+		moveBack.src.i=moveForward.dst.i;
+		moveBack.src.j=moveForward.dst.j;
+		moveBack.dst.i=moveForward.src.i;
+		moveBack.dst.j=moveForward.src.j;
+		if(board->square[moveBack.src.i][moveBack.src.j].piece==0){
 			assert(false);
 		}
-		board->makeMove(tmpMove);
+		board->makeMove(moveBack);
 		if(p){
-			p->place(&board->square[testMove.dst.i][testMove.dst.j]);
+			p->place(&board->square[moveForward.dst.i][moveForward.dst.j]);
 		}
 		if(invalidMove){
 			invalidMove=false;
