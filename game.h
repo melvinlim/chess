@@ -1,5 +1,4 @@
 #include<string>
-#include"move.h"
 #include"board.h"
 #include"square.h"
 #include"player.h"

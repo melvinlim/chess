@@ -7,7 +7,6 @@
 #include"collection.h"
 #include"stack.h"
 #include"piece.h"
-#include"move.h"
 #include<string>
 #include<iostream>
 #include<list>

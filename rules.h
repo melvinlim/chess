@@ -1,7 +1,6 @@
 #ifndef _RULES_H
 #define _RULES_H
 #include"defs.h"
-#include"move.h"
 #include"stack.h"
 #include"board.h"
 #include"piece.h"
