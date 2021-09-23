@@ -14,7 +14,7 @@ void Player::updateGlobalMoves(){
 }
 bool Player::isChecked(){
 	nextPlayer->updateGlobalMoves();
-	return Rules::checked(board,this,*kingSquare);
+	return Rules::checked(this,*kingSquare);
 }
 void Player::reset(){
 	previousMove=0;
@@ -88,7 +88,7 @@ int Human::getCoord(string type,Move &move){
 	if(type[0]=='s'){
 		strncpy(srcbuf,str.data(),2);
 		Utility::stringToCoord(str,move.src);
-		if(!Rules::verifySrc(board,move.src)){
+		if(!Rules::verifySrc(move.src)){
 			return -1;
 		}
 	}else{

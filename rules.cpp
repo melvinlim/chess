@@ -1,5 +1,5 @@
 #include"rules.h"
-bool Rules::checked(const Board *board,const Player *player,const Square &dstSquare){
+bool Rules::checked(const Player *player,const Square &dstSquare){
 	int i,j;
 	Move *mptr;
 	int n=player->nextPlayer->globalMoves->size;
@@ -7,15 +7,15 @@ bool Rules::checked(const Board *board,const Player *player,const Square &dstSqu
 		mptr=player->nextPlayer->globalMoves->atIndex(x);
 		i=mptr->dst.i;
 		j=mptr->dst.j;
-//		attackedSquare=&board->square[i][j];
-		if(&board->square[i][j]==&dstSquare){
+//		attackedSquare=&boardptr->square[i][j];
+		if(&boardptr->square[i][j]==&dstSquare){
 			return true;
 		}
 	}
 	return false;
 }
-bool Rules::verifySrc(const Board *board,const Coord &coord){
-	if(board->square[coord.i][coord.j].piece==0){
+bool Rules::verifySrc(const Coord &coord){
+	if(boardptr->square[coord.i][coord.j].piece==0){
 		printf("starting square must be occupied\n");
 		return false;
 	}
@@ -28,7 +28,7 @@ bool Rules::verifyColor(const Piece *p,const enum Color &color){
 	}
 	return true;
 }
-bool Rules::verifyKnight(const Board *board,const Move &move){
+bool Rules::verifyKnight(const Move &move){
 	int adx,ady;
 	Coord src=move.src;
 	Coord dst=move.dst;
@@ -38,7 +38,7 @@ bool Rules::verifyKnight(const Board *board,const Move &move){
 	printf("knights move one square straight and one square diagonally\n");
 	return false;
 }
-bool Rules::verifyKing(const Board *board,const Move &move){
+bool Rules::verifyKing(const Move &move){
 	int dx,dy;
 	Coord src=move.src;
 	Coord dst=move.dst;
@@ -46,17 +46,17 @@ bool Rules::verifyKing(const Board *board,const Move &move){
 	dy=dst.i-src.i;
 	if((abs(dx)>1)||(abs(dy)>1)){
 		if(dx==2){
-			if(	(board->square[move.src.i][move.src.j].piece->hasMoved)	||
-					(board->square[move.src.i][move.src.j+1].piece!=0)				||
-					(board->square[move.src.i][move.src.j+2].piece!=0)				||
+			if(	(boardptr->square[move.src.i][move.src.j].piece->hasMoved)	||
+					(boardptr->square[move.src.i][move.src.j+1].piece!=0)				||
+					(boardptr->square[move.src.i][move.src.j+2].piece!=0)				||
 					(dy!=0)																										){
 				printf("King can only move 1 square in any direction.\n");
 				return false;
 			}
 		}else if(dx==-2){
-			if(	(board->square[move.src.i][move.src.j].piece->hasMoved)	||
-					(board->square[move.src.i][move.src.j-1].piece!=0)				||
-					(board->square[move.src.i][move.src.j-2].piece!=0)				||
+			if(	(boardptr->square[move.src.i][move.src.j].piece->hasMoved)	||
+					(boardptr->square[move.src.i][move.src.j-1].piece!=0)				||
+					(boardptr->square[move.src.i][move.src.j-2].piece!=0)				||
 					(dy!=0)																										){
 				printf("King can only move 1 square in any direction.\n");
 				return false;
@@ -68,12 +68,12 @@ bool Rules::verifyKing(const Board *board,const Move &move){
 	}
 	return true;
 }
-bool Rules::verifyQueen(const Board *board,const Move &move){
-	if(verifyRook(board,move))	return true;
-	if(verifyBishop(board,move))	return true;
+bool Rules::verifyQueen(const Move &move){
+	if(verifyRook(move))	return true;
+	if(verifyBishop(move))	return true;
 	return false;
 }
-bool Rules::verifyBishop(const Board *board,const Move &move){
+bool Rules::verifyBishop(const Move &move){
 	int dx,dy;
 	Coord src=move.src;
 	Coord dst=move.dst;
@@ -103,7 +103,7 @@ bool Rules::verifyBishop(const Board *board,const Move &move){
 		int i=yStart+1;
 		int j=xStart+1;
 		while(i<yEnd){
-			if(board->square[i][j].piece){
+			if(boardptr->square[i][j].piece){
 				printf("Bishops cannot jump over other pieces.  (1)\n");
 				return false;
 			}
@@ -114,7 +114,7 @@ bool Rules::verifyBishop(const Board *board,const Move &move){
 		int i=src.i-1;
 		int j=src.j+1;
 		while(j<dst.j){
-			if(board->square[i][j].piece){
+			if(boardptr->square[i][j].piece){
 				printf("Bishops cannot jump over other pieces.  (%d,%d) (2)\n",i,j);
 				return false;
 			}
@@ -125,7 +125,7 @@ bool Rules::verifyBishop(const Board *board,const Move &move){
 		int i=src.i+1;
 		int j=src.j-1;
 		while(i<dst.i){
-			if(board->square[i][j].piece){
+			if(boardptr->square[i][j].piece){
 				printf("Bishops cannot jump over other pieces.  (%d,%d) (3)\n",i,j);
 				return false;
 			}
@@ -135,7 +135,7 @@ bool Rules::verifyBishop(const Board *board,const Move &move){
 	}
 	return true;
 }
-bool Rules::verifyRook(const Board *board,const Move &move){
+bool Rules::verifyRook(const Move &move){
 	bool lrMove,udMove;
 	Coord src=move.src;
 	Coord dst=move.dst;
@@ -161,7 +161,7 @@ bool Rules::verifyRook(const Board *board,const Move &move){
 			end=dst.j;
 		}
 		for(int j=start+1;j<end;j++){
-			if(board->square[src.i][j].piece){
+			if(boardptr->square[src.i][j].piece){
 				printf("Rooks cannot jump over other pieces.\n");
 				return false;
 			}
@@ -175,7 +175,7 @@ bool Rules::verifyRook(const Board *board,const Move &move){
 			end=dst.i;
 		}
 		for(int i=start+1;i<end;i++){
-			if(board->square[i][src.j].piece){
+			if(boardptr->square[i][src.j].piece){
 				printf("Rooks cannot jump over other pieces.\n");
 				return false;
 			}
@@ -183,12 +183,12 @@ bool Rules::verifyRook(const Board *board,const Move &move){
 	}
 	return true;
 }
-bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
+bool Rules::verify(const enum Color &color,const Move &move){
 	Coord src=move.src;
 	Coord dst=move.dst;
 	int dx,dy,startingRank;
-	Piece *p=board->square[src.i][src.j].piece;
-	Piece *pAtDst=board->square[dst.i][dst.j].piece;
+	Piece *p=boardptr->square[src.i][src.j].piece;
+	Piece *pAtDst=boardptr->square[dst.i][dst.j].piece;
 	if(!verifyColor(p,color))	return false;
 	bool capturing;
 	if(pAtDst){
@@ -222,9 +222,9 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 						printf("pawns may not move sideways unless capturing\n");
 						Piece *pEnPassant=0;
 						if(color==White)
-							pEnPassant=board->square[dst.i+1][dst.j].piece;
+							pEnPassant=boardptr->square[dst.i+1][dst.j].piece;
 						else
-							pEnPassant=board->square[dst.i-1][dst.j].piece;
+							pEnPassant=boardptr->square[dst.i-1][dst.j].piece;
 						if(pEnPassant->enPassant)
 							return true;
 						else
@@ -242,19 +242,19 @@ bool Rules::verify(const enum Color &color,const Board *board,const Move &move){
 			}
 		break;
 		case(KnightT):
-			return verifyKnight(board,move);
+			return verifyKnight(move);
 		break;
 		case(BishopT):
-			return verifyBishop(board,move);
+			return verifyBishop(move);
 		break;
 		case(RookT):
-			return verifyRook(board,move);
+			return verifyRook(move);
 		break;
 		case(QueenT):
-			return verifyQueen(board,move);
+			return verifyQueen(move);
 		break;
 		case(KingT):
-			return verifyKing(board,move);
+			return verifyKing(move);
 		break;
 	}
 	return true;
@@ -274,8 +274,8 @@ void Rules::updateMoveList(Stack<Move *> *allLegalMoves,const Square &src,const 
 		addLegalMove(allLegalMoves,src,dst);
 	}
 }
-void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
-	Square (*square)[8]=board->square;
+void Rules::addKingMoves(Stack<Move *> *allLegalMoves,Square *start){
+	Square (*square)[8]=boardptr->square;
 	int si,sj;
 	si=start->i;
 	sj=start->j;
@@ -305,9 +305,9 @@ void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 	}
 	if(!start->piece->hasMoved){
 		if(square[si][sj+1].piece==0){
-			if(!checked(board,start->piece->player,square[si][sj+1])){
+			if(!checked(start->piece->player,square[si][sj+1])){
 				if(square[si][sj+2].piece==0){
-					if(!checked(board,start->piece->player,square[si][sj+2])){
+					if(!checked(start->piece->player,square[si][sj+2])){
 						if((square[si][sj+3].piece)&&(!square[si][sj+3].piece->hasMoved)){
 							updateMoveList(allLegalMoves,*start,square[si][sj+2]);
 						}
@@ -316,10 +316,10 @@ void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 			}
 		}
 		if(square[si][sj-1].piece==0){
-			if(!checked(board,start->piece->player,square[si][sj-1])){
+			if(!checked(start->piece->player,square[si][sj-1])){
 				if(square[si][sj-2].piece==0){
 					if(square[si][sj-3].piece==0){
-						if(!checked(board,start->piece->player,square[si][sj-2])){
+						if(!checked(start->piece->player,square[si][sj-2])){
 							if((square[si][sj-4].piece)&&(!square[si][sj-4].piece->hasMoved)){
 								updateMoveList(allLegalMoves,*start,square[si][sj-2]);
 							}
@@ -330,12 +330,12 @@ void Rules::addKingMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 		}
 	}
 }
-void Rules::addQueenMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
-	addRookMoves(board,allLegalMoves,start);
-	addBishopMoves(board,allLegalMoves,start);
+void Rules::addQueenMoves(Stack<Move *> *allLegalMoves,Square *start){
+	addRookMoves(allLegalMoves,start);
+	addBishopMoves(allLegalMoves,start);
 }
-void Rules::addBishopMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
-	Square (*square)[8]=board->square;
+void Rules::addBishopMoves(Stack<Move *> *allLegalMoves,Square *start){
+	Square (*square)[8]=boardptr->square;
 	int si,sj,i,j;
 	si=start->i;
 	sj=start->j;
@@ -372,9 +372,9 @@ void Rules::addBishopMoves(Board *board,Stack<Move *> *allLegalMoves,Square *sta
 		}
 	}
 }
-void Rules::addKnightMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
-	//Square *(*square)[8]=board->square;
-	Square (*square)[8]=board->square;
+void Rules::addKnightMoves(Stack<Move *> *allLegalMoves,Square *start){
+	//Square *(*square)[8]=boardptr->square;
+	Square (*square)[8]=boardptr->square;
 	int si,sj;
 	si=start->i;
 	sj=start->j;
@@ -411,9 +411,9 @@ void Rules::addKnightMoves(Board *board,Stack<Move *> *allLegalMoves,Square *sta
 		}
 	}
 }
-void Rules::addRookMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start){
-//	Square *(*square)[8]=board->square;
-	Square (*square)[8]=board->square;
+void Rules::addRookMoves(Stack<Move *> *allLegalMoves,Square *start){
+//	Square *(*square)[8]=boardptr->square;
+	Square (*square)[8]=boardptr->square;
 	int si,sj,i,j;
 	si=start->i;
 	sj=start->j;
@@ -442,34 +442,34 @@ void Rules::addRookMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 		}
 	}
 }
-void Rules::addPawnMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start,int forwardDirection){
+void Rules::addPawnMoves(Stack<Move *> *allLegalMoves,Square *start,int forwardDirection){
 	Square *square;
 	int forwardSquare=start->i+forwardDirection;
 	if((forwardSquare>7)||(forwardSquare<0))	return;
 	if(start->j>0){
-		square=&board->square[forwardSquare][start->j-1];
+		square=&boardptr->square[forwardSquare][start->j-1];
 		if(square->piece&&(square->piece->player!=start->piece->player)){
 			addLegalMove(allLegalMoves,*start,*square);
 		}
 	}
 	if(start->j<7){
-		square=&board->square[forwardSquare][start->j+1];
+		square=&boardptr->square[forwardSquare][start->j+1];
 		if(square->piece&&(square->piece->player!=start->piece->player)){
 			addLegalMove(allLegalMoves,*start,*square);
 		}
 	}
-	square=&board->square[forwardSquare][start->j];
+	square=&boardptr->square[forwardSquare][start->j];
 	if(!square->piece){
 		addLegalMove(allLegalMoves,*start,*square);
 	}
 	if(!start->piece->hasMoved){
 		if(start->i==1){
-			square=&board->square[3][start->j];
+			square=&boardptr->square[3][start->j];
 			if(!square->piece){
 				addLegalMove(allLegalMoves,*start,*square);
 			}
 		}else if(start->i==6){
-			square=&board->square[4][start->j];
+			square=&boardptr->square[4][start->j];
 			if(!square->piece){
 				addLegalMove(allLegalMoves,*start,*square);
 			}
@@ -478,26 +478,26 @@ void Rules::addPawnMoves(Board *board,Stack<Move *> *allLegalMoves,Square *start
 	Player *currentPlayer=start->piece->player;
 	if((start->i==3)&&(start->piece->player->color==White)){
 		Move *previousMove=currentPlayer->nextPlayer->previousMove;
-		Piece *previousPiece=board->square[previousMove->dst.i][previousMove->dst.j].piece;
+		Piece *previousPiece=boardptr->square[previousMove->dst.i][previousMove->dst.j].piece;
 		if(	(previousPiece)	&&
 				(previousPiece->type==PawnT)	&&
 				(abs(previousMove->dst.j-start->j)==1)	&&
 				(previousMove->dst.i==3)	&&
 				(previousMove->src.i==1)	){
-			square=&board->square[forwardSquare][previousMove->dst.j];
+			square=&boardptr->square[forwardSquare][previousMove->dst.j];
 			addLegalMove(allLegalMoves,*start,*square);
 			currentPlayer->enPassant=previousPiece;
 			previousPiece->enPassant=true;
 		}
 	}else if((start->i==4)&&(start->piece->player->color==Black)){
 		Move *previousMove=currentPlayer->nextPlayer->previousMove;
-		Piece *previousPiece=board->square[previousMove->dst.i][previousMove->dst.j].piece;
+		Piece *previousPiece=boardptr->square[previousMove->dst.i][previousMove->dst.j].piece;
 		if(	(previousPiece)	&&
 				(previousPiece->type==PawnT)	&&
 				(abs(previousMove->dst.j-start->j)==1)	&&
 				(previousMove->dst.i==4)	&&
 				(previousMove->src.i==6)	){
-			square=&board->square[forwardSquare][previousMove->dst.j];
+			square=&boardptr->square[forwardSquare][previousMove->dst.j];
 			addLegalMove(allLegalMoves,*start,*square);
 			currentPlayer->enPassant=previousPiece;
 			previousPiece->enPassant=true;

@@ -42,8 +42,12 @@ void Game::printMoveList(){
 	}
 	printf("\n");
 }
+namespace Rules{
+  Board *boardptr;
+}
 Game::Game(){
 	board=new Board();
+  Rules::boardptr=board;
 	board->players=this->players;
 #ifdef DEBUG
 	p1=new Random(White,board);
@@ -279,7 +283,7 @@ void Game::step(Player *player){
 			printf("invalid move.\n");
 		}
 #ifdef DEBUG
-		valid=Rules::verify(player->color,board,currentMove);
+		valid=Rules::verify(player->color,currentMove);
 		assert(valid);
 #endif
 	}
