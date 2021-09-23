@@ -2,6 +2,7 @@
 #define _STACK_H
 #include<stdio.h>
 #include<stdlib.h>
+#include<assert.h>
 template<typename T>
 class Stack{
 private:

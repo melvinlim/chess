@@ -1,10 +1,12 @@
 #include<string>
+#include"move.h"
 #include"board.h"
 #include"square.h"
 #include"player.h"
 #include"rules.h"
 #include"defs.h"
 #include<list>
+//class Move;
 class Game{
 private:
 	bool valid;

@@ -1,6 +1,6 @@
 CXX =				g++
-CXXFLAGS =	-std=c++11 -Wall -g -c
-LFLAGS =		-std=c++11 -Wall -g -o chess
+CXXFLAGS =	-Wall -g
+LFLAGS =		-Wall -g -o chess
 OBJECTS =		main.o board.o square.o piece.o game.o player.o utility.o rules.o move.o
 chess:		$(OBJECTS)
 	$(CXX) $(LFLAGS) $(OBJECTS)
