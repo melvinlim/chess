@@ -193,6 +193,7 @@ bool Game::gameOver(Player *player){
 	if(escapePossible)	return false;
 	moveRecord.front()->print();
 	if(player->isChecked()){
+//currently possible to move into checkmate for some reason
 		printf("\ncheckmate detected\n");
 		player->result=Lose;
 		player->nextPlayer->result=Win;
