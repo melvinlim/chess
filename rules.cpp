@@ -83,14 +83,14 @@ bool Rules::verifyBishop(const Board *board,const Move &move){
 		printf("bishops move diagonally.\n");
 		return false;
 	}
-	int xStart,xEnd;
+	int xStart;//,xEnd;
 	int yStart,yEnd;
 	if(src.j>dst.j){
 		xStart=dst.j;
-		xEnd=src.j;
+//		xEnd=src.j;
 	}else{
 		xStart=src.j;
-		xEnd=dst.j;
+//		xEnd=dst.j;
 	}
 	if(src.i>dst.i){
 		yStart=dst.i;
