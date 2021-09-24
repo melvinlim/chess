@@ -3,6 +3,7 @@
 #include<stdio.h>
 #define MAXMOVESZ (14+14+14+14+8+8+28+8)
 #define DEBUG
+//#define CHECKDEBUG
 enum Result{
 	Playing,
 	Win,

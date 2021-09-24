@@ -310,6 +310,12 @@ void Game::step(Player *player){
 	Piece *p;
 	valid=false;
   updateValidity(player);
+	if(player->isChecked()){
+    printf("player is checked.  any moves which do not remove king from check should be invalid\n");
+#ifdef CHECKDEBUG
+    getchar();
+#endif
+  }
 	while(!valid){
 		player->decide(currentMove);
 		if(currentMove.quit){
