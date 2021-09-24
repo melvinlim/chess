@@ -32,4 +32,5 @@ public:
 	bool isValidMove(const Move &);
 	void addToRecord(const Move &);
 	void testMove(const char *,const char *);
+  void updateValidity(Player *);
 };

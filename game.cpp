@@ -147,6 +147,42 @@ if(moveNumber>=500)	running=false;
 void validate(Move *move){
 	move->valid=true;
 }
+void Game::updateValidity(Player *player){
+	Piece *p;
+	bool invalidMove;
+	Move moveForward,moveBack;
+	Move *mptr;
+	int n=player->globalMoves->size;
+//	bool escapePossible=false;
+	for(int i=0;i<n;i++){
+		mptr=player->globalMoves->atIndex(i);
+		moveForward.src=mptr->src;
+		moveForward.dst=mptr->dst;
+		if((moveForward.dst.i==moveForward.src.i)&&(moveForward.dst.j==moveForward.src.j)){
+			assert(false);
+		}
+		p=board->makeMove(moveForward);
+		if(player->isChecked()){
+			invalidMove=true;
+		}else{
+//			escapePossible=true;
+		}
+		moveBack.src=moveForward.dst;
+		moveBack.dst=moveForward.src;
+		if(board->square[moveBack.src.i][moveBack.src.j].piece==0){
+			assert(false);
+		}
+		board->makeMove(moveBack);
+		if(p){
+			p->place(&board->square[moveForward.dst.i][moveForward.dst.j]);
+		}
+		if(invalidMove){
+			invalidMove=false;
+			//sptr->item->valid=false;
+			mptr->valid=false;
+		}
+  }
+}
 bool Game::gameOver(Player *player){
 	Piece *p;
 	bool invalidMove;
@@ -273,6 +309,7 @@ void Game::step(Player *player){
 //	board->blackPieces->print();
 	Piece *p;
 	valid=false;
+  updateValidity(player);
 	while(!valid){
 		player->decide(currentMove);
 		if(currentMove.quit){
@@ -284,6 +321,9 @@ void Game::step(Player *player){
 			printf("invalid move.\n");
 		}
 #ifdef DEBUG
+    printf("current move: ");
+    currentMove.print();
+    printf("\n");
 		valid=Rules::verify(player->color,currentMove);
 		assert(valid);
 #endif
