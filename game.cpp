@@ -357,16 +357,20 @@ void Game::step(Player *player){
 						(player->kingSquare->j==6)									&&
 						(currentMove.src.i==currentMove.dst.i)			&&
 						(player->kingSquare->i==currentMove.dst.i)	){
+//if castling king side
 		currentMove.src.j=7;
 		currentMove.dst.j=5;
+//move rook
 		board->makeMove(currentMove,false);
 	}else if(	(currentMove.src.j==4)											&&
 						(currentMove.dst.j==2)											&&
 						(player->kingSquare->j==2)									&&
 						(currentMove.src.i==currentMove.dst.i)			&&
 						(player->kingSquare->i==currentMove.dst.i)	){
+//if castling queen side
 		currentMove.src.j=0;
 		currentMove.dst.j=3;
+//move rook
 		board->makeMove(currentMove,false);
 	}else if(player->enPassant){
 		if(	(currentMove.src.i==player->enPassant->square->i)		&&

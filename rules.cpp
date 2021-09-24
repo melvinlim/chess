@@ -509,15 +509,20 @@ void Rules::addPawnMoves(Stack<Move *> *allLegalMoves,Square *start,int forwardD
 	if(!square->piece){
 		addLegalMove(allLegalMoves,*start,*square);
 	}
+//if the pawn has not moved, it may move 2 spaces at once
 	if(!start->piece->hasMoved){
 		if(start->i==1){
 			square=&boardptr->square[3][start->j];
-			if(!square->piece){
+      Square *passingSquare=&boardptr->square[2][start->j];
+//check if there is a piece in either of the 2 spaces
+			if(!passingSquare->piece && !square->piece){
 				addLegalMove(allLegalMoves,*start,*square);
 			}
 		}else if(start->i==6){
 			square=&boardptr->square[4][start->j];
-			if(!square->piece){
+      Square *passingSquare=&boardptr->square[5][start->j];
+//check if there is a piece in either of the 2 spaces
+			if(!passingSquare->piece && !square->piece){
 				addLegalMove(allLegalMoves,*start,*square);
 			}
 		}
