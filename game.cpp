@@ -34,10 +34,13 @@ void printInvalidated(Stack<Move *> *stack){
 		}
 	}
 }
-void Game::printMoveList(){
+void Game::printMoveList(int z=5){
 	int i=1;
+  int start=moveRecord.size()-z;
 	for(auto rit=moveRecord.crbegin();rit!=moveRecord.crend();rit++){
-		printf("\n%d:",i++);
+    if(i > start)
+      printf("\n%d:",i);
+    i++;
 		(*rit)->print();
 	}
 	printf("\n");
