@@ -27,26 +27,23 @@ void Player::reset(){
 	}
 	captured->clear();
 }
-Player::Player(enum Color c,Board *board){
+Player::Player(enum Color c){
 	color=c;
 	if(color==White){
 		strcpy(colorStr,"White");
-		this->pieces=board->whitePieces;
 	}else{
 		strcpy(colorStr,"Black");
-		this->pieces=board->blackPieces;
 	}
 	this->captured=new std::list<Piece *>();
 	//this->captured=new Collection<Piece *>();
 	//this->globalMoves=new Collection<Move *>();
 	this->globalMoves=new Stack<Move *>(MAXMOVESZ);
-	this->board=board;
 	result=Playing;
 	promotedPawn=0;
 	previousMove=0;
 	enPassant=0;
 }
-Random::Random(enum Color c,Board *board):Player(c,board){}
+Random::Random(enum Color c):Player(c){}
 void Random::decide(Move &move){
 	Move *chosenMove;
 	srand(time(0));
@@ -65,7 +62,7 @@ void Random::decide(Move &move){
 	move.dst.i=chosenMove->dst.i;
 	move.dst.j=chosenMove->dst.j;
 }
-Human::Human(enum Color c,Board *board):Player(c,board){}
+Human::Human(enum Color c):Player(c){}
 int Human::getCoord(string type,Move &move){
 	cin>>str;
 	if((str.size()==1)&&((str[0]=='q')||(str[0]=='Q'))){

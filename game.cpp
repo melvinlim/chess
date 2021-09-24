@@ -53,12 +53,12 @@ Game::Game(){
   Rules::boardptr=board;
 	board->players=this->players;
 #ifdef DEBUG
-	p1=new Random(White,board);
+	p1=new Random(White);
 #else
-	p1=new Human(White,board);
+	p1=new Human(White);
 #endif
-//	p2=new Human(Black,board);
-	p2=new Random(Black,board);
+//	p2=new Human(Black);
+	p2=new Random(Black);
 	p1->nextPlayer=p2;
 	p2->nextPlayer=p1;
 	players[0]=p1;

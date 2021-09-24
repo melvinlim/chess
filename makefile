@@ -14,7 +14,7 @@ piece:		piece.cpp defs.h
 	$(CXX) $(CXXFLAGS) piece.cpp
 game:			game.cpp board.h square.h player.h utility.h rules.h defs.h
 	$(CXX) $(CXXFLAGS) game.cpp
-player:		player.cpp defs.h board.h piece.h
+player:		player.cpp defs.h piece.h
 	$(CXX) $(CXXFLAGS) player.cpp
 utility:	utility.cpp defs.h
 	$(CXX) $(CXXFLAGS) utility.cpp
