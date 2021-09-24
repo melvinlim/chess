@@ -69,8 +69,9 @@ bool Rules::verifyKing(const Move &move){
 	return true;
 }
 bool Rules::verifyQueen(const Move &move){
-	if(verifyRook(move))	return true;
+	if(verifyRookQuiet(move))	return true;
 	if(verifyBishop(move))	return true;
+  printf("Queens cannot jump over other pieces\n");
 	return false;
 }
 bool Rules::verifyBishop(const Move &move){
@@ -131,6 +132,52 @@ bool Rules::verifyBishop(const Move &move){
 			}
 			i++;
 			j--;
+		}
+	}
+	return true;
+}
+//exactly the same as verifyRook but with the print statements removed.  used in verifyQueen.
+bool Rules::verifyRookQuiet(const Move &move){
+	bool lrMove,udMove;
+	Coord src=move.src;
+	Coord dst=move.dst;
+	if(dst.i!=src.i)
+		udMove=true;
+	else
+		udMove=false;
+	if(dst.j!=src.j)
+		lrMove=true;
+	else
+		lrMove=false;
+	if((lrMove&&udMove)||(!lrMove&&!udMove)){
+		return false;
+	}
+	int start,end;
+	if(lrMove){
+		if(src.j>dst.j){
+			start=dst.j;
+			end=src.j;
+		}else{
+			start=src.j;
+			end=dst.j;
+		}
+		for(int j=start+1;j<end;j++){
+			if(boardptr->square[src.i][j].piece){
+				return false;
+			}
+		}
+	}else if(udMove){
+		if(src.i>dst.i){
+			start=dst.i;
+			end=src.i;
+		}else{
+			start=src.i;
+			end=dst.i;
+		}
+		for(int i=start+1;i<end;i++){
+			if(boardptr->square[i][src.j].piece){
+				return false;
+			}
 		}
 	}
 	return true;

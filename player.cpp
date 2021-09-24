@@ -45,11 +45,6 @@ Player::Player(enum Color c,Board *board){
 	promotedPawn=0;
 	previousMove=0;
 	enPassant=0;
-/*
-	for(auto it=pieces->list.begin();it!=pieces->list.end();it++){
-		(*it)->addMoves(threats);
-	}
-*/
 }
 Random::Random(enum Color c,Board *board):Player(c,board){}
 void Random::decide(Move &move){

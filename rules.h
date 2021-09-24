@@ -16,6 +16,7 @@ namespace Rules{
   extern Board *boardptr;
 	bool checked(const Player *,const Square &);
 	bool verify(const enum Color &,const Move &);
+	bool verifyRookQuiet(const Move &);
 	bool verifyRook(const Move &);
 	bool verifyBishop(const Move &);
 	bool verifyKnight(const Move &);
