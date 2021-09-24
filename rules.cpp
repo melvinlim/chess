@@ -244,6 +244,10 @@ bool Rules::verify(const enum Color &color,const Move &move){
 			return false;
 		}
 		capturing=true;
+//maybe only one player has to be checked since if enPassant is possible both will be nonzero
+	}else if( boardptr->players[0]->enPassant  ||
+            boardptr->players[1]->enPassant  ){
+		capturing=true;
 	}else{
 		capturing=false;
 	}

@@ -378,8 +378,9 @@ void Game::step(Player *player){
 				(board->square[currentMove.dst.i][currentMove.dst.j].piece->type==PawnT)){
 			player->enPassant->removePiece();
 			board->display(1);
-			player->enPassant=0;
 		}
+    player->enPassant=0;
+    player->nextPlayer->enPassant=0;
 	}
 	player->nextPlayer->updateGlobalMoves();
 }
