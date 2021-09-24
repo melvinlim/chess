@@ -63,15 +63,9 @@ Game::Game(){
 	p2->nextPlayer=p1;
 	players[0]=p1;
 	players[1]=p2;
-	activePlayer=p1;
 	board->whitePlayer=p1;
 	board->blackPlayer=p2;
-	board->whitePlayer->pieces=board->whitePieces;
-	board->blackPlayer->pieces=board->blackPieces;
-	currentMove.quit=false;
-	board->placeAllPieces();
-	running=true;
-	moveNumber=0;
+  reset();
 }
 void Game::reset(){
 	p1->reset();
@@ -82,6 +76,8 @@ void Game::reset(){
 	board->whitePlayer->pieces=board->whitePieces;
 	board->blackPlayer->pieces=board->blackPieces;
 	board->placeAllPieces();
+  players[0]->updateGlobalMoves();
+  players[1]->updateGlobalMoves();
 	running=true;
 	moveNumber=0;
 	Move *mptr;
