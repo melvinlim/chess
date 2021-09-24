@@ -38,10 +38,11 @@ void Game::printMoveList(int z=5){
 	int i=1;
   int start=moveRecord.size()-z;
 	for(auto rit=moveRecord.crbegin();rit!=moveRecord.crend();rit++){
-    if(i > start)
+    if(i > start){
       printf("\n%d:",i);
+      (*rit)->print();
+    }
     i++;
-		(*rit)->print();
 	}
 	printf("\n");
 }
@@ -302,7 +303,6 @@ void Game::step(Player *player){
 	printf("\n((%d))",nLegalMoves(player));
 	printf("\nkingSquare:");
 	player->kingSquare->print();
-	printf("\n");
 	printMoveList();
 //	board->whitePieces->print();
 //	board->blackPieces->print();
@@ -357,7 +357,7 @@ void Game::step(Player *player){
 						(player->kingSquare->j==6)									&&
 						(currentMove.src.i==currentMove.dst.i)			&&
 						(player->kingSquare->i==currentMove.dst.i)	){
-//if castling king side
+//if castling king side (currently the board is always set up from white's pov)
 		currentMove.src.j=7;
 		currentMove.dst.j=5;
 //move rook
@@ -367,7 +367,7 @@ void Game::step(Player *player){
 						(player->kingSquare->j==2)									&&
 						(currentMove.src.i==currentMove.dst.i)			&&
 						(player->kingSquare->i==currentMove.dst.i)	){
-//if castling queen side
+//if castling queen side (currently the board is always set up from white's pov)
 		currentMove.src.j=0;
 		currentMove.dst.j=3;
 //move rook
